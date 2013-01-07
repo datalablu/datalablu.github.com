@@ -2,10 +2,10 @@
 #      Main Configs       #
 # ----------------------- #
 
-url: http://datalablu.github.com
-title: My Octopress Blog
-subtitle: A blogging framework for hackers.
-author: Your Name
+url: http://datalab.lu
+title: DataLab.lu
+subtitle: Data based inventions.
+author: Dzidorius Martinaitis
 simple_search: http://google.com/search
 description:
 

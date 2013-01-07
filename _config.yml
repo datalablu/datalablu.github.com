@@ -5,7 +5,7 @@
 url: http://datalab.lu
 title: DataLab.lu
 subtitle: Data based inventions.
-author: Dzidorius Martinaitis
+author: DataLab Luxembourg 
 simple_search: http://google.com/search
 description:
 
@@ -64,7 +64,7 @@ github_show_profile_link: true
 github_skip_forks: true
 
 # Twitter
-twitter_user:dzidorius
+twitter_user: dzidorius
 twitter_tweet_count: 4
 twitter_show_replies: false
 twitter_follow_button: true

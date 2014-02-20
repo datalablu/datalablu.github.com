@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: data analysis | DataLab]]></title>
-  <link href="http://datalab.lu/blog/categories/data-analysis/atom.xml" rel="self"/>
-  <link href="http://datalab.lu/"/>
-  <updated>2014-02-20T12:32:18+01:00</updated>
-  <id>http://datalab.lu/</id>
+  <link href="http://datalablu.github.com/blog/categories/data-analysis/atom.xml" rel="self"/>
+  <link href="http://datalablu.github.com/"/>
+  <updated>2014-02-20T20:08:02+01:00</updated>
+  <id>http://datalablu.github.com/</id>
   <author>
     <name><![CDATA[Dzidorius Martinaitis]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Machine learning for hackers]]></title>
-    <link href="http://datalab.lu/blog/2012/10/23/machine-learning-for-hackers/"/>
+    <link href="http://datalablu.github.com/blog/2012/10/23/machine-learning-for-hackers/"/>
     <updated>2012-10-23T18:48:35+02:00</updated>
-    <id>http://datalab.lu/blog/2012/10/23/machine-learning-for-hackers</id>
+    <id>http://datalablu.github.com/blog/2012/10/23/machine-learning-for-hackers</id>
     <content type="html"><![CDATA[<p>Which way do you prefer to learn a new material - deep theoretical background first and practice later or do you like to break things in order to fix them? If latter is your way of learning things, then most likely you will enjoy <a href="http://www.amazon.com/gp/product/1449303714/ref=as_li_tf_tl?ie=UTF8&amp;camp=1789&amp;creative=9325&amp;creativeASIN=1449303714&amp;linkCode=as2&amp;tag=quantitativ0e-20">Machine Learning for Hackers</a>.</p>
 
 <p>The book has chapters on machine learning techniques such as PCA, kNN, analysis of social graphs hence even advanced R users might find something interesting. So I want you to show you my example of visualisation of similarity between parliamentarians in <a href="http://en.wikipedia.org/wiki/Lithuania">Lithuania</a> which idea is taken for chapter 9.</p>
@@ -40,9 +40,9 @@ Members of the left wing are mixed up and it would make sense to them to merge o
   
   <entry>
     <title type="html"><![CDATA[Garmin data visualization]]></title>
-    <link href="http://datalab.lu/blog/2012/10/04/garmin-data-visualization/"/>
+    <link href="http://datalablu.github.com/blog/2012/10/04/garmin-data-visualization/"/>
     <updated>2012-10-04T18:52:14+02:00</updated>
-    <id>http://datalab.lu/blog/2012/10/04/garmin-data-visualization</id>
+    <id>http://datalablu.github.com/blog/2012/10/04/garmin-data-visualization</id>
     <content type="html"><![CDATA[<p>People go on rage, when governments initiate surveillance projects like <a href="http://www.edri.org/cleanIT">CleanIT</a>, nevertheless share very private data without a doubt.</p>
 
 <p>I have to admit, that some data leaks are well buried in the process. Take for example Garmin which produces GPS training devices for runners. In order to see your workouts you are forced to upload sensitive data on internet. In response you are given a visualization tool and a storage facility. What are alternatives? It seems, that in the past there was a desktop version, however I was not able to find it. So, we are left with the last option - hack it.</p>
@@ -67,9 +67,9 @@ Members of the left wing are mixed up and it would make sense to them to merge o
   
   <entry>
     <title type="html"><![CDATA[Building a presentation, report or paper in R]]></title>
-    <link href="http://datalab.lu/blog/2012/08/01/building-a-presentation-report-or-paper-in-r/"/>
+    <link href="http://datalablu.github.com/blog/2012/08/01/building-a-presentation-report-or-paper-in-r/"/>
     <updated>2012-08-01T13:40:35+02:00</updated>
-    <id>http://datalab.lu/blog/2012/08/01/building-a-presentation-report-or-paper-in-r</id>
+    <id>http://datalablu.github.com/blog/2012/08/01/building-a-presentation-report-or-paper-in-r</id>
     <content type="html"><![CDATA[<p>If you need to build a presentation, obviously you have following options:</p>
 
 <ul>
@@ -129,9 +129,9 @@ barplot(tail(rez$count,10),names.arg=as.character(tail(rez$name,10)),cex.names=.
   
   <entry>
     <title type="html"><![CDATA[How to track Twitter unfollowers in R]]></title>
-    <link href="http://datalab.lu/blog/2012/07/18/how-to-track-twitter-unfollowers-in-r/"/>
+    <link href="http://datalablu.github.com/blog/2012/07/18/how-to-track-twitter-unfollowers-in-r/"/>
     <updated>2012-07-18T16:58:29+02:00</updated>
-    <id>http://datalab.lu/blog/2012/07/18/how-to-track-twitter-unfollowers-in-r</id>
+    <id>http://datalablu.github.com/blog/2012/07/18/how-to-track-twitter-unfollowers-in-r</id>
     <content type="html"><![CDATA[<p>I have Twitter <a href="https://twitter.com/dzidorius">account</a> and it is relatively easy to see new followers or subscribers. However, I was looking for ways to know who are the unfollowers. I have noticed, that some (un)subscriptions happen in bulks, which made me thinking that either I tweeted some bullshit and upset bunch of people or spam bots work in sync. With that in mind I have created a simple R script, which produces Markdown and html reports about unfollowers. You can find an example of such report below.</p>
 
 <p>The advantage of this script is that it does not require you to sign or share your data. You just have to install twitter package and you ready to go. Nevertheless, if you want to create Markdown report, you need to install markdown and knitr packages.</p>
@@ -195,9 +195,9 @@ Java, C++ and R developer &amp; data junkie
   
   <entry>
     <title type="html"><![CDATA[Data mining for network security and intrusion detection]]></title>
-    <link href="http://datalab.lu/blog/2012/07/17/data-mining-for-network-security-and-intrusion-detection/"/>
+    <link href="http://datalablu.github.com/blog/2012/07/17/data-mining-for-network-security-and-intrusion-detection/"/>
     <updated>2012-07-17T00:56:00+02:00</updated>
-    <id>http://datalab.lu/blog/2012/07/17/data-mining-for-network-security-and-intrusion-detection</id>
+    <id>http://datalablu.github.com/blog/2012/07/17/data-mining-for-network-security-and-intrusion-detection</id>
     <content type="html"><![CDATA[<p>In preparation for <a href="http://www.haxogreen.lu">"Haxogreen" hackers summer camp</a> which takes place in Luxembourg, I was exploring network security world. My motivation was to find out how data mining is applicable to network security and intrusion detection.</p>
 
 <p><a href="http://en.wikipedia.org/wiki/Flame_(malware">Flame virus</a>), <a href="http://en.wikipedia.org/wiki/Stuxnet">Stuxnet</a>, <a href="http://en.wikipedia.org/wiki/Duqu">Duqu</a> proved that static, signature based security systems are not able to detect very advanced, government sponsored threats. Nevertheless, signature based defense systems are mainstream today - think of antivirus, intrusion detection systems. What do you do when unknown is unknown? Data mining comes to mind as the answer.</p>

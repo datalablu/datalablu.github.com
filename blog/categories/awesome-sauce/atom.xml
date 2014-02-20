@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: awesome-sauce | DataLab]]></title>
+  <link href="http://datalablu.github.com/blog/categories/awesome-sauce/atom.xml" rel="self"/>
+  <link href="http://datalablu.github.com/"/>
+  <updated>2014-02-20T20:08:02+01:00</updated>
+  <id>http://datalablu.github.com/</id>
+  <author>
+    <name><![CDATA[Dzidorius Martinaitis]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[This is post]]></title>
+    <link href="http://datalablu.github.com/blog/2011/06/01/this-is-a-test/"/>
+    <updated>2011-06-01T14:44:00+02:00</updated>
+    <id>http://datalablu.github.com/blog/2011/06/01/this-is-a-test</id>
+    <content type="html"><![CDATA[<p>Booyah!</p>
+]]></content>
+  </entry>
+  
+</feed>

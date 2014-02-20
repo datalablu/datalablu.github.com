@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://datalab.lu/sitemap.xml 
+Sitemap: http://datalablu.github.com/sitemap.xml 

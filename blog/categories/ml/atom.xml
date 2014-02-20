@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: ML | DataLab]]></title>
-  <link href="http://datalab.lu/blog/categories/ml/atom.xml" rel="self"/>
-  <link href="http://datalab.lu/"/>
-  <updated>2014-02-20T12:32:18+01:00</updated>
-  <id>http://datalab.lu/</id>
+  <link href="http://datalablu.github.com/blog/categories/ml/atom.xml" rel="self"/>
+  <link href="http://datalablu.github.com/"/>
+  <updated>2014-02-20T20:08:02+01:00</updated>
+  <id>http://datalablu.github.com/</id>
   <author>
     <name><![CDATA[Dzidorius Martinaitis]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Credit card fraud detection]]></title>
-    <link href="http://datalab.lu/blog/2013/04/09/credit-card-fraud/"/>
+    <link href="http://datalablu.github.com/blog/2013/04/09/credit-card-fraud/"/>
     <updated>2013-04-09T06:06:00+02:00</updated>
-    <id>http://datalab.lu/blog/2013/04/09/credit-card-fraud</id>
+    <id>http://datalablu.github.com/blog/2013/04/09/credit-card-fraud</id>
     <content type="html"><![CDATA[<p>During the last <a href="https://www.facebook.com/DataScienceLuxembourg">Data Science</a> community meeting in Luxembourg Phd Candidate <a href="https://twitter.com/albahnsen">Alejandro Correa Bahnsen</a> made a presentation on Credit Card Fraud Detection(CCFD). In short - CCFD is just another machine learning problem which is similar to <a href="http://datalab.lu/blog/2012/07/16/data-mining-for-network-security-and-intrusion-detection/">Network Security and Intrusion Detection</a>(NSID) problem, but it has its own obstacles.</p>
 
 <p>From business perspectives - card fraud detection system directly impacts profitability of all credit card operators, therefore are very desirable. The cost of card fraud in <a href="http://en.wikipedia.org/wiki/Credit_card_fraud">the UK alone</a> in 2006 was estimated ~ 500 millions pounds. Assuming, that CCFD system can identify 30% (Churn models at TelComs are able to save that much) of all fraud would lead to 150 millions pound savings a year. Hence, we have a desirable product with price range from 1.5 to 15 millions pounds in the UK. Here is the catch - in any given country there are a few credit card operators, for ex. only <a href="http://www.cetrel.lu">CETREL</a> operates in Luxembourg. So, if you want to sell a solution you play all or nothing game.<br/>

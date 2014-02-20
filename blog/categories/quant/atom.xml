@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: quant | DataLab]]></title>
-  <link href="http://datalab.lu/blog/categories/quant/atom.xml" rel="self"/>
-  <link href="http://datalab.lu/"/>
-  <updated>2014-02-20T12:32:18+01:00</updated>
-  <id>http://datalab.lu/</id>
+  <link href="http://datalablu.github.com/blog/categories/quant/atom.xml" rel="self"/>
+  <link href="http://datalablu.github.com/"/>
+  <updated>2014-02-20T20:08:02+01:00</updated>
+  <id>http://datalablu.github.com/</id>
   <author>
     <name><![CDATA[Dzidorius Martinaitis]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Building a presentation, report or paper in R]]></title>
-    <link href="http://datalab.lu/blog/2012/08/01/building-a-presentation-report-or-paper-in-r/"/>
+    <link href="http://datalablu.github.com/blog/2012/08/01/building-a-presentation-report-or-paper-in-r/"/>
     <updated>2012-08-01T13:40:35+02:00</updated>
-    <id>http://datalab.lu/blog/2012/08/01/building-a-presentation-report-or-paper-in-r</id>
+    <id>http://datalablu.github.com/blog/2012/08/01/building-a-presentation-report-or-paper-in-r</id>
     <content type="html"><![CDATA[<p>If you need to build a presentation, obviously you have following options:</p>
 
 <ul>
@@ -77,9 +77,9 @@ barplot(tail(rez$count,10),names.arg=as.character(tail(rez$name,10)),cex.names=.
   
   <entry>
     <title type="html"><![CDATA[My first competition at Kaggle]]></title>
-    <link href="http://datalab.lu/blog/2012/07/02/my-first-competition-at-kaggle/"/>
+    <link href="http://datalablu.github.com/blog/2012/07/02/my-first-competition-at-kaggle/"/>
     <updated>2012-07-02T18:41:08+02:00</updated>
-    <id>http://datalab.lu/blog/2012/07/02/my-first-competition-at-kaggle</id>
+    <id>http://datalablu.github.com/blog/2012/07/02/my-first-competition-at-kaggle</id>
     <content type="html"><![CDATA[<p>For me <a href="http://www.kaggle.com/">Kaggle</a> becomes a social network for data scientist, as <a href="http://stackoverflow.com/questions/tagged/r">stackoverflow.com</a> or <a href="https://github.com">github.com</a> for programmers. If you are data scientist, machine learner or statistician you better off to have a profile there, otherwise you do not exist.</p>
 
 <p>Nevertheless, I won't bet on rosy future for data scientist as journalists suggest (<a href="http://www.guardian.co.uk/news/datablog/2012/mar/02/data-scientist">sexy job for next decade</a>). For sure, the demand for such specialists is on rise. However, I see one big threat for data scientist - Kaggle and similar service providers. You see, such services allows to tap high end data scientists (think of PhD in hard science) at minuscule fraction of real price. Think of Hollywood business model - top players get majority of the pool and the rest is starving. If you try the same service model on IT projects you will most likely get burned. My reasoning can be wrong, but I suspect, that project timespan is the issue - IT projects can take for while to finish (1-10 years), but main stream ML project won't take that long.</p>
@@ -107,9 +107,9 @@ Keeping all this information in mind I wasn't able to to implement accurate cr
   
   <entry>
     <title type="html"><![CDATA[Levenshtein distance in C++ and code profiling in R]]></title>
-    <link href="http://datalab.lu/blog/2012/03/25/levenshtein-distance-in-c-and-code-profiling-in-r/"/>
+    <link href="http://datalablu.github.com/blog/2012/03/25/levenshtein-distance-in-c-and-code-profiling-in-r/"/>
     <updated>2012-03-25T18:26:23+02:00</updated>
-    <id>http://datalab.lu/blog/2012/03/25/levenshtein-distance-in-c-and-code-profiling-in-r</id>
+    <id>http://datalablu.github.com/blog/2012/03/25/levenshtein-distance-in-c-and-code-profiling-in-r</id>
     <content type="html"><![CDATA[<p>At work, the client requested, if existing search engine could accept singular and plural forms equally, e. g. "partner" and "partners" would lead to the same result.</p>
 
 <p>The first option - <a href="http://en.wikipedia.org/wiki/Stemming">stemming</a>. In that case, search engine would use root of a word, e. g. "partn". However, stemming has many weaknesses: two different words might have same root, a user can misspell the root of the word, except English and few others languages it is not that trivial to implement stemming.</p>
@@ -150,9 +150,9 @@ ggplot(rez,aes(time,fill=type))+geom_density(alpha=0.6,size=1.3)+scale_x_log10()
   
   <entry>
     <title type="html"><![CDATA[Vectorized R vs Rcpp]]></title>
-    <link href="http://datalab.lu/blog/2012/02/01/vectorized-r-vs-rcpp/"/>
+    <link href="http://datalablu.github.com/blog/2012/02/01/vectorized-r-vs-rcpp/"/>
     <updated>2012-02-01T22:03:09+01:00</updated>
-    <id>http://datalab.lu/blog/2012/02/01/vectorized-r-vs-rcpp</id>
+    <id>http://datalablu.github.com/blog/2012/02/01/vectorized-r-vs-rcpp</id>
     <content type="html"><![CDATA[<p><a href="http://www.investuotojas.eu/2012/01/30/the-power-of-rcpp/">In my previous post</a>, I tried to show, that Rcpp is 1000 faster than pure R and that generated the fuss in the comments. Being lazy, I didn't vectorize R code and at the end I was comparing apples vs oranges.</p>
 
 <p>To fix that problem, I built a new script, where I'm trying to compare apples against apples. First piece of code named "ifelse R" uses R "ifelse" function to vectorize code. Second piece of code is fully vectorized code written in R, third - pure C++ code and the last one is C++, where  Rcpp "ifelse" function is used.</p>
@@ -201,9 +201,9 @@ I found a bit strange, that vectorized C++ code doesn't perform that well...</p>
   
   <entry>
     <title type="html"><![CDATA[How big block trades affect stock market prices?]]></title>
-    <link href="http://datalab.lu/blog/2011/07/27/how_big_block_trades_affect_stock_market_prices/"/>
+    <link href="http://datalablu.github.com/blog/2011/07/27/how_big_block_trades_affect_stock_market_prices/"/>
     <updated>2011-07-27T23:52:53+02:00</updated>
-    <id>http://datalab.lu/blog/2011/07/27/how_big_block_trades_affect_stock_market_prices</id>
+    <id>http://datalablu.github.com/blog/2011/07/27/how_big_block_trades_affect_stock_market_prices</id>
     <content type="html"><![CDATA[<p>I will be giving a presentation on "Optimal transaction cost" in <a href="http://maps.google.com/maps?q=vilnius,Maironio+g.+11&amp;hl=en&amp;sll=54.689386,25.280024&amp;sspn=0.599292,1.226349&amp;z=16">Vilnius</a> on  16  August. While preparing the presentation and looking for an optimal execution solution, a natural question arises: does the size of the trade affect stock market price? I'm sure, you would say 100 % yes. Well, you would be right, but what is the scale of such effect? Is it possible to profit from execution of the big block trades?</p>
 
 <p>Such test is not trivial and to conduct it, you need high frequency data, which is messy in most of the cases. For testing purpose I chose <a href="http://finance.yahoo.com/q?s=BNP.PA&amp;ql=0">BNP Paribas</a> stock from February 2011 to May 2011. Initially, I had more than 460 k. trades and more than 320k. quotes. However, the data was filtered by buyers initiated trades. To find buyers initiated trades, I used <em>Lee-Ready Rule</em> - short description can be found <a href="http://goo.gl/RWSqa">here</a> on page 2. I found about Lee - Ready rule while reading <a href="http://www.maxdama.com/?p=477">Maxdama</a> last post and a damn good <a href="http://dl.dropbox.com/u/39904/maxdama.pdf">summary</a> (check page 42).</p>

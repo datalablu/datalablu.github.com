@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Workuot</title>
+  <meta charset="utf-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
+<link rel="stylesheet" href="http://leaflet.github.io/Leaflet.label/leaflet.label.css" />
+
+
+
+<style>
+body {    
+  font: 11px sans-serif;
+
+}
+
+.bar {
+  fill: rgb(231,145,59);
+  font: 11px sans-serif;
+}
+.chart_style{
+  fill: rgb(231,145,59);
+  font: 11px sans-serif;
+}
+
+.bar:hover {
+  fill: rgb(226,104,35);
+  font: 11px sans-serif;
+  
+}
+
+text{
+  stroke-width: '0.6px';
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  
+  shape-rendering: crispEdges;
+  stroke-width: 1.5px;
+}
+
+.x.axis path {
+  
+  
+}
+
+/*speed line*/
+.line {
+  fill: none;
+  stroke: rgb(226,104,35);
+  stroke-width: 2px;
+}
+
+/*heart rate*/
+.line2 {
+  fill: none;
+  stroke: #EBB035;
+  stroke-width: 2px;
+  opacity: .6;
+}
+
+.speed_axis{
+  fill: none;
+  stroke: rgb(226,104,35);
+}
+
+.speed{
+  fill: rgb(226,104,35);
+  stroke:none;
+}
+
+.altitude_axis{
+  fill: none;
+  stroke: rgb(205,210,135);
+}
+
+.altitude{
+  fill: rgb(205,210,135);
+  stroke:none;
+}
+
+.heart_axis{
+  fill: none;
+  stroke:#EBB035;
+}
+.heart{
+  fill:#EBB035;
+  stroke:none;
+}
+
+.distance_axis{
+  fill:none;
+  stroke:#000000;
+}
+
+.distance{
+  fill:#000000;
+  stroke:none;
+}
+
+/* area line */
+.arealine {
+  fill: none;
+  stroke: rgb(205,210,135);
+  opacity: .6;
+  stroke-width: 2px;
+}
+.overlay {
+  fill: none;
+  pointer-events: all;
+  stroke-width: 2px;
+}
+
+.focus circle {
+  fill: none;
+  stroke: black;
+}
+
+.magnifier{
+  font-size:200%
+}
+#map { 
+  height: 500px;
+  width :710px;
+
+}
+
+.info { 
+  font: 12px Helvetica, Arial;
+  padding-top: 30px;
+  padding-left: 40px;
+  padding-bottom: 20px;
+  
+}
+
+.info_subj{ 
+  font: 12px Helvetica, Arial;
+  color: rgb(185,179,172);
+}
+.info_txt{ 
+  font: 12px Helvetica, Arial;
+  color: rgb(156,194,141);
+}
+</style>
+</head>
+<body>
+
+<div id="stats"></div>
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
+<script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
+<script src="http://leaflet.github.io/Leaflet.label/leaflet.label.js"></script>
+
+
+  
+
+<div id="info" class='info'>
+  <span class="info_subj">DISTANCE</span>:<div id="total_dist" class="info_txt"></div>
+  <span class="info_subj">AVERAGE SPEED</span>:<div id="avg_speed" class="info_txt"></div>
+  <span class="info_subj">DURATION</span>:<div id="work_time" class="info_txt"></div>
+</div>
+
+<div>
+  <svg class="svg1"></svg>
+</div>
+<div>
+  <svg class="svg2"></svg>
+</div>
+
+<div id="map" ></div>
+
+<script>
+coord_array = []
+markers = []
+var margin = {top: 50, right: 60, bottom: 30, left: 50},
+    width = 700 - margin.left - margin.right,
+    height = 300 - margin.top - margin.bottom;
+
+var parseDate = d3.time.format("%Y-%m-%dT%H:%M:%SZ").parse,
+    bisectDate = d3.bisector(function(d) { return parseFloat(d.DistanceMeters); }).left,
+    formatValue = d3.format(",.2f"),
+    formatSpeed = function(d) { 
+      rez = formatValue(d); 
+      remain = Math.round((rez - Math.floor(d))*60)
+      if(remain<10)
+        remain = "0"+remain
+      //console.log(Math.round((rez - Math.floor(d))*60));
+      return Math.round(rez)+":"+remain;
+    };
+
+var x = d3.scale.linear()
+    .range([0, width]);
+
+var y = d3.scale.linear()
+    .range([height, 0]);
+
+var y2 = d3.scale.linear()
+    .range([height, 0]);
+
+var y3 = d3.scale.linear()
+    .range([height, 0]);
+
+
+
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left");
+
+var yAxis2 = d3.svg.axis()
+    .scale(y2)
+    .orient("right");
+
+var yAxis3 = d3.svg.axis()
+    .scale(y3)
+    .orient("right");
+
+
+var line = d3.svg.line()
+    .x(function(d) { return x((d.DistanceMeters)); })
+    .y(function(d) { return y((d.Time)); });
+
+var area = d3.svg.area()
+    .x(function(d) { return x((d.DistanceMeters)); })
+    .y0(height)
+    .y1(function(d) { return y2((d.AltitudeMeters)); });
+
+var line2 = d3.svg.line()
+    .x(function(d) { return x((d.DistanceMeters)); })
+    .y(function(d) { return y3((d.HeartRateBpm)); });
+
+var svg = d3.select(".svg1")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+var svg2 = d3.select(".svg2")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+/* ========================= */
+
+var x_bar = d3.scale.ordinal()
+    .rangeRoundBands([0, width], .1);
+
+var y_bar = d3.scale.linear()
+    .range([height, 0]);
+
+var xAxis_bar = d3.svg.axis()
+    .scale(x_bar)
+    .orient("bottom");
+
+var yAxis_bar = d3.svg.axis()
+    .scale(y_bar)
+    .orient("left")
+    .tickValues([1, 2, 3,4,5,6,7,8,9,10]);
+
+//second chart
+var chart = svg2.append("chart")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+
+old_values = []
+smooth_length = 21;
+laps = []
+total_dist = 0.0
+total_time = 0.0
+d3.xml('work.xml', "application/xml", function(xml) {
+  
+  var data = []
+  my_data = xml.getElementsByTagName('Trackpoint')
+  //console.log(my_data)
+
+
+  for (var i = 0; i < my_data.length; i++) {
+    timepoint = {}
+    for(var z = 0; z<my_data[i].childNodes.length; z++){
+      if(typeof my_data[i].childNodes[z].tagName !== "undefined"){
+        var tag = my_data[i].childNodes[z].tagName
+        if(tag !='Position')
+          timepoint[tag] = my_data[i].childNodes[z].textContent
+        else
+        {
+          timepoint['LatitudeDegrees'] = parseFloat(my_data[i].childNodes[z].childNodes[1].textContent)
+          timepoint['LongitudeDegrees'] = parseFloat(my_data[i].childNodes[z].childNodes[3].textContent)
+        }  
+      }
+    }
+    //console.log(timepoint)
+    data.push(timepoint)
+  }
+  //console.log(data)
+  prev_x = 0;
+  prev_y = 0;
+  prev_y2 = 0;
+  prev_y3 = 0;
+    //prev_vals =[];//[10,7]
+  //prev_vals.length = smooth_length-1
+  //for (var i = prev_vals.length-1; i >= 0; -- i) prev_vals[i] = 0;
+  lap = 1
+  lap_time = parseDate(data[0].Time)
+  lap_distance = parseFloat(data[0].DistanceMeters)
+  past_coor = []
+  total_time = parseDate(data[data.length-1].Time)-parseDate(data[0].Time)
+  //console.log(lap_time)
+  data.forEach(function(d) 
+  {
+    if(typeof d.LatitudeDegrees ==="undefined" || typeof d.LongitudeDegrees ==="undefined" )
+      coord_array.push(past_coor)
+    else  
+    {
+      coord_array.push([d.LatitudeDegrees, d.LongitudeDegrees])
+      past_coor = [d.LatitudeDegrees, d.LongitudeDegrees]
+    }
+    //console.log(d.Position)
+    if(d.DistanceMeters > 1000*lap)
+    {
+
+      laps.push({'time':(parseDate(d.Time)-lap_time)/(parseFloat(d.DistanceMeters)-lap_distance)/60,'lap':lap})
+      lap_time = parseDate(d.Time)
+      lap_distance = parseFloat(d.DistanceMeters)
+      lap += 1
+      markers.push([d.LatitudeDegrees, d.LongitudeDegrees])
+    }
+    total_dist = parseFloat(d.DistanceMeters)
+    if(parseFloat(d.AltitudeMeters)>0)
+    {
+      d.AltitudeMeters= +parseFloat(d.AltitudeMeters);
+      prev_y2 = d.AltitudeMeters;
+    }
+    else
+      d.AltitudeMeters=prev_y2
+
+    if(parseFloat(d.HeartRateBpm)>0)
+    {
+      d.HeartRateBpm= +parseFloat(d.HeartRateBpm);
+      prev_y3 = d.HeartRateBpm;
+    }
+    else
+      d.HeartRateBpm=prev_y3
+
+    val_x = parseFloat(d.DistanceMeters); 
+    if(isNaN(val_x)){val_x = prev_x;}
+    diff_x = val_x - prev_x;
+    prev_x = val_x;
+    //console.log(d.DistanceMeters)
+    d.DistanceMeters = +val_x;//+(parseInt(d.DistanceMeters));
+
+    val_y = parseDate(d.Time); 
+    
+    //console.log(val_y);
+    diff_y = (val_y - prev_y)
+    if(diff_y>10000){diff_y = 0}
+    else {diff_y = diff_y/1000}
+    
+    prev_y = val_y;
+    //console.log('diff_y '+diff_y+' diff_x '+diff_x+' '+(((diff_y*1000)/diff_x)/60))
+    if(diff_x>0){ 
+      d.Time = +(((diff_y*1000)/diff_x)/60); old_values.push(((diff_y*1000)/diff_x)/60)}
+    else{
+      d.Time = 0; old_values.push(0);}
+   });
+
+  d3.select("#total_dist").text((total_dist/1000).toFixed(2)+" km")
+  d3.select("#avg_speed").text(time_convert((total_time/60000).toFixed(2)/(total_dist/1000).toFixed(2))+" km/h")
+  d3.select("#work_time").text(time_convert(total_time/60000, hour=true))
+  //console.log(coord_array)
+  smooth_line(data, smooth_length)
+  function smooth_line(d, smooth)
+  {
+    //smooth_length = 16;
+    prev_vals =[];//[10,7]
+    prev_vals.length = smooth
+    for (var i = prev_vals.length-1; i >= 0; -- i) prev_vals[i] = 0;
+    min = 100
+    max = 0
+    for(var i =0; i<d.length;i++)
+    {
+      
+      if(i<=smooth)
+      {  prev_vals[i] = old_values[i];}
+      else
+      {
+        prev_vals.push(old_values[i])
+        prev_vals = prev_vals.slice((prev_vals.length-smooth),(prev_vals.length))
+        d[i].Time = d3.median(prev_vals)
+        if(min > d[i].Time) min = d[i].Time
+        if(max < d[i].Time) max = d[i].Time
+      }
+
+    }
+    //console.log(min +' before '+max)
+     min = min - 2
+     max = max + 2
+    //console.log(min +' '+max)
+
+    //y.domain(d3.min(d.map(function(dz) { return dz.Time; })),10);
+    y.domain([min, max])
+    svg.select(".yaxis").transition().duration(1500)
+      .call(yAxis)
+  }
+
+  x.domain(d3.extent(data, function(d) { return d.DistanceMeters; }));
+  //y.domain(d3.extent(data, function(d) { return d.Time; }));
+  y2.domain(d3.extent(data, function(d) { return (d.AltitudeMeters); }));
+  y3.domain(d3.extent(data, function(d) { return (d.HeartRateBpm); }));
+
+
+  svg.append("g")
+      .attr("class", "distance_axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis)
+      .selectAll('text').attr("class", "distance")
+
+  y_a = svg.append("g")
+      .attr("class", "yaxis speed_axis")
+      .call(yAxis)
+
+  y_a.append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", ".71em")
+      .style({ "text-anchor":"end"})
+      .text("Speed, min/km");
+  y_a.selectAll('text').attr("class", "speed")
+  
+        // Add the y-axis to the right
+  y_b = svg.append("g")
+      .attr("class", "altitude_axis")
+      .attr("transform", "translate(" + width + " ,0)")   
+      .call(yAxis2)
+
+  y_b.append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", -8)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text("Altitude");
+  y_b.selectAll('text').attr("class", "altitude")
+
+  y_c = svg.append("g")
+      .attr("class", "heart_axis")
+      .attr("transform", "translate(" + (width+40) + " ,0)")   
+      .call(yAxis3)
+
+  y_c.append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", -8)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text("HeartRate");
+  y_c.selectAll('text').attr("class", "heart")
+      
+  var path = svg.append("path")
+      .datum(data)
+      .attr("class", "line")
+      .attr("d", line)
+
+      ;
+  var path3 = svg.append("path")
+      .datum(data)
+      .attr("class", "arealine")
+      .attr("d", area)
+      ;
+
+  var path_line2 = svg.append("path")
+      .datum(data)
+      .attr("class", "line2")
+      .attr("d", line2);
+
+  var focus = svg.append("g")
+      .attr("class", "focus")
+      .style("display", "none");
+
+  focus.append("circle")
+      .attr("r", 4.5);
+
+  focus.append("text")
+      .attr("x", 9)
+      .attr("dy", ".35em");
+
+  svg.append("rect")
+      .attr("class", "overlay")
+      .attr("width", width)
+      .attr("height", height)
+      .on("mouseover", function() { focus.style("display", null); })
+      .on("mouseout", function() { focus.style("display", "none"); })
+      .on("mousemove", mousemove);
+
+  stats_speed = svg.append('svg:text')
+      .attr('class', 'speed static')
+      .attr('x', 30)
+      .attr('y', 20)
+      .text('Speed: ');
+  stats_altitude = svg.append('svg:text')
+      .attr('class', 'altitude static')
+      .attr('x', 30)
+      .attr('y', 30)
+      .text('Altitude: ');
+
+  svg.append('svg:text')
+      .attr('class', 'heart static')
+      .attr('x', 30)
+      .attr('y', 40)
+      .text('HeartRate: ');
+
+  svg.append('svg:text')
+      .attr('class', 'distance static')
+      .attr('x', 30)
+      .attr('y', 50)
+      .text('DistanceMeters: ');
+
+  svg.append('svg:text')
+      .attr('class', 'magnifier')
+      .attr('x', 500)
+      .attr('y', 20)
+      .attr('cursor','pointer')
+      .text('+')
+      .on("mousedown", function(){
+        smooth_length += 5
+        smooth_line(data, smooth_length)
+      svg.selectAll('path.line')
+        .datum(data)
+        .attr("d", line)
+      });
+  svg.append('svg:text')
+      .attr('class', 'magnifier')
+      .attr('x', 485)
+      .attr('y', 20)
+      .attr('cursor','pointer')
+      .text('-')
+      .on("mousedown", function(){
+        smooth_length -= 5
+        smooth_line(data, smooth_length)
+      svg.selectAll('path.line')
+        .datum(data)
+        .attr("d", line)
+      });  
+
+  /*  ================ */
+  x_bar.domain(laps.map(function(d) { return d.lap; }));
+  y_bar.domain([d3.min(laps, function(d) { return d.time; })-1, d3.max(laps, function(d) { return d.time; })+1]);
+
+ svg2.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis_bar);
+
+  svg2.append("g")
+      .attr("class", "bar axis")
+      .call(yAxis_bar);
+  
+
+      
+  barz = svg2.selectAll(".chart_style").data(laps).enter()
+  barz.append("rect")
+      .attr("class", "bar")
+      .attr("x", function(d) { return x_bar(d.lap); })
+      .attr("y", function(d) { return y_bar(d.time); })
+      .attr("height", function(d) { return height - y_bar(d.time); })
+      .attr("width", x_bar.rangeBand());
+  
+  barz.append("text")
+  .attr("class", "chart_style")
+   .attr("x", function(d) { return x_bar(d.lap); })
+   .attr("y", function(d) { return y_bar(d.time); })
+   .attr("dy", "-.51em")
+   .attr("dx", x_bar.rangeBand()/2-x_bar.rangeBand()*0.1)
+   .text(function(d) { return time_convert(d.time)});
+
+  svg2.append("g")
+    .attr("class", "y axis")
+    //.call(yAxis)
+    .attr("class", "chart_style")
+  .append("text")
+    .attr("transform", "rotate(-90)")
+    .attr("y", 6)
+    .attr("dy", ".71em")
+    .style("text-anchor", "end")
+    .text("Time");
+  //svg2.selectAll('y axis text').attr("class", "bar")
+
+
+  function mousemove() {
+    var x0 = x.invert(d3.mouse(this)[0]),
+        i = bisectDate(data, x0, 1),
+        d0 = data[i - 1],
+        d1 = data[i],
+        d = x0 - d0.dist > d1.dist - x0 ? d1 : d0;
+    focus.attr("transform", "translate(" + x(d.DistanceMeters) + "," + y(d.Time) + ")");
+    
+    focus.select("text").text(Math.floor(d.Time)+":"+remain+" min/km");
+
+    d3.select("text.speed.static").text("Speed: "+time_convert(d.Time)+" min/km");
+    d3.select("text.altitude.static").text("Altitude: "+Math.floor(d.AltitudeMeters)+" m");
+    d3.select("text.heart.static").text("HeartRate: "+Math.floor(d.HeartRateBpm)+" bpm");
+    d3.select("text.distance.static").text("Distance: "+Math.floor(d.DistanceMeters)+" m");
+  }
+
+});
+
+  function time_convert(t,hour)
+  {
+    hour = typeof hour !== 'undefined' ? hour : false;
+
+      remain = ((t-Math.floor(t))*60/100)*100;
+      if(Math.floor(remain)<10)
+        remain = "0"+Math.floor(remain);
+      else
+        remain = Math.floor(remain);
+      
+      ret = ''
+      if(hour)
+      {
+        min = Math.floor(Math.floor(t)%60)
+
+        ret = "0"+Math.floor(Math.floor(t)/60)+":"
+        if(min===0)ret = ret + "0"
+        if(min<10)ret = ret + "0"
+        ret = ret + min +":"+remain
+        //ret = ret + min
+        return ret
+      }
+      else
+        return(Math.floor(t)+":"+remain)
+
+  }
+
+    function draw_path()
+    {
+      var map = L.map('map')
+      map.fitBounds(coord_array);
+      L.polyline(coord_array,{color: '#FF4500',fillOpacity:0.8}).addTo(map)
+
+      L.tileLayer('http://{s}.tile.cloudmade.com/b27b6666d1704c9bbc347305f8fdf31f/997/256/{z}/{x}/{y}.png', {
+        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
+        maxZoom: 18
+      }).addTo(map);
+
+      for(i = 1;i<markers.length;i++)
+      {
+        L.circleMarker(markers[i-1],{fillColor:'#FF4500',stroke:false, fillOpacity:0.6}).setRadius(6).bindLabel(i+"km", { noHide: true,'color': '#0099ff' }).addTo(map);
+
+      }
+      //L.marker(coord_array[0]).bindLabel("Start", { noHide: true }).addTo(map);
+      L.circleMarker(coord_array[coord_array.length-1],{fillColor:'#FF4500',stroke:false, fillOpacity:0.6}).setRadius(8).bindLabel((total_dist/1000).toFixed(2)+"km", { noHide: true }).addTo(map);
+      
+    }
+    setTimeout(draw_path,2000)
+
+</script>
+
+
+
+<script>
+    
+    function draw_path()
+    {
+      var map = L.map('map')
+      map.fitBounds(coord_array);
+      L.polyline(coord_array,{color: '#FF4500',fillOpacity:0.8}).addTo(map)
+
+      L.tileLayer('http://{s}.tile.cloudmade.com/b27b6666d1704c9bbc347305f8fdf31f/997/256/{z}/{x}/{y}.png', {
+        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
+        maxZoom: 18
+      }).addTo(map);
+
+      for(i = 1;i<markers.length;i++)
+      {
+        L.circleMarker(markers[i-1],{fillColor:'#FF4500',stroke:false, fillOpacity:0.6}).setRadius(6).bindLabel(i+"km", { noHide: true,'color': '#0099ff' }).addTo(map);
+
+      }
+      //L.marker(coord_array[0]).bindLabel("Start", { noHide: true }).addTo(map);
+      L.circleMarker(coord_array[coord_array.length-1],{fillColor:'#FF4500',stroke:false, fillOpacity:0.6}).setRadius(8).bindLabel((total_dist/1000).toFixed(2)+"km", { noHide: true }).addTo(map);
+      
+    }
+    setTimeout(draw_path,2000)
+  </script>
+</body>
+</html>
+

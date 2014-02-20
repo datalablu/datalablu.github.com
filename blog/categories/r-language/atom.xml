@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: R-language | DataLab]]></title>
+  <link href="http://datalab.lu/blog/categories/r-language/atom.xml" rel="self"/>
+  <link href="http://datalab.lu/"/>
+  <updated>2014-02-20T12:32:18+01:00</updated>
+  <id>http://datalab.lu/</id>
+  <author>
+    <name><![CDATA[Dzidorius Martinaitis]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Machine learning for hackers]]></title>
+    <link href="http://datalab.lu/blog/2012/10/23/machine-learning-for-hackers/"/>
+    <updated>2012-10-23T18:48:35+02:00</updated>
+    <id>http://datalab.lu/blog/2012/10/23/machine-learning-for-hackers</id>
+    <content type="html"><![CDATA[<p>Which way do you prefer to learn a new material - deep theoretical background first and practice later or do you like to break things in order to fix them? If latter is your way of learning things, then most likely you will enjoy <a href="http://www.amazon.com/gp/product/1449303714/ref=as_li_tf_tl?ie=UTF8&amp;camp=1789&amp;creative=9325&amp;creativeASIN=1449303714&amp;linkCode=as2&amp;tag=quantitativ0e-20">Machine Learning for Hackers</a>.</p>
+
+<p>The book has chapters on machine learning techniques such as PCA, kNN, analysis of social graphs hence even advanced R users might find something interesting. So I want you to show you my example of visualisation of similarity between parliamentarians in <a href="http://en.wikipedia.org/wiki/Lithuania">Lithuania</a> which idea is taken for chapter 9.</p>
+
+<p>In most of the cases you should be able to get access to voting results of legislative body in your country. Nevertheless the data can be buried in "wrong" format such as html or pdf. I use <a href="http://scrapy.org/">Scrapy</a> framework to parse html pages, however I have faced a problem, when my IP address was blocked due to many requests (10 000) within 2 hours. But in cloud age the problem was quickly solved and I made a delay in my crawler. <a href="https://github.com/kafka399/votingDistance/tree/master/getdata">Here is</a> the examples of the data in CSV format.</p>
+
+<p>With data in hand it was easy to proceed further. To find similarities between parliamentarians I took voting results of approximately 4000 legislations and built a matrix, where rows represent parliamentarians and columns - legislations. "Yes" votes were encoded as 1, "No" as -1 and the rest as 0. R has a handy function <code>dist</code> to compute the distances between the rows (parliamentarians) of a data matrix. The result of the function is one dimension data of the distance between parliamentarians, however to reveal the structure of a data set we need two dimensions. Once again, R has a function <code>cmdscale</code> which does <a href="http://en.wikipedia.org/wiki/Multidimensional_scaling">Classical Multidimensional Scaling (CMS)</a>. I found <a href="http://www.bristol.ac.uk/cmm/publications/aimdss-2nd-ed/chapter3.pdf">this document</a> very useful in explaining Multidimensional Scaling. Here is the final result:</p>
+
+<p><a href="http://dl.dropbox.com/u/6360678/blog/big_mds.png"><img src="http://dl.dropbox.com/u/6360678/blog/small_mds.png" alt="" /></a></p>
+
+<p>Click on the image to enlarge.</p>
+
+<p>The plot above reveals, that right wing party TSLKD has a majority in parliament and LSDP (socialists) are in opposition and liberals (LSF, JF, MG) are in the center. You might argue, that that is already known, however the plot is based on actual data, therefore differences in voting support outlooks of the parliamentarians(right, central, left).<br/>
+The map shows which members of the party are outliers and which one from the other party can be invited while forming a new parliament (second tour of the election is on the way).<br/>
+Members of the left wing are mixed up and it would make sense to them to merge or form a coalition.</p>
+
+<p>Are you looking for source code? <a href="https://github.com/kafka399/votingDistance">Click here</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Garmin data visualization]]></title>
+    <link href="http://datalab.lu/blog/2012/10/04/garmin-data-visualization/"/>
+    <updated>2012-10-04T18:52:14+02:00</updated>
+    <id>http://datalab.lu/blog/2012/10/04/garmin-data-visualization</id>
+    <content type="html"><![CDATA[<p>People go on rage, when governments initiate surveillance projects like <a href="http://www.edri.org/cleanIT">CleanIT</a>, nevertheless share very private data without a doubt.</p>
+
+<p>I have to admit, that some data leaks are well buried in the process. Take for example Garmin which produces GPS training devices for runners. In order to see your workouts you are forced to upload sensitive data on internet. In response you are given a visualization tool and a storage facility. What are alternatives? It seems, that in the past there was a desktop version, however I was not able to find it. So, we are left with the last option - hack it.</p>
+
+<p>First of all you need to transfer data from Garmin device to computer. I own Forerunner 610 with relays on <a href="http://en.wikipedia.org/wiki/ANT_(network">ANT</a>) network and I found Python <a href="https://github.com/kafka399/Garmin-Forerunner-610-Extractor">script</a> with takes care of data transfer. Once data is transfered there is another obstacle - Garmin uses a proprietary format <a href="http://www.thisisant.com/pages/developer-zone/fit-sdk">FIT</a>. In order to tackle this problem I use another <a href="https://github.com/dtcooper/python-fitparse">Python script</a> which I have adapted to have <a href="https://github.com/kafka399/fitparse/blob/master/run.py">csv format</a>.</p>
+
+<p>Once data is in CSV format R can be used to plot data.</p>
+
+<p><img src="http://dl.dropbox.com/u/6360678/blog/garmin_1.png" alt="" /></p>
+
+<p><img src="http://dl.dropbox.com/u/6360678/blog/garmin_2.png" alt="" /></p>
+
+<p>I had a lot of fun by trying to understand Garmin longitude and latitude coordinates. Here is a short explantion by Hal Mueller:</p>
+
+<blockquote><p>The mapping Garmin uses (180 degrees to 2<sup>31</sup> semicircles) allows them to use a standard 32 bit unsigned integer to represent the full 360 degrees of longitude. Thus you get the maximum precision that 32 bits allows you (about double what youâd get from a floating point value), and they still get to use integer arithmetic instead of floating point.</p></blockquote>
+
+<p><img src="http://dl.dropbox.com/u/6360678/blog/garmin_map.png" alt="" /></p>
+
+<p><a href="https://github.com/kafka399/fitparse">Source code</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Building a presentation, report or paper in R]]></title>
+    <link href="http://datalab.lu/blog/2012/08/01/building-a-presentation-report-or-paper-in-r/"/>
+    <updated>2012-08-01T13:40:35+02:00</updated>
+    <id>http://datalab.lu/blog/2012/08/01/building-a-presentation-report-or-paper-in-r</id>
+    <content type="html"><![CDATA[<p>If you need to build a presentation, obviously you have following options:</p>
+
+<ul>
+<li><p>Powerpoint alike presentation</p></li>
+<li><p>Online engines</p></li>
+<li><p><a href="http://www.latex-project.org/">LaTex</a></p></li>
+</ul>
+
+
+<p>The first two are beloved by business people and the third one is widely used in academia. The objective of the first group is shiny presentation, contrary to the second where asceticism and demand for automation are top priorities. However, if you are data scientist or any other data specialist with a need to build an automated report, then you know, that LaTex is just wrong.<br/>
+LaTex allows you to build a shiny presentation or outstanding paper, however it can take light years to build something useful for beginners . If you never tried LaTex here is an example of the monster - you literally have to <strong>code</strong> a document or presentation:</p>
+
+<pre><code>&lt;code&gt;\documentclass{article}
+\title {Investment strategy}
+\author {Dzidorius Martinaitis}
+\begin{document}
+\maketitle&lt;/code&gt;
+</code></pre>
+
+<p>So, what do you do, if you need only 1% of all LaTex features and a report/document needs to be build automatically? Turns out, that HTML little brother <a href="http://en.wikipedia.org/wiki/Markdown">Markdown</a> is saving the world. Markdown(.md) source files are easy to read and easy to write and you can convert it into .html, .pdf, .docx, .tex or any other format. There are many ways to do conversion, however I use <a href="http://johnmacfarlane.net/pandoc/">Pandoc</a> utility. By the way this post was written in markdown in <a href="http://www.vim.org/about.php">Vim</a> and you can check the <a href="https://github.com/kafka399/haxogreen.lu">source file</a>.</p>
+
+<p>However, the nicest thing about Markdown is integration with R. You can build your report in one file, where R code would be embed in Markdown. <a href="http://yihui.name/knitr/">Knitr</a> package will help you to convert R code into Markdown simply by calling this piece of code:</p>
+
+<pre><code>&lt;code&gt;require(knitr);
+knit('workshop.Rmd', 'workshop.md');&lt;/code&gt;
+</code></pre>
+
+<p>Below you will find an excerpt of .Rmd file which is mix of R and Markdown:</p>
+
+<pre><code>&lt;code&gt;Get the data
+===
+
+Who is tweeting about #Haxogreen
+
+```{r results=asis,comment=NA, message=FALSE}
+require(twitteR)
+load('tweets.Rdata')
+names=sapply(tweets,function(x)x$screenName)
+rez=(aggregate(names,list(factor(names)),length))
+rez=rez[order(rez$x),]
+colnames(rez)=c('name','count')
+options(xtable.type = 'html')
+require(xtable)
+xtable(t(tail(rez,6)))
+```
+
+Plot top10 tweeters
+===
+```{r topspam, figure=TRUE,fig.cap=''}
+barplot(tail(rez$count,10),names.arg=as.character(tail(rez$name,10)),cex.names=.7,las=2)
+```&lt;/code&gt;
+</code></pre>
+
+<p><a href="http://dl.dropbox.com/u/6360678/workshop.html">Here is a workshop presentation</a> which contains the example above - I built it for <a href="www.haxogreen.lu">Haxogreen</a> hackers camp and source code can be found on <a href="https://github.com/kafka399/haxogreen.lu/blob/master/workshop.Rmd">gitHub</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How to track Twitter unfollowers in R]]></title>
+    <link href="http://datalab.lu/blog/2012/07/18/how-to-track-twitter-unfollowers-in-r/"/>
+    <updated>2012-07-18T16:58:29+02:00</updated>
+    <id>http://datalab.lu/blog/2012/07/18/how-to-track-twitter-unfollowers-in-r</id>
+    <content type="html"><![CDATA[<p>I have Twitter <a href="https://twitter.com/dzidorius">account</a> and it is relatively easy to see new followers or subscribers. However, I was looking for ways to know who are the unfollowers. I have noticed, that some (un)subscriptions happen in bulks, which made me thinking that either I tweeted some bullshit and upset bunch of people or spam bots work in sync. With that in mind I have created a simple R script, which produces Markdown and html reports about unfollowers. You can find an example of such report below.</p>
+
+<p>The advantage of this script is that it does not require you to sign or share your data. You just have to install twitter package and you ready to go. Nevertheless, if you want to create Markdown report, you need to install markdown and knitr packages.</p>
+
+<p>The source code and build scripts can be found <a href="https://github.com/kafka399/twittrack">here</a>.</p>
+
+<pre><code>```{r echo=FALSE,message=FALSE}
+require(twitteR)
+setwd('~/git/twitTracker/')
+usr=getUser("dzidorius")
+tmp=sapply(usr$getFollowers(),function(x)x$screenName)
+
+if(!file.exists('users.csv'))
+{
+  ## when file doesn't exist - take users list and add some artificial user
+  write.table(c(as.character(tmp),'dzidorius'),'users.csv')
+
+}
+
+old_list=as.character(read.table('users.csv')$x)
+users=lookupUsers(old_list[which(!(old_list %in% as.character(tmp)))])
+if(length(users)==0)
+{
+  ## stop() doesn't work under knitr
+  cat('no one left you')  
+
+}
+```
+
+
+```{r comment=NA,echo=FALSE,message=FALSE,results='asis'}
+for(i in 1:length(users))
+{
+cat(paste("**",users[[i]]$name," @",users[[i]]$screenName,"**", "\n===\n",sep=""))
+cat(paste("![](https://api.twitter.com/1/users/profile_image?screen_name=",users[[i]]$screenName,
+          "&amp;size;=bigger)",sep=''))
+cat(paste("  \n**Created:** ",users[[i]]$created,
+          "  \n**Spam rate:** ",round(users[[i]]$followersCount/users[[i]]$friendsCount,digits=2),
+          "  \n**Activity:** " , users[[i]]$statusesCount,
+          "  \n**Location:** ", users[[i]]$location,"  \n",users[[i]]$description,"  \n",
+          "**Last status:** ",(users[[i]]$lastStatus$text),"\n\n",sep=""))
+}
+```
+
+```{r comment=NA,echo=FALSE,message=FALSE,results='asis'}
+write.table(as.character(tmp),'users.csv')
+```
+</code></pre>
+
+<h1><strong>Dzidas @dzidorius</strong></h1>
+
+<p><img src="https://api.twitter.com/1/users/profile_image?screen_name=dzidorius&amp;size=bigger" alt="" />
+<strong>Created:</strong> 2010-02-18 13:09:29
+<strong>Spam rate:</strong> 0.98
+<strong>Activity:</strong> 315
+<strong>Location:</strong> Luxembourg
+Java, C++ and R developer &amp; data junkie
+<strong>Last status:</strong> It is rainy summer in #Luxembourg but there is a party! http://t.co/FZ7eZq6u</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Data mining for network security and intrusion detection]]></title>
+    <link href="http://datalab.lu/blog/2012/07/17/data-mining-for-network-security-and-intrusion-detection/"/>
+    <updated>2012-07-17T00:56:00+02:00</updated>
+    <id>http://datalab.lu/blog/2012/07/17/data-mining-for-network-security-and-intrusion-detection</id>
+    <content type="html"><![CDATA[<p>In preparation for <a href="http://www.haxogreen.lu">"Haxogreen" hackers summer camp</a> which takes place in Luxembourg, I was exploring network security world. My motivation was to find out how data mining is applicable to network security and intrusion detection.</p>
+
+<p><a href="http://en.wikipedia.org/wiki/Flame_(malware">Flame virus</a>), <a href="http://en.wikipedia.org/wiki/Stuxnet">Stuxnet</a>, <a href="http://en.wikipedia.org/wiki/Duqu">Duqu</a> proved that static, signature based security systems are not able to detect very advanced, government sponsored threats. Nevertheless, signature based defense systems are mainstream today - think of antivirus, intrusion detection systems. What do you do when unknown is unknown? Data mining comes to mind as the answer.</p>
+
+<p>There are following areas where data mining is or can be employed: misuse/signature detection, anomaly detection, scan detection, etc.</p>
+
+<p>Misuse/signature detection systems are based on supervised learning. During learning phase, labeled examples of network packets or systems calls are provided, from which algorithm can learn about the threats. This is very efficient and fast way to find know threats. Nevertheless there are some important drawbacks, namely false positives, novel attacks and complication of obtaining initial data for training of the system.
+The false positives happens, when normal network flow or system calls are marked as a threat. For example, an user can fail to provide the correct password for three times in a row or start using the service which is deviation from the standard profile. Novel attack can be define as an attack not seen by the system, meaning that signature or the pattern of such attack is not learned and the system will be penetrated without the knowledge of the administrator. The latter obstacle (training dataset) can be overcome by collecting the data over time or relaying on public data, such as <a href="http://www.ll.mit.edu/mission/communications/ist/corpora/ideval/data/index.html">DARPA Intrusion Detection Data Set</a>.
+Although misuse detection can be built on your own data mining techniques, I would suggest well known product like <a href="http://www.snort.org/">Snort</a> which relays on crowd-sourcing.</p>
+
+<p>Anomaly/outlier detection systems looks for deviation from normal or established patterns within given data. In case of network security any threat will be marked as an anomaly. Below you can find two features graph, where number of logins are plotted on x axis and number of queries are plotter on y axis. The color indicates the group to which points are assigned - blue ones are normal, red ones - anomalies.</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=start_dec_anomalies.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/start_dec_anomalies.png" alt="alt text" /></a></p>
+
+<p>Anomaly detection systems constantly evolves - what was a norm year ago can be an anomaly today. The algorithm compares network flow with historical flow over given period and looks for outliers with are far away. Such dynamic approach allows to detect novel attacks, nevertheless it generates false positive alerts (marks normal flow as suspicious). Moreover, hackers can mimic normal profile, if they know that such system is deployed.</p>
+
+<p>The first task when implementing anomaly detection (AD) is collection of the data. If AD is going to be network based, there are two possibilities to collect aggregated data from network. Some Cisco products provide aggregated data as <a href="http://www.cisco.com/en/US/products/ps6601/products_ios_protocol_group_home.html">Netflow</a> protocol. However, you can use <a href="http://www.wireshark.org">Wireshark or tshark</a> to collect network flow data from the computer. For example:</p>
+
+<pre><code>tshark -T fields -E separator , -E quote d -e ip.src -e ip.dst -e tcp.srcport -e tcp.dstport -e udp.srcport -e upd.dstport -e tcp.len -e ip.len -e eth.type -e frame.time_epoch -e frame.len
+</code></pre>
+
+<p>Once you have enough data for mining process, you need to preprocess acquired data. In the context of intrusion, anomalous actions happen in bursts rather than single event. <a href="http://minds.cs.umn.edu/publications/chapter.pdf">Varun Chandola et al.</a> proposed to derive following features:</p>
+
+<ul>
+<li><p>Time window based:
+Number of flows to unique destination IP addresses inside the network in the last T seconds from the same source
+Number of flows from unique source IP addresses inside the network in the last T seconds to the same destination
+Number of flows from the source IP to the same destination port in the last T seconds host based - system calls network based - packet information
+Number of flows to the destination IP address using same source port in the last T seconds</p></li>
+<li><p>Connection based:
+Number of flows to unique destination IP addresses inside the network in the last N flows from the same source
+Number of flows from unique source IP addresses inside the network in the last N flows to the same destination
+Number of flows from the source IP to the same destination port in the last N flows
+Number of flows to the destination IP address using same source port in the last N flows</p></li>
+</ul>
+
+
+<p>Below you can find an example of feature creation in R. The dataset was created by calling tshark script, which is specified above.</p>
+
+<pre><code>#load data
+tmp=read.csv(‘stats2.csv’,colClasses=c(rep(‘character’,11)),header=F)
+#get rid of everything below min. in timestamp
+tmp[,10]=as.integer(as.POSIXct(format(as.POSIXct(as.integer(tmp[,10]),origin=‘1970-01-01’),‘%Y-%m-%d %H:%M:00’)))
+#fix some rows
+tmp=tmp[-which(sapply(tmp[,1],function(x) nchar(x)&gt;15)),] tmp=tmp[which(!is.na(tmp[,4])),]
+
+#aggregate date by 5 mins. it assumes, that flow is continuous
+factor=as.factor(tmp[1:5000,10])
+
+feature=do.call(rbind, sapply(seq(from=1,to=length(factor),by=4),function(x){ return(list(ddply( subset(tmp,factor==levels(factor)[x:(x+4)]),.(V1,V4),summarize,times=length(V11),.parallel=FALSE ))) }))
+</code></pre>
+
+<p>After preprocessing the data we can apply local outlier detection, KNN, random forest and others algorithms. I will provide R code and practical implementation of some algorithms in the following post.</p>
+
+<p>While preparing this post, I was looking for the books, I found only few books covering data mining and network security. To my surprise <a href="http://www.amazon.com/gp/product/1439839425/ref=as_li_qf_sp_asin_tl?ie=UTF8&amp;tag=quantitativ0e-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=1439839425">Data Mining and Machine Learning in Cybersecurity</a> book includes both topics and well written. However, if you are security specialist looking for data mining books, you can read my <a href="http://www.investuotojas.eu/2012/07/02/my-first-competition-at-kaggle/">summary</a> of <a href="http://www.amazon.com/gp/product/0123748569/ref=as_li_tf_tl?ie=UTF8&amp;tag=quantitativ0e-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=0123748569%20%22Data%20Mining:%20Practical%20Machine%20Learning%20Tools%20and%20Techniques%22.">"Data Mining: Practical Machine Learning Tools and Techniques"</a></p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,423 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Machine learning for identification of cars - DataLab</title>
+  <meta name="author" content="Dzidorius Martinaitis">
+
+  
+  <meta name="description" content="There are plenty of data on internet, however it is raw data. Think for a second about public surveillance cameras - useful to check the traffic on &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://datalab.lu/blog/2012/04/22/machine-learning-for-identification-of-cars/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="DataLab" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-37484105-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">DataLab</a></h1>
+  <div id="logo">
+  	<div id="logoLeft">{</div>
+  	<div id="logoText">Luxembourg</div>
+  	<div id="logoRight">}</div>
+  	<div class="clear"></div>
+  </div>
+
+  
+    <h2>Data based innovations</h2>
+  
+  <div class="clear"></div>
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:datalab.lu" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+<!--  <li><a href="/blog">Blog</a></li> -->
+  <li><a href="/blog/archives">Archives</a></li> 
+  <li><a href="/aboutme.html">About</a></li>
+  <li><a href="/contact">Contacts</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Machine Learning for Identification of Cars</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-22T17:53:33+02:00" pubdate data-updated="true">Apr 22<span>nd</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>There are plenty of data on internet, however it is raw data. Think for a second about public surveillance cameras - useful to check the traffic on the route or busy place, but anything else? What if you want to know how many cars are on the route? How many car were yesterday at the same time? Given so many cars on the route, how much polluted air in the area?
+While working on the road map for data dive event, I started to wonder, how feasible is to use data of public surveillance cameras. So I quickly built a pilot project and now I would like to share my experience.</p>
+
+<p>First step - <strong>data acquisition</strong>. At beginning I was thinking to plug my smartphone somewhere and collect data of the busy route.  Nevertheless, I quickly found surveillance cameras in Vilnius and started to collect images. Run a search and I&#8217;m sure, that you will find them in your city:</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=example.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/example.png" alt="Photobucket" /></a></p>
+
+<p>Here is bash script, which I use to collect images:</p>
+
+<pre><code>#you need full path for crontab
+cd /home/git/carCount/img
+a=`date +%s`
+b=${a}_4.jpg
+wget -O $b -q "http://www.sviesoforai.lt/map/camera.aspx?size=full&amp;image=K7742-1.jpg&amp;rnd=0.15417794161476195"
+</code></pre>
+
+<p><strong>Data preparation</strong>. After while you will have enough data to train your machine (for beginning more than 30 images should be O.K.).
+How do we train the algorithm? The goal is to identify the cars in a given image. That means, that we have to provide the examples of positive images (clear image of the cars) and negative images (no car, parts of the car and etc.). Important note - we don&#8217;t feed whole image, but we cut a chosen image with sliding window (100x100 in my case). 4 examples of positive images:</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=4.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/4.png" alt="Photobucket" /></a></p>
+
+<p>Meanwhile, it is worth converting each image to <a href="en.wikipedia.org/wiki/Netpbm_format">portable grey format PGM</a>. For this specific task, we can sacrifice information about the color of the car - it won&#8217;t improve prediction. Besides, PGM images can be loaded into R and easily transformed into matrix. Here is bash script, which converts jpg to pgm and slices each image:</p>
+
+<pre><code>#remove image duplicates
+find . -maxdepth 1 -type f -exec md5sum {} \;  &gt;test.txt
+awk 'a[$1]++ {gsub(/^\*/,"",$2); print "rm ", $2}' test.txt |sh
+rm test.txt
+
+#convert jpg
+
+if [ -d "out" ]; then
+        rm -r out
+fi
+mkdir out
+for k in $(ls *.jpg); do convert $k out/$k.pgm; done
+
+cd out
+mkdir slide
+for filename in $(ls *.pgm);
+ do 
+
+w=`convert $filename -print "%w" /dev/null`
+h=`convert $filename -print "%h" /dev/null`
+let "ww= $w/100"
+let "hh= $h/100"
+for((y=150;y&lt;=250;y+=50))
+do
+for((i=100;i&lt;=400;i+=50))
+do
+echo "slide/$i.$filename"
+let "h_slide=$i"
+convert $filename -crop 100x100+$i+$y slide/$y.$i.$filename
+done
+done
+done
+</code></pre>
+
+<p><strong>Training, predicting, cross validation</strong>. Now is time to open R, load 100x100 images from &#8220;train/out/slide&#8221; directory and train the algorithm. Important note - each image is a matrix, however you have to feed a matrix of all images to learning algorithm (support vector machine in my case). What you have to do is to &#8220;unroll&#8221; each image matrix into a vector, get 1X10000 vector and build a new matrix, where each row is an image.
+Once training is done, load unseen data from &#8220;crossval/out/slide&#8221; directory and check &#8220;result/&#8221; directory, where you will find  images of the cars. R script, which does all above:</p>
+
+<pre><code>setwd('/home/git/carCount/')
+
+######read positives############
+files=list.files('test/pos/')
+pos=matrix(nrow=NROW(files),ncol=100*100)
+
+for(i in 1:NROW(files))
+{
+  gray_file=read.pnm(paste('test/pos/',files[i],sep=''))
+  pos[i,]=c(gray_file@grey)
+}
+outcome=vector(length=NROW(files))
+outcome[which(outcome!=1)]=1
+
+########read negatives#############
+files=list.files('test/neg/')
+neg=matrix(nrow=NROW(files),ncol=100*100)
+
+for(i in 1:NROW(files))
+{
+  gray_file=read.pnm(paste('test/neg/',files[i],sep=''))
+  neg[i,]=c(gray_file@grey)
+}
+tmp=vector(length=NROW(files))
+tmp[which(tmp!=0)]=0
+outcome=c(outcome,tmp)
+forecast=svm(rbind(pos,neg),outcome)
+cross_val=pos[84:90,]
+pred=predict(forecast,cross_val,decision.values=TRUE)
+
+##########################unseen data######################
+files=list.files('crossval/out/slide/')
+cross=matrix(nrow=NROW(files),ncol=100*100)
+
+for(i in 1:NROW(files))
+{
+  gray_file=read.pnm(paste('crossval/out/slide/',files[i],sep=''))
+  cross[i,]=c(gray_file@grey)
+}
+pred=predict(forest,cross,decision.values=TRUE)
+
+###############copy positives into result directory###############
+dir.create('result')
+file.copy(paste('crossval/out/slide/',files[which(as.double(pred)&gt;0.6)],sep=''),'result/')
+</code></pre>
+
+<p>Classified as positive by algorithm:
+<a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=pos.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/pos.png" alt="Photobucket" /></a></p>
+
+<p>Classified as negative by algorithm:
+<a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=neg.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/neg.png" alt="Photobucket" /></a></p>
+
+<p><strong>Conclusion</strong>. It is truly amazing how well algorithm is able to separate wheat from the chaff without additional tuning. Mind you, my impression is biased after so many fails with financial data, which is noisy and good predictions are scarce.
+Nevertheless, this project is far away for ideal - it doesn&#8217;t take into account weather condition, traffic jams, perspective view, movements of the camera and etc. But I leave this fun for data-dive event.</p>
+
+<p><strong>Fork the code</strong>: <a href="https://github.com/kafka399/carCount/">https://github.com/kafka399/carCount/</a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Dzidorius Martinaitis</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-22T17:53:33+02:00" pubdate data-updated="true">Apr 22<span>nd</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/en/'>EN</a>, <a class='category' href='/blog/categories/r-language/'>R-language</a>, <a class='category' href='/blog/categories/data-analysis/'>data analysis</a>, <a class='category' href='/blog/categories/machine-learning/'>machine learning</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://datalab.lu/blog/2012/04/22/machine-learning-for-identification-of-cars/" data-via="dzidorius" data-counturl="http://datalab.lu/blog/2012/04/22/machine-learning-for-identification-of-cars/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/03/25/levenshtein-distance-in-c-and-code-profiling-in-r/" title="Previous Post: Levenshtein distance in C++ and code profiling in R">&laquo; Levenshtein distance in C++ and code profiling in R</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/05/15/github-data-analysis/" title="Next Post: GitHub data analysis">GitHub data analysis &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Contact me</h1>
+	<p>email: <a href="mailto:dm@datalab.lu">dm@datalab.lu</a></p>
+</section>
+
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/02/06/workouts-in-d3/">Offline Garmin workout visualization</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/04/09/credit-card-fraud/">Credit card fraud detection</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/02/21/kaggle-event-recommentation-engine/">Kaggle challenge - event recommendation engine</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/10/23/machine-learning-for-hackers/">Machine learning for hackers</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/10/04/garmin-data-visualization/">Garmin data visualization</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("dzidorius", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/dzidorius" class="twitter-follow-button" data-show-count="true">Follow @dzidorius</a>
+  
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Dzidorius Martinaitis -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'datalab';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://datalab.lu/blog/2012/04/22/machine-learning-for-identification-of-cars/';
+        var disqus_url = 'http://datalab.lu/blog/2012/04/22/machine-learning-for-identification-of-cars/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

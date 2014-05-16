@@ -674,9 +674,9 @@ d3.xml('work.xml', "application/xml", function(xml) {
       map.fitBounds(coord_array);
       L.polyline(coord_array,{color: '#FF4500',fillOpacity:0.8}).addTo(map)
 
-      L.tileLayer('http://{s}.tile.cloudmade.com/b27b6666d1704c9bbc347305f8fdf31f/997/256/{z}/{x}/{y}.png', {
-        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
-        maxZoom: 18
+L.tileLayer('https://{s}.tiles.mapbox.com/v3/kafka.i4foej8g/{z}/{x}/{y}.png', {
+      attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery Ā© <a href="http://mapbox.com">Mapbox</a>',
+      maxZoom: 18
       }).addTo(map);
 
       for(i = 1;i<markers.length;i++)

@@ -9,7 +9,7 @@
   <meta name="author" content="Dzidorius Martinaitis">
 
   
-  <meta name="description" content="While ago I built a R script for Garmin data visualization and actually used it myself for more than one year. However the solution suffer from few &hellip;">
+  <meta name="description" content="Our bodies generate a lot of data - blood pressure, heart rate, amount of glucose in blood, etc. However, the struggle is how to collect data? Until &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -85,6 +85,64 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2014/04/30/data-based-review-of-strapless-mio-link-hrm/">Data Based Review of Strapless Mio Link HRM</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-30T19:38:00+02:00" pubdate data-updated="true">Apr 30<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/04/30/data-based-review-of-strapless-mio-link-hrm/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Our bodies generate a lot of data - blood pressure, heart rate, amount of glucose in blood, etc. However, the struggle is how to collect data? Until recently, heart rate monitors(HRM) were popular only among practitioners of endurance sports - runners, cyclists, swimmers, etc. Nevertheless, a strapless, wristband heart rate monitor seduces a new category of users - data minded people who are interested in quantified self movement.</p>
+
+<p><a href="http://www.amazon.com/gp/product/B00IVF04LQ/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;camp=1789&amp;creative=9325&amp;creativeASIN=B00IVF04LQ&amp;linkCode=as2&amp;tag=quantitativ0e-20&amp;linkId=P6FG6UOAAIH32K2T">Mio Link</a> looks like a watch on your wrist, allowing to wear it around the clock. Have you ever tried to wear chest based HRM outside workout?</p>
+
+<p><img src="https://dl.dropboxusercontent.com/u/6360678/blog/mio_.jpg" alt="Mio on the wrist" /></p>
+
+<p>The technology behind wristband HRM is quite simple - integrated LEDs beams light into the skin and pulsing volume of blood flow is collected. Wristband HRM might provide better accuracy than chest based HRM, because latter is affected in lower air temperatures. Below you can see data comparison between <a href="http://www.amazon.com/gp/product/B00IVF04LQ/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;camp=1789&amp;creative=9325&amp;creativeASIN=B00IVF04LQ&amp;linkCode=as2&amp;tag=quantitativ0e-20&amp;linkId=P6FG6UOAAIH32K2T">Mio Link</a> and <a href="http://www.amazon.com/gp/product/B00BI9X1QM/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=9325&amp;creativeASIN=B00BI9X1QM&amp;linkCode=as2&amp;tag=quantitativ0e-20&amp;linkId=NHAWYZKZN4NPAATG">Garmin Soft Strap</a> from one of my workouts:</p>
+
+<p><img src="https://dl.dropboxusercontent.com/u/6360678/blog/mio_garmin.png" alt="Mio Link vs Garmin Soft Strap" /></p>
+
+<p>There some data discrepancy, but most importantly peaks and valleys are intact. However, sport workouts are limited in time and I wanted to know, how does wristband HRM work around the clock. The second chart shows data recorded during the day. As you can see the error rate (red color indicates potential errors) is much higher. This might be explained by the fact that my movements were not constant or repetitive contrary to running or sleeping.</p>
+
+<p><img src="https://dl.dropboxusercontent.com/u/6360678/blog/day.png" alt="Heart rate" /></p>
+
+<p>The third chart shows the data gathered during the night. The data bears some noise as well, but the spikes indicate shift in data blocks and presumably body movements. It would be interesting to know if sleep stages can be extracted from heart rate data.</p>
+
+<p><img src="https://dl.dropboxusercontent.com/u/6360678/blog/night.png" alt="Night rate" /></p>
+
+<p>If you plan to use it on daily basis, keep in mind, that the battery last 8-10 hours. It might sound bad, but during the day you have plenty of time windows when you can charge the battery without loosing a lot sensitive data. For example, while you sit in front of computer your heart rate most likely will be low and stable and it is perfect time for charging.</p>
+
+<p>If the idea of wristband HRM sounds appealing, beside Mio link, you can check for <a href="http://www.scosche.com/health-fitness/rhythm-plus">Scosche RHYTHM+</a> as well, which is equivalent of the former.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2014/02/06/workouts-in-d3/">Offline Garmin Workout Visualization</a></h1>
     
     
@@ -116,12 +174,7 @@
 
 <p>In order to save the file on the local disk, click right button on <a href="https://raw2.github.com/kafka399/d3_workout/master/garmin.html">the link</a> and then &#8220;Save as&#8221;. Then copy your workout *.tcx file to the same directory where you saved garmin.html file. On mac OS the path is: <code>/Users/my_username/Library/Application\ Support/Garmin/Devices/RANDOM_NUMBER/History/YOU_WORKOUT.tcx</code> Once you copied the *.tcx file please rename it to <code>work.tcx</code>. Double click on garmin.hml and you will see a visualization similar to one bellow. Bonus? You can see it off-line, without uploading or sharing your workout with the world.</p>
 
-<iframe src="/workout5.html" height=1400 width=100% >
-iframe is turned off and you can&#8217;t see the content. You can see the same file by following [the link][link]
-</iframe>
-
-
-
+<p>Here is an <a href="http://datalab.lu/workout5.html">example</a></p>
 </div>
   
   
@@ -697,83 +750,6 @@ Keeping all this information in mind I wasn&#8217;t able to to implement accur
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/05/15/github-data-analysis/">GitHub Data Analysis</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-15T13:48:49+02:00" pubdate data-updated="true">May 15<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/05/15/github-data-analysis/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Few weeks ago GitHub <a href="https://github.com/blog/1112-data-at-github">announced</a>, that its timeline data is available on <a href="https://bigquery.cloud.google.com">bigquery</a> for analysis. Moreover, it <a href="https://github.com/blog/1118-the-github-data-challenge">offers prizes</a> for the best visualization of the data. Despite my art skills and minimal chances to win beauty contest, I decided to crunch GitHub data and run data analysis.</p>
-
-<p>After initial trial of bigquery service, I found hard to know, what price, if any, I&#8217;m going to pay for the service. Hence, I pulled the data (6.5 GB) from bigquery on my machine and further I used my machine for analysis. Bash scripts have been used to clean up and extract necessary data, R for data analysis and visualization and C++ for text extraction.</p>
-
-<p>GitHub dataset is one table, where each row consist of information about repository (i.e. path, date of creation, name, description, programming language, number of forks/watchers and etc.) and action, which was done by user (i.e. username, location, timestamp and etc.).</p>
-
-<p>As a result, we can check how GitHub users actions are spread over time during the day. The X axis on the graph below is labeled with the hours of the day (GMT) and the Y axis represent median values of the actions for each hour. From it, we can make a deduction, that highest load for GitHub can be expected between 15:00 and 17:00 GMT and lowest to be expected between 05:00 and 07:00 GMT. The color of the line indicates how busy was the day based on quantiles: green are calm days (20% of days), blue - normal days (50% quantile) and red are busy days (80% quantile). I should to mention, that auto-correlation or serial correlation is high (70% for following hour), which means, that busy hours tend to be followed by busy hours and calm hours tend to be followed by calm hours. Moreover, busy days tend happen after busy days.</p>
-
-<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=actions.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/actions.png" alt="Photobucket" /></a></p>
-
-<p>Second graph below shows median of actions divided by weekdays. There is not big surprise - weekends are more slow than weekdays, nevertheless the programmers are slightly less productive on Mondays and Fridays.</p>
-
-<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=actions_weekdays.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/actions_weekdays.png" alt="Photobucket" /></a></p>
-
-<p>The analysis of creation of new repository shows, that the pattern of busy or calm hours remains over the years. This can be attributed to the fact, that majority of the users comes from North America and Europe.
-Another hypothesis can be drawn from this information, that number of creation of the new repositories grow exponentially. However, I mind you, that the graph below is biased - most likely, GitHub users update recent projects, consequently more recent projects appeared on timeline. Even though, 2009-2011 years show exponential grow.
-The X axis of the graph below is labeled with the hour of the day, the Y axis - log of median values of new repositories.</p>
-
-<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=new_repos.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/new_repos.png" alt="Photobucket" /></a></p>
-
-<p>Following graph shows the number of forks per project (the X axis, log scale) versus number of watchers (the Y axis, log scale). As expected, there is linear correlation between forks and watchers. Even so there is something interesting about outliers, which are below bottom line - the projects, where number of watchers is low, but number of forks is high. These are anomalies and worth to check.</p>
-
-<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=fork_watch.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/fork_watch.png" alt="Photobucket" /></a></p>
-
-<p>The next thing to do is to look at the repository description. Let&#8217;s group the repositories by programming language and count most dominant words in the description. The graph below has C++ word cloud on the left and Java - right . C++ projects are about library, game, simple(?), engine, Arduino. Java is dominated by android, plugin, server, minecraft, spring, maven.</p>
-
-<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=cpp_java.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/cpp_java.png" alt="Photobucket" /></a>
-Ruby (left) vs Python(right ):
-<a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=ruby_python.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/ruby_python.png" alt="Photobucket" /></a></p>
-
-<p>&#8220;Surprise&#8221;, &#8220;surprise&#8221; - R projects (left) are largely about data analysis, however &#8220;machine&#8221; word, which corresponds to Machine learning is very tiny. Shell (right) is dominated by configuration, managing, git(?).</p>
-
-<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=r_bash.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/r_bash.png" alt="Photobucket" /></a></p>
-
-<p>GitHub dataset includes location field. Unfortunately, the users can enter whatever they want - country, city or leave it empty. Nevertheless, I was able to extract good chunk of actions, where location field has meaningful value.  The video below shows country based users activity, where dark red corresponds to high activity and light red - minor. Only 30 most active countries are included, the rest are grey.
-The same pattern persist over the days - activity in Asia increases around midnight, Europe wakes up around 8:00 or 9:00, where America starts around 15:00. Who said, that hackers and programmers work at night?</p>
-
-<p>What else can be done with GitHub dataset? Most repositories have description field, which can be used to find similar projects by implementing <a href="http://en.wikipedia.org/wiki/Tf*idf">tf-idf</a> method. I tried that method and the results are satisfying.</p>
-
-<p>Most of the graphs shown above are reproducible (except word clouds) and the code can be found on <a href="https://github.com/kafka399/githubdata">GitHub</a>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -794,6 +770,10 @@ The same pattern persist over the days - activity in Asia increases around midni
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/04/30/data-based-review-of-strapless-mio-link-hrm/">Data based review of strapless Mio Link HRM</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/02/06/workouts-in-d3/">Offline Garmin workout visualization</a>
       </li>
     
@@ -807,10 +787,6 @@ The same pattern persist over the days - activity in Asia increases around midni
     
       <li class="post">
         <a href="/blog/2012/10/23/machine-learning-for-hackers/">Machine learning for hackers</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/10/04/garmin-data-visualization/">Garmin data visualization</a>
       </li>
     
   </ul>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: d3.js | DataLab]]></title>
   <link href="http://datalablu.github.com/blog/categories/d3-js/atom.xml" rel="self"/>
   <link href="http://datalablu.github.com/"/>
-  <updated>2014-02-20T20:15:38+01:00</updated>
+  <updated>2014-05-16T15:16:45+02:00</updated>
   <id>http://datalablu.github.com/</id>
   <author>
     <name><![CDATA[Dzidorius Martinaitis]]></name>
@@ -24,12 +24,7 @@
 
 <p>In order to save the file on the local disk, click right button on <a href="https://raw2.github.com/kafka399/d3_workout/master/garmin.html">the link</a> and then "Save as". Then copy your workout *.tcx file to the same directory where you saved garmin.html file. On mac OS the path is: <code>/Users/my_username/Library/Application\ Support/Garmin/Devices/RANDOM_NUMBER/History/YOU_WORKOUT.tcx</code> Once you copied the *.tcx file please rename it to <code>work.tcx</code>. Double click on garmin.hml and you will see a visualization similar to one bellow. Bonus? You can see it off-line, without uploading or sharing your workout with the world.</p>
 
-<iframe src="http://datalablu.github.com/workout5.html" height=1400 width=100% >
-iframe is turned off and you can't see the content. You can see the same file by following [the link][link]
-</iframe>
-
-
-
+<p>Here is an <a href="http://datalab.lu/workout5.html">example</a></p>
 ]]></content>
   </entry>
   

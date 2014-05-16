@@ -4,7 +4,7 @@
   <title><![CDATA[DataLab]]></title>
   <link href="http://datalablu.github.com/atom.xml" rel="self"/>
   <link href="http://datalablu.github.com/"/>
-  <updated>2014-02-20T20:13:53+01:00</updated>
+  <updated>2014-05-16T15:14:29+02:00</updated>
   <id>http://datalablu.github.com/</id>
   <author>
     <name><![CDATA[Dzidorius Martinaitis]]></name>
@@ -12,6 +12,35 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Data based review of strapless Mio Link HRM]]></title>
+    <link href="http://datalablu.github.com/blog/2014/04/30/data-based-review-of-strapless-mio-link-hrm/"/>
+    <updated>2014-04-30T19:38:00+02:00</updated>
+    <id>http://datalablu.github.com/blog/2014/04/30/data-based-review-of-strapless-mio-link-hrm</id>
+    <content type="html"><![CDATA[<p>Our bodies generate a lot of data - blood pressure, heart rate, amount of glucose in blood, etc. However, the struggle is how to collect data? Until recently, heart rate monitors(HRM) were popular only among practitioners of endurance sports - runners, cyclists, swimmers, etc. Nevertheless, a strapless, wristband heart rate monitor seduces a new category of users - data minded people who are interested in quantified self movement.</p>
+
+<p><a href="http://www.amazon.com/gp/product/B00IVF04LQ/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;camp=1789&amp;creative=9325&amp;creativeASIN=B00IVF04LQ&amp;linkCode=as2&amp;tag=quantitativ0e-20&amp;linkId=P6FG6UOAAIH32K2T">Mio Link</a> looks like a watch on your wrist, allowing to wear it around the clock. Have you ever tried to wear chest based HRM outside workout?</p>
+
+<p><img src="https://dl.dropboxusercontent.com/u/6360678/blog/mio_.jpg" alt="Mio on the wrist" /></p>
+
+<p>The technology behind wristband HRM is quite simple - integrated LEDs beams light into the skin and pulsing volume of blood flow is collected. Wristband HRM might provide better accuracy than chest based HRM, because latter is affected in lower air temperatures. Below you can see data comparison between <a href="http://www.amazon.com/gp/product/B00IVF04LQ/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;camp=1789&amp;creative=9325&amp;creativeASIN=B00IVF04LQ&amp;linkCode=as2&amp;tag=quantitativ0e-20&amp;linkId=P6FG6UOAAIH32K2T">Mio Link</a> and <a href="http://www.amazon.com/gp/product/B00BI9X1QM/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=9325&amp;creativeASIN=B00BI9X1QM&amp;linkCode=as2&amp;tag=quantitativ0e-20&amp;linkId=NHAWYZKZN4NPAATG">Garmin Soft Strap</a> from one of my workouts:</p>
+
+<p><img src="https://dl.dropboxusercontent.com/u/6360678/blog/mio_garmin.png" alt="Mio Link vs Garmin Soft Strap" /></p>
+
+<p>There some data discrepancy, but most importantly peaks and valleys are intact. However, sport workouts are limited in time and I wanted to know, how does wristband HRM work around the clock. The second chart shows data recorded during the day. As you can see the error rate (red color indicates potential errors) is much higher. This might be explained by the fact that my movements were not constant or repetitive contrary to running or sleeping.</p>
+
+<p><img src="https://dl.dropboxusercontent.com/u/6360678/blog/day.png" alt="Heart rate" /></p>
+
+<p>The third chart shows the data gathered during the night. The data bears some noise as well, but the spikes indicate shift in data blocks and presumably body movements. It would be interesting to know if sleep stages can be extracted from heart rate data.</p>
+
+<p><img src="https://dl.dropboxusercontent.com/u/6360678/blog/night.png" alt="Night rate" /></p>
+
+<p>If you plan to use it on daily basis, keep in mind, that the battery last 8-10 hours. It might sound bad, but during the day you have plenty of time windows when you can charge the battery without loosing a lot sensitive data. For example, while you sit in front of computer your heart rate most likely will be low and stable and it is perfect time for charging.</p>
+
+<p>If the idea of wristband HRM sounds appealing, beside Mio link, you can check for <a href="http://www.scosche.com/health-fitness/rhythm-plus">Scosche RHYTHM+</a> as well, which is equivalent of the former.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Offline Garmin workout visualization]]></title>
@@ -24,12 +53,7 @@
 
 <p>In order to save the file on the local disk, click right button on <a href="https://raw2.github.com/kafka399/d3_workout/master/garmin.html">the link</a> and then &#8220;Save as&#8221;. Then copy your workout *.tcx file to the same directory where you saved garmin.html file. On mac OS the path is: <code>/Users/my_username/Library/Application\ Support/Garmin/Devices/RANDOM_NUMBER/History/YOU_WORKOUT.tcx</code> Once you copied the *.tcx file please rename it to <code>work.tcx</code>. Double click on garmin.hml and you will see a visualization similar to one bellow. Bonus? You can see it off-line, without uploading or sharing your workout with the world.</p>
 
-<iframe src="http://datalablu.github.com/workout5.html" height=1400 width=100% >
-iframe is turned off and you can&#8217;t see the content. You can see the same file by following [the link][link]
-</iframe>
-
-
-
+<p>Here is an <a href="http://datalab.lu/workout5.html">example</a></p>
 ]]></content>
   </entry>
   

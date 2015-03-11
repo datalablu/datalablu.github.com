@@ -16,7 +16,7 @@ Regardless of many lending platforms such us [Prosper.com][prosper] (US), [zopa.
 [prosper]:http://www.Prosper.com
 [zopa]:http://zopa.co.uk
 [fund]:http://www.fundingcircle.com
-[aux]:http://auxmoney.com
+[aux]:http://www.auxmoney.com
 [pret]:http://pret-dunion.fr
 [spain]:http://comunitae.com
 [lend]:http://lendico.com

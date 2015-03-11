@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: kaggle | DataLab.lu]]></title>
+  <link href="http://datalab.lu/blog/categories/kaggle/atom.xml" rel="self"/>
+  <link href="http://datalab.lu/"/>
+  <updated>2015-03-11T19:25:51+01:00</updated>
+  <id>http://datalab.lu/</id>
+  <author>
+    <name><![CDATA[Dzidorius Martinaitis]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Kaggle Challenge - Event Recommendation Engine]]></title>
+    <link href="http://datalab.lu/blog/2013/02/21/kaggle-event-recommentation-engine/"/>
+    <updated>2013-02-21T15:24:00+01:00</updated>
+    <id>http://datalab.lu/blog/2013/02/21/kaggle-event-recommentation-engine</id>
+    <content type="html"><![CDATA[<p><a href="https://www.kaggle.com/c/event-recommendation-engine-challenge/leaderboard">Event Recommendation Engine Challenge</a> was my second challenge at Kaggle and I finished 15th out of 225 on final (private) leaderboard. I was able to finish 1st on public leaderboard. Believe or not but the difference doesn't come from over fitting but rather from an external data source (Google Maps) which was forbidden. I did read the rules, but such important restriction was buried under additional layer of rules which I didn't bother to read. So moral of the story - if you are doing well then read the rules for second time. Nevertheless it is strange, why the host of the challenge didn't preprocess the data and didn't convert location of the users into latitude/longitude format? It would definitely lead to better models, as in my case such conversion gave + 4% in precision.</p>
+
+<p>For this competition I used random forest almost exclusively and devoted all my time for the feature derivation. For the final prediction I built three models and then combined them together:</p>
+
+<pre><code>set.seed(333)
+final_model3=randomForest(factor((interested-not_interested)/2+.5) ~ .,data=final_model,importance=TRUE,nodesize=4)
+
+set.seed(33)
+final_model1=randomForest(factor((interested-not_interested)/2+.5) ~ .,data=final_model,importance=TRUE,nodesize=4)
+
+set.seed(3)
+final_model2=randomForest(factor((interested-not_interested)/2+.5) ~ .,data=final_model,importance=TRUE,nodesize=4)
+
+final_model=combine(final_model3,final_model1,final_model2)
+</code></pre>
+
+<p>Below you can find a chart with most important features of my final model:</p>
+
+<p><img src="http://dl.dropbox.com/u/6360678/blog/features.png" alt="" /></p>
+
+<ul>
+<li><p><strong><em>time_diff</em></strong> - From early beginning I found that the difference between when the event is scheduled to begin and when the user saw the event ad is important feature which is easy to derive.</p></li>
+<li><p><strong><em>popularity</em></strong> - How many users said they are interested in the event.</p></li>
+<li><p><strong><em>start_hour</em></strong> - Turns out, that it is important to know at what hour an event is going to begin.</p></li>
+<li><p><strong><em>friends</em></strong> - The name of this feature might be misleading, nevertheless it keeps how many user friends are invited to the event.</p></li>
+<li><p><strong><em>joinedAt</em></strong> The difference between year when the user joined the service and 2000-01-01. I was surprised to find, that such feature has weight at all.</p></li>
+<li><p><strong><em>timezone</em></strong> Had few NA values which I replaced by 0. Then I converted timezone numerical value into factor of two hours: 14-12, 12-10 and etc.</p></li>
+<li><p><strong><em>birthyear</em></strong> Numeric value.</p></li>
+<li><p><strong><em>weekdays</em></strong> On which weekday did the event happen? (Monday, Tuesday and etc).</p></li>
+<li><p><strong><em>friend_yes, friend_no, friend_maybe</em></strong> Number of friends which are interested, not interested or maybe in the event.</p></li>
+<li><p><strong><em>c_XXX All c_xxxx</em></strong> features were used without preprocessing.</p></li>
+<li><p><strong><em>locale</em></strong> I used the first two letter of locale variable.</p></li>
+<li><p><strong><em>location_mat</em></strong> Once I found, that external sources such as Google maps are forbidden then I tried to determine if user location shares the same words with event country, state and city descriptions. If it does I would add +1 (max 3) for location_mat variable.</p></li>
+<li><p><strong><em>distance</em></strong> (forbidden) the feature scored high, but I had to remove it. The first step was to obtain latitude and longitude for users with known location. If you are interested here is the <a href="https://github.com/kafka399/kaggle-event/blob/master/address.r">source code</a> which shows how easily it can be done in R. Need to say, that I did manual and automated data cleaning - converted states names and some frequent errors like "City name 19". Once I had the coordinates of the users I was able to calculate the distance to event. Then I used k-means to predict user location for those who did not specified it, based on friends location. For example if 5 out of 8 friends of the user are based in Indonesia then user is given Indonesia location and distance to the event is calculated. Here's the <a href="https://github.com/kafka399/kaggle-event/blob/master/user_friends_coord.r">source code</a> for prediction of user location.</p></li>
+</ul>
+
+
+<p><a href="https://github.com/kafka399/kaggle-event/blob/master/review.r">Click here</a> if you are interested in the source code of my solution.</p>
+]]></content>
+  </entry>
+  
+</feed>

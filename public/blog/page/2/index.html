@@ -1,0 +1,718 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>DataLab.lu</title>
+  <meta name="author" content="Dzidorius Martinaitis">
+
+  
+  <meta name="description" content="There are plenty of data on internet, however it is raw data. Think for a second about public surveillance cameras - useful to check the traffic on &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://datalab.lu/blog/page/2/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="DataLab.lu" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-37484105-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:datalab.lu" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+    <li><a href="/">
+        <span class="blue_light">
+            DataLab.lu
+        </span>
+       
+           <span class="blue_dark">
+             Data based inventions.
+           </span>
+       
+    </a></li>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/04/22/machine-learning-for-identification-of-cars/">Machine Learning for Identification of Cars</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-22T17:20:00+02:00" pubdate data-updated="true">Apr 22<span>nd</span>, 2012</time>
+        
+         | <a href="/blog/2012/04/22/machine-learning-for-identification-of-cars/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>There are plenty of data on internet, however it is raw data. Think for a second about public surveillance cameras - useful to check the traffic on the route or busy place, but anything else? What if you want to know how many cars are on the route? How many car were yesterday at the same time? Given so many cars on the route, how much polluted air in the area? While working on the road map for data dive event, I started to wonder, how feasible is to use data of public surveillance cameras. So I quickly built a pilot project and now I would like to share my experience.</p>
+
+<p>First step - <strong><em>data acquisition</em></strong>. At beginning I was thinking to plug my smartphone somewhere and collect data of the busy route.  Nevertheless, I quickly found surveillance cameras in Vilnius and started to collect images. Run a search and I&#8217;m sure, that you will find them in your city:</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=example.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/example.png" alt="" /></a></p>
+
+<p>Here is bash script, which I use to collect images:</p>
+
+<pre><code>#you need full path for crontab
+cd /home/git/carCount/img
+a=`date +%s`
+b=${a}_4.jpg
+wget -O $b -q "http://www.sviesoforai.lt/map/camera.aspx?size=full&amp;image=K7742-1.jpg&amp;rnd=0.15417794161476195"
+</code></pre>
+
+<p><strong><em>Data preparation</em></strong>. After while you will have enough data to train your machine (for beginning more than 30 images should be O.K.). How do we train the algorithm? The goal is to identify the cars in a given image. That means, that we have to provide the examples of positive images (clear image of the cars) and negative images (no car, parts of the car and etc.). Important note - we don&#8217;t feed whole image, but we cut a chosen image with sliding window (100x100 in my case). 4 examples of positive images:</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=4.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/4.png" alt="" /></a></p>
+
+<p>Meanwhile, it is worth converting each image to <a href="http://datalab.lu/blog/2012/04/22/machine-learning-for-identification-of-cars/en.wikipedia.org/wiki/Netpbm_format">portable grey format PGM</a>. For this specific task, we can sacrifice information about the color of the car - it won&#8217;t improve prediction. Besides, PGM images can be loaded into R and easily transformed into matrix. Here is bash script, which converts jpg to pgm and slices each image:</p>
+
+<pre><code>#remove image duplicates
+find . -maxdepth 1 -type f -exec md5sum {} \;  &gt;test.txt
+awk 'a[$1]++ {gsub(/^\*/,"",$2); print "rm ", $2}' test.txt |sh
+rm test.txt
+
+#convert jpg
+
+if [ -d "out" ]; then
+    rm -r out
+fi
+mkdir out
+for k in $(ls *.jpg); do convert $k out/$k.pgm; done
+
+cd out
+mkdir slide
+for filename in $(ls *.pgm);
+ do 
+
+w=`convert $filename -print "%w" /dev/null`
+h=`convert $filename -print "%h" /dev/null`
+let "ww= $w/100"
+let "hh= $h/100"
+for((y=150;y&lt;=250;y+=50))
+do
+for((i=100;i&lt;=400;i+=50))
+do
+echo "slide/$i.$filename"
+let "h_slide=$i"
+convert $filename -crop 100x100+$i+$y slide/$y.$i.$filename
+done
+done
+done
+</code></pre>
+
+<p><strong><em>Training, predicting, cross validation</em></strong>. Now is time to open R, load 100x100 images from &#8220;train/out/slide&#8221; directory and train the algorithm. Important note - each image is a matrix, however you have to feed a matrix of all images to learning algorithm (support vector machine in my case). What you have to do is to &#8220;unroll&#8221; each image matrix into a vector, get 1X10000 vector and build a new matrix, where each row is an image. Once training is done, load unseen data from &#8220;crossval/out/slide&#8221; directory and check &#8220;result/&#8221; directory, where you will find  images of the cars. R script, which does all above:</p>
+
+<pre><code>setwd('/home/git/carCount/')
+
+######read positives############
+files=list.files('test/pos/')
+pos=matrix(nrow=NROW(files),ncol=100*100)
+
+for(i in 1:NROW(files))
+{
+  gray_file=read.pnm(paste('test/pos/',files[i],sep=''))
+  pos[i,]=c(gray_file@grey)
+}
+outcome=vector(length=NROW(files))
+outcome[which(outcome!=1)]=1
+
+########read negatives#############
+files=list.files('test/neg/')
+neg=matrix(nrow=NROW(files),ncol=100*100)
+
+for(i in 1:NROW(files))
+{
+  gray_file=read.pnm(paste('test/neg/',files[i],sep=''))
+  neg[i,]=c(gray_file@grey)
+}
+tmp=vector(length=NROW(files))
+tmp[which(tmp!=0)]=0
+outcome=c(outcome,tmp)
+forecast=svm(rbind(pos,neg),outcome)
+cross_val=pos[84:90,]
+pred=predict(forecast,cross_val,decision.values=TRUE)
+
+##########################unseen data######################
+files=list.files('crossval/out/slide/')
+cross=matrix(nrow=NROW(files),ncol=100*100)
+
+for(i in 1:NROW(files))
+{
+  gray_file=read.pnm(paste('crossval/out/slide/',files[i],sep=''))
+  cross[i,]=c(gray_file@grey)
+}
+pred=predict(forest,cross,decision.values=TRUE)
+
+###############copy positives into result directory###############
+dir.create('result')
+file.copy(paste('crossval/out/slide/',files[which(as.double(pred)&gt;0.6)],sep=''),'result/')
+</code></pre>
+
+<p>Classified as positive by algorithm:</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=pos.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/pos.png" alt="" /></a></p>
+
+<p>Classified as negative by algorithm:</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=neg.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/neg.png" alt="" /></a></p>
+
+<p><strong><em>Conclusion</em></strong>. It is truly amazing how well algorithm is able to separate wheat from the chaff without additional tuning. Mind you, my impression is biased after so many fails with financial data, which is noisy and good predictions are scarce. Nevertheless, this project is far away for ideal - it doesn&#8217;t take into account weather condition, traffic jams, perspective view, movements of the camera and etc. But I leave this fun for data-dive event.</p>
+
+<p>Fork the code: <a href="https://github.com/kafka399/carCount/">https://github.com/kafka399/carCount/</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/03/25/levenshtein-distance-in-c-and-code-profiling-in-r/">Levenshtein Distance in C++ and Code Profiling in R</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-03-25T16:50:00+02:00" pubdate data-updated="true">Mar 25<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/03/25/levenshtein-distance-in-c-and-code-profiling-in-r/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>At work, the client requested, if existing search engine could accept singular and plural forms equally, e. g. &#8220;partner&#8221; and &#8220;partners&#8221; would lead to the same result.</p>
+
+<p>The first option - <a href="http://en.wikipedia.org/wiki/Stemming">stemming</a>. In that case, search engine would use root of a word, e. g. &#8220;partn&#8221;. However, stemming has many weaknesses: two different words might have same root, a user can misspell the root of the word, except English and few others languages it is not that trivial to implement stemming.</p>
+
+<p><a href="http://en.wikipedia.org/wiki/Levenshtein_distance">Levenshtein distance</a> comes as the second option. The algorithm is simple - you have two words and you calculate the difference between them. You can insert, delete or replace any character, but it will cost you. Let&#8217;s imagine, an user enters &#8220;Levenstin distances&#8221; into search engine and expects to find revalent information. However, he just made 2 errors by misspeling the author&#8217;s name and he used plural form of &#8220;distance&#8221;. If search engine accepts 3 errors - the user will get relevant information.</p>
+
+<p>The challenge comes, when you have a dictionary of terms (e. g. more that 1 mil.) and you want to get similar terms based on Levenshtein distance. You can visit every entry in the dictionary (very costly) or you can push dictionary into the <a href="http://en.wikipedia.org/wiki/Trie">trie</a>. Do you need a proof for the cost? There we go:</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=test.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/test.png" alt="" /></a></p>
+
+<p>Red color indicates the performance of the search, when all terms are in the trie, green - simple dictionary.</p>
+
+<p>Now we come to the second part of the post - why to bother and plot such graphs, if we could check few entries to determine average time and the winner? The reason is simple - we trust in God, all others must bring data. To say it differently - while profiling the code, you should be interested in average time AND variation. As you can see in the graph above, variation of the blue color is very small - it takes approximately the same time to scan whole dictionary. However, red has higher variation - the result can take for while or it can finish just at the beginning, but overall it works faster. Now, imagine, that a programmer wants to define, which implementation A or B for volatile cache is much faster. Let&#8217;s assume, that big O notion is not going to help and she conducts 2 test for A and 2 for B. While running test A, cache size expands, while B - shrinks. As the result, B wins over A and she makes wrong choice. However, her colleague claims, that despite A has greater volatility, it is much faster and she tried with 500 queries! Whom should I trust?</p>
+
+<p>I use this piece for code profiling:</p>
+
+<pre><code>simple=read.table('simple.txt')
+node=read.table('node.txt')
+
+simple=cbind(simple,as.character(c('simple')))
+colnames(simple)=c('time','type')
+node=cbind(node,c('node'))
+colnames(node)=c('time','type')
+
+rez=data.frame(rbind(simple, node))
+
+require(ggplot2)
+
+ggplot(rez,aes(time,fill=type))+geom_density(alpha=0.6,size=1.3)+scale_x_log10()
+</code></pre>
+
+<p>The data, C++ code for Levenshtein distance and trie can be find on <a href="https://github.com/kafka399/Levenshtein-distance">GitHub</a>.</p>
+
+<p>I found this source very useful: <a href="http://stevehanov.ca/blog/index.php?id=114">http://stevehanov.ca/blog/index.php?id=114</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/02/01/vectorized-r-vs-rcpp/">Vectorized R vs Rcpp</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-01T11:35:00+01:00" pubdate data-updated="true">Feb 1<span>st</span>, 2012</time>
+        
+         | <a href="/blog/2012/02/01/vectorized-r-vs-rcpp/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://www.investuotojas.eu/2012/01/30/the-power-of-rcpp/">In my previous post</a>, I tried to show, that Rcpp is 1000 faster than pure R and that generated the fuss in the comments. Being lazy, I didn&#8217;t vectorize R code and at the end I was comparing apples vs oranges.</p>
+
+<p>To fix that problem, I built a new script, where I&#8217;m trying to compare apples against apples. First piece of code named &#8220;ifelse R&#8221; uses R &#8220;ifelse&#8221; function to vectorize code. Second piece of code is fully vectorized code written in R, third - pure C++ code and the last one is C++, where  Rcpp &#8220;ifelse&#8221; function is used.</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=performance.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/performance.png" alt="" /></a></p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th> Name  </th>
+<th> Seconds </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td> ifelse R </td>
+<td> 27.50</td>
+</tr>
+<tr>
+<td></td>
+<td> vectorized R </td>
+<td> 10.40</td>
+</tr>
+<tr>
+<td></td>
+<td> pure C++ </td>
+<td> 0.44</td>
+</tr>
+<tr>
+<td></td>
+<td> vectorized C++ </td>
+<td> 2.24</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>Here we go - vectorization truly helps, but pure C++ code still 23 times faster. Of course you pay the price when writing it in C++. I found a bit strange, that vectorized C++ code doesn&#8217;t perform that well&#8230;</p>
+
+<p>You can get the code from <a href="https://github.com/kafka399/Rproject/blob/master/performance/performance.R">github</a>.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/07/27/how_big_block_trades_affect_stock_market_prices/">How Big Block Trades Affect Stock Market Prices?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-07-27T16:01:00+02:00" pubdate data-updated="true">Jul 27<span>th</span>, 2011</time>
+        
+         | <a href="/blog/2011/07/27/how_big_block_trades_affect_stock_market_prices/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I will be giving a presentation on &#8220;Optimal transaction cost&#8221; in <a href="http://maps.google.com/maps?q=vilnius,Maironio+g.+11&amp;hl=en&amp;sll=54.689386,25.280024&amp;sspn=0.599292,1.226349&amp;z=16">Vilnius</a> on 16th of August. While preparing the presentation and looking for an optimal execution solution, a natural question arises: does the size of the trade affect stock market price? I&#8217;m sure, you would say 100 % yes. Well, you would be right, but what is the scale of such effect? Is it possible to profit from execution of the big block trades?</p>
+
+<p>Such test is not trivial and to conduct it, you need high frequency data, which is messy in most of the cases. For testing purpose I chose <a href="http://finance.yahoo.com/q?s=BNP.PA&amp;ql=0">BNP Paribas</a> stock from February 2011 to May 2011. Initially, I had more than 460 k. trades and more than 320k. quotes. However, the data was filtered by buyers initiated trades. To find buyers initiated trades, I used Lee-Ready Rule - short description can be found <a href="http://goo.gl/RWSqa">here</a> on page 2. I found about Lee - Ready rule while reading <a href="http://www.maxdama.com/?p=477">Maxdama</a> last post and a damn good <a href="http://dl.dropbox.com/u/39904/maxdama.pdf">summary</a> (check page 42).</p>
+
+<p>The first chart below shows the average return  one trade later (within seconds in most of the cases), when big or small trade was done. X axis represents difference between the trade and following trade, Y axis represents the trade size and the dot size represents number of trades within that cluster of volume. As you can see, small trades add 0.0004% to the price, while big ones (more than 980 of shares) increase the price on average 0.0007%</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=bnpNextTrade.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/bnpNextTrade.png" alt="" /></a></p>
+
+<p>The next figure shows average return one minute later. This time the different between small trades and big one are almost3 times!</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=bnpMinuteLater.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/bnpMinuteLater.png" alt="" /></a></p>
+
+<p>While we can see, that stock market prices are affected by big blocks, there&#8217;s no easy way to profit from it. You have to take into account bid/ask spread, plus you are becoming liquidity demander when liquidity is dry. On other end, this test shows the cost for each volume cluster and this cost can be used when choosing an optimal strategy for portfolio/stock liquidation.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/04/20/transaction-cost-analysis-and-pre-trade-analysis/">Transaction Cost Analysis and Pre-trade Analysis</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-04-20T14:33:00+02:00" pubdate data-updated="true">Apr 20<span>th</span>, 2011</time>
+        
+         | <a href="/blog/2011/04/20/transaction-cost-analysis-and-pre-trade-analysis/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Transaction cost analysis (TCA) is the framework to achieve best execution in trading context. TCA can be split into three groups: pre-trade analysis, intraday analysis, and post-trade measurement.</p>
+
+<p>Pre-trade analysis allows us to get insight about the future volatility of the price, forecast intra-day and daily volumes, market impact. It evaluates all strategies and advises the strategy that is most consistent with manager preferences for the risk.</p>
+
+<p>Intraday analysis is real time analysis, where the system ensure that the strategy performs in line with the forecast.</p>
+
+<p>Post-trade analysis measures the implementation of the investment decision to ensure, that pre-trade models are accurate and best execution is delivered.</p>
+
+<p>If you want to learn more about the transaction cost analysis, I highly recommend <a href="http://www.amazon.com/gp/product/0814407242/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;tag=quantitativ0e-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=0814407242">Optimal Trading Strategies: Quantitative Approaches for Managing Market Impact and Trading Risk</a> by Robert Kissell. The book not only covers all type of mentioned analysis, but also considers the practical aspects of the implementation of trading strategy and algorithms. The book includes very interesting part about Principal Bid Transactions or blind bids.</p>
+
+<p>To build a forecast model we need some input parameters. Pre-trade analysis can be split into two parts - fundamental part and statistically based part. It is much ease to derive fundamental facts such as market capitalization, company profile, the sectors in which company operates, than statistically based parameters. For the latter I&#8217;m going to use R and the raw stock price data to derive it. The former can easily be found on Internet, Bloomber or Reuter.</p>
+
+<p>The first input parameter that I&#8217;m are going to derive is average daily trading volume of the traded security. It is very easy to obtain it - only daily data is necessary. I used 20 days rolling window to get average volume. Here&#8217;s an example of IBM security:</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=avgDailyVolume.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/avgDailyVolume.png" alt="" /></a></p>
+
+<p>The graph shows, how the 20 days average volume evolved since last September - the minimum was 3.5 millions and the maximum was 6 millions traded a day. But the average can be misleading - it takes into account last 20 days and then it derives one number. In most of the case, we are going to deal with short time prediction such as 1 day or 1 hour, so approximation of 20 days does not make a lot sense. One of possible solutions would be using confidence intervals estimate daily volume. 95% confidence interval is wide used in finance - I will use the same interval answering the following question: based on this interval, what volume will be traded next day.</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=volumeDensity.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/volumeDensity.png" alt="" /></a></p>
+
+<p>The density diagram shows distribution of daily volume of IBM security. As you can see most of the days the volume was above 3 millions. However, 5% of the days the volume was below 3 millions. Based on this diagram, we can predict, that tomorrow&#8217;s volume will be higher than 3 millions.</p>
+
+<p>Before we finish with the daily volume, we have to test for weekly seasonality. If there is weekday seasonality, then the volume forecast has to be adjusted.</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=weekday.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/weekday.png" alt="" /></a></p>
+
+<p>The chart above clearly indicates, that the traded volume on Monday is below (~5%) the day average. There is increase in the volume on Friday, but the significance is under question. Let&#8217;s check density diagram to get rid of any doubt about the volatility on Monday and Friday.</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=weekdayDensity.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/weekdayDensity.png" alt="" /></a></p>
+
+<p>The density diagram above shows, that Monday&#8217;s peak and the body are shifted to the left. On the other end we can see, that Friday&#8217;s body is aligned with others days, only it has a fat tail. Based on this diagram we can eliminate Friday&#8217;s volume adjustment and apply Monda&#8217;s adjustment only.</p>
+
+<p>Once we finished with daily data we can move to intra-day. Then liquidating (or acquiring) a position in a security, the position has to be sliced into smaller parts to avoid influence of the market and to hide the intentions. For this reason, intra-day volume patterns have to be known. With that in mind, let&#8217;s look at how the volume is distributed in relation to the trading hour.</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=hourlyVolume.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/hourlyVolume.png" alt="" /></a></p>
+
+<p>The graph above shows hourly volume pattern, where the volume is grouped by hour. The black dots indicate the median of the hour. Please keep in mind, that the trading starts at 9:30 and the first trading hour has only 30 minutes (if you want align the first hour to the others, then you need to multiply the volume of the first hour by two). As we can see, the first and the last are most traded and the volume drops in the middle of the day.</p>
+
+<p>The next useful thing then liquidating a big position is average trade size. We need to know, how behaves average Joe and what he trades.</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=tradeSize.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/tradeSize.png" alt="" /></a></p>
+
+<p>The chart above shows all trades grouped by hour - the black dots indicate median of the trades. The following table is supplementary to the chart - here you find median of the hour.</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th> Hour  </th>
+<th> Volume </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td> 10 </td>
+<td> 842.5 |</td>
+</tr>
+<tr>
+<td></td>
+<td> 11 </td>
+<td> 565.5 |</td>
+</tr>
+<tr>
+<td></td>
+<td> 12 </td>
+<td> 394.0 |</td>
+</tr>
+<tr>
+<td></td>
+<td> 13 </td>
+<td> 300.0 |</td>
+</tr>
+<tr>
+<td></td>
+<td> 14 </td>
+<td> 297.0 |</td>
+</tr>
+<tr>
+<td></td>
+<td> 15 </td>
+<td> 369.5 |</td>
+</tr>
+<tr>
+<td></td>
+<td> 16 </td>
+<td> 708.5 |</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>Once again, average trade size is much higher in the first and last hours and it drops ~2.5 times during the trading session.</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=hourlyVolatility.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/hourlyVolatility.png" alt="" /></a></p>
+
+<p>The final chart shows the volatility grouped by hour. There is a lot jittery, then the market opens, it becomes calmer during the lunch time and slightly increases then the market closes. These are the numbers for each hour:</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th> Hour  </th>
+<th> Volume </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td> 10 </td>
+<td> 0.16% |</td>
+</tr>
+<tr>
+<td></td>
+<td> 11 </td>
+<td> 0.09% |</td>
+</tr>
+<tr>
+<td></td>
+<td> 12 </td>
+<td> 0.08% |</td>
+</tr>
+<tr>
+<td></td>
+<td> 13 </td>
+<td> 0.05% |</td>
+</tr>
+<tr>
+<td></td>
+<td> 14 </td>
+<td> 0.05% |</td>
+</tr>
+<tr>
+<td></td>
+<td> 15 </td>
+<td> 0.06% |</td>
+</tr>
+<tr>
+<td></td>
+<td> 16 </td>
+<td> 0.07% |</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>In this article we analyzed a list of potential input parameters for pre-trade analysis and further forecast. The list is not static and can be extended with supplementary parameters, such as bid-ask spread distribution and etc. The next step is to aggregate these parameters and build the models to forecast volatility and volume.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/03/11/applying-machine-learning-to-peer-to-peer-lending/">Applying Machine Learning to Peer to Peer lending</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/04/30/data-based-review-of-strapless-mio-link-hrm/">Data Based Review of Strapless Mio Link HRM</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/04/09/credit-card-fraud/">Credit Card Fraud Detection</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/02/21/kaggle-event-recommentation-engine/">Kaggle Challenge - Event Recommendation Engine</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/10/23/machine-learning-for-hackers/">Machine Learning for Hackers</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/dzidorius"  data-widget-id=""  data-link-color="#1863a1" data-tweet-limit="4" data-chrome="noheader nofooter transparent noscrollbar">Tweets by @dzidorius</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+  </ul>
+  
+    <a href="http://twitter.com/dzidorius" class="twitter-follow-button" data-show-count="false">Follow @dzidorius</a>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Dzidorius Martinaitis -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'kafka399';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

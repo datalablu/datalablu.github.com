@@ -1,0 +1,342 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Applying Machine Learning to Peer to Peer lending - DataLab.lu</title>
+  <meta name="author" content="Dzidorius Martinaitis">
+
+  
+  <meta name="description" content="Peer to peer lending allows to lend money to unrelated individuals without going through traditional financial service such as bank, credit union, &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://datalab.lu/blog/2015/03/11/applying-machine-learning-to-peer-to-peer-lending/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="DataLab.lu" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-37484105-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:datalab.lu" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+    <li><a href="/">
+        <span class="blue_light">
+            DataLab.lu
+        </span>
+       
+           <span class="blue_dark">
+             Data based inventions.
+           </span>
+       
+    </a></li>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Applying Machine Learning to Peer to Peer Lending</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-03-11T16:25:00+01:00" pubdate data-updated="true">Mar 11<span>th</span>, 2015</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Peer to peer lending allows to lend money to unrelated individuals without going through traditional financial service such as bank, credit union, etc. Nevertheless, there is an intermediary - service and platform provider. The provider verifies the identity of the borrower and income status, processes the payments, promotes its platform, deals with bad loans or demands bankruptcy for the borrower.<br/>
+The advantage of peer to peer lending for the borrowers is lower interest rate and higher rate for lenders. However, higher rate comes with higher risk - the return is more volatile than a bank deposit.</p>
+
+<p>Regardless of many lending platforms such us <a href="http://www.Prosper.com">Prosper.com</a> (US), <a href="http://zopa.co.uk">zopa.co.uk</a> (UK), <a href="http://www.fundingcircle.com">www.fundingcircle.com</a> (UK), <a href="http://auxmoney.com">auxmoney.com</a> (DE), <a href="http://pret-dunion.fr">pret-dunion.fr</a> (FR), <a href="http://comunitae.com">comunitae.com</a> (ES), <a href="http://lendico.com">lendico.com</a> (global), majority of platforms accept only the investment from local investors. However <a href="http://bondora.com">bondora.com</a> (EE) allows invest into three markets - Estonia, Finland and Spain and accepts investors from across Europe. Additionally, the rate of return at bondora.com is not fixed as in other platforms and allows much higher returns. However, there is a possibility that you may lose some or all of your initial investment as it is not protected by any financial compensation scheme.</p>
+
+<p>The company behind bondora.com is isePankur AS, which is based in Estonia, a small country in north of Europe. The really amazing thing about bondora.com, that they share <a href="https://www.bondora.ee/en/invest/statistics/data_export">data</a> with everyone. The data-set gives us an opportunity to glimpse at the performance of the company and a possibility to build our own credit scoring model!</p>
+
+<p>The data goes back to 2009 and the chart below shows the total number of loans and funded loans per month. It looks like the business exploded in 2013 and the following charts will give us a few clues.</p>
+
+<p><img src="https://dl.dropboxusercontent.com/s/85hu5gke4x7rxvw/unnamed-chunk-1-1.png?dl=0" alt="plot of chunk unnamed-chunk-1" /></p>
+
+<p>In 2013 bondora.com became more active in Finland and Spain markets, though it was in 2014, when the grow skyrocketed in these markets.</p>
+
+<p><img src="https://dl.dropboxusercontent.com/s/m1y7rnev0sm8vy9/unnamed-chunk-2-1.png?dl=0" alt="Countries" /></p>
+
+<p>Another big change, what might ignited the grow of bondora.com is shift in the duration of the loans. Dominant loan duration before 2013 was 1-2 years, but in 2013 the company started issuing 5 years loans, which became the primary duration in 2014 and was half of all loans.</p>
+
+<p><img src="https://dl.dropboxusercontent.com/s/ohha8j873ym6h4j/unnamed-chunk-3-1.png?dl=0" alt="plot of chunk unnamed-chunk-3" /></p>
+
+<p>The latest data-set has data about 29688 loans and 172 columns or features (depending which parlance you prefer). Below you can see a partial print screen of the interface and dozen of the features.</p>
+
+<p><img src="https://dl.dropboxusercontent.com/s/z1xsothaax10g06/interface.png?dl=0" alt="plot of interface" /></p>
+
+<h3>Model building</h3>
+
+<p>Now, that we are familiar with bondora&#8217;s data-set, let&#8217;s move to model building. The prediction model can predict two types of outcomes - categorical (yes/no, true/false classes) or numerical (one is less than one hundred). Although most credit scoring models are built to return a credit score for a borrower, I have opted for simple model, where the outcome has two classes: good or bad.</p>
+
+<p>The definition of &#8220;good&#8221; class is straight forward - the class in which you are willing to invest or give a credit, but &#8220;bad&#8221; class definition is complicated. The data-set has data about the borrowers who were late with their payments for 7, 14, 21, 60 days and defaulted loans. How bad is a borrower if he is late for X days? True, he doesn&#8217;t respect the schedule and the contract for various reason such as harsh life, distraction or any other reason. However, once he is back on track he pays what he owns, plus late charges, which leads to higher return for additional risk.<br/>
+The defaulted loans really sounds as bad loans, right? Well, what if the loan defaults, but you get back the principal and partial interest rate? Doesn&#8217;t sound that bad, does it? What you really don&#8217;t like is the default on the loan and zero payments - these loans are the fraud and you want to avoid them. So let&#8217;s mark them as a &#8220;bad&#8221; ones.</p>
+
+<p>Beside choosing the outcome, it took me awhile to realize another problem with the data-set - the shift in the business model. Nowadays, most of the loans are issued for 5 years and the data-set doesn&#8217;t event have data on matured 5 years loans! So I did the trick - I marked all 5 years loans as repaid which are still &#8220;alive&#8221; after 2-3 years.</p>
+
+<p>While working on a few machine learning projects I quickly learned, that the biggest impact on performance of the model comes not from the fancy machine learning algorithms, but from well engineered features. In the chart below you can find, that 3rd feature is &#8220;total_interest&#8221;, which is made of &#8220;Interest&#8221; and &#8220;LoanDuration&#8221;. The two features perform well, but the derived feature has much bigger weight.<br/>
+Additionally, I have added data about <a href="http://en.wikipedia.org/wiki/VIX">VIX index</a>. The index tracks volatility of the stock market via S&amp;P500 index - its value increases during the crisis and falls back during calm times. By adding independent source the performance of the model increased 2%.</p>
+
+<p>After initial cleaning of the data-set and feature engineering it was time to build a simple model. My favorite machine learning algorithm is Random Forest for the following reasons: you can feed almost any raw data and it chew happily; the algorithm itself is easy to understand, nevertheless it is kind of black-box; it gives the weights of the features:</p>
+
+<p><img src="https://dl.dropboxusercontent.com/s/y5f7u1tch7tqtvo/weight.png?dl=0" alt="Weight" /></p>
+
+<h3>Model metrics</h3>
+
+<p>In classification task <a href="http://en.wikipedia.org/wiki/Precision_and_recall">precision and recall</a> are used frequently for model metrics. The predicted value can be assigned to four classes: True Positive - real fraud (model predicted True and value was True), True Negative - not a fraud (model predicted False value and value was False), False Positive - not fraud marked as a fraud (model predicted True, however value was False) and False Negative - real fraud marked as not fraud (model predicted False, but the value was True).</p>
+
+<p><img src="https://dl.dropboxusercontent.com/s/kk5st4vandt7i9j/metrics.png?dl=0" alt="Metrics " /></p>
+
+<p>In case of p2p lending, if you commit False Positive error (Type I), you just miss one investment. You main concern is False Negative (Type II) errors, because you will be loosing money on the bad investment. <a href="http://en.wikipedia.org/wiki/Positive_predictive_value">Positive predictive value</a> metrics is used for performance evaluation: <code>sum(True positive)/sum(Test outcome positive)</code></p>
+
+<h3>Blending</h3>
+
+<p>Funny, but the blending works well with ML algorithms and with the people. Michael Nielsen in his book <a href="http://www.amazon.com/gp/product/0691160198/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=9325&amp;creativeASIN=0691160198&amp;linkCode=as2&amp;tag=quantitativ0e-20&amp;linkId=SHCTNV7H7ED2OEKM">&#8220;Reinventing Discovery: The New Era of Networked Science&#8221;</a> gives many examples how the collective intelligence can be more powerful than single mind. The idea is very simple - if you gather predictions from dozen of people or ML models then the average score will better than the best single prediction. There is one pitfall - if the predictions are given by &#8220;herd mind&#8221; then the result most likely be horrible. So, in ML environment try to include very different algorithms - decision trees, linear models, neural networks, etc. to sustain diversity.</p>
+
+<p>For my final model I blend tree algorithms - Random forest, SVM and generalized boosted modeling (GBM). If all of them predict, that the loan is not a fraud, then I will make an investment.</p>
+
+<h3>Real time data</h3>
+
+<p>The modeling part is done, but without real time data it is just waste of time. Fortunately, there is a nice Python framework for web crawling - <a href="http://scrapy.org/">Scrapy</a>. Initial time investment in the tool might look significant, but because it is robust it won&#8217;t be your concern any time soon, unless the platform gets face-lift&#8230;</p>
+
+<h3>Automated investment</h3>
+
+<p><a href="http://www.seleniumhq.org/">Selenium</a> is a suite of tools to automate web browsers across many platforms. It is widely used for web interface testing purpose, however any web-based task can be automated.</p>
+
+<p>Once I have real time data I feed my model with it to find out which loans are good for the investment. Acquired list is send to Selenium script, which logins into the platform and makes the investments.</p>
+
+<h3>Infrastructure</h3>
+
+<p>My first idea was to use Raspberry Pi for the project, however I had the problems setting up R-language and Python frameworks. So, I rented an instance on DigitalOcean for 10 dollars a month (there is 5$/month option as well) and it worked well. Meanwhile, I realized, that I don&#8217;t need the server for 24 hours a day.</p>
+
+<p>The solution was to power-on four times a day and shutdown the server once the job is finished. But as you probably know, powering-off your server is not enough to save you from paying - you need to archive your virtual instance (the same applies to Amazon AWS). So, I came up with the script, which creates a virtual image from the archive, powers it on, runs the crawler, runs R mining module, makes the investments if necessary and then shutdowns the instance, archives the image and deletes virtual machine.</p>
+
+<p>Does it sounds good? Well, it was good, until I went on holiday for one week without almost any access to Internet. At the end of my vacation, I found, that every day four new servers were created and were still spinning&#8230; Turns out, that Raspberry Pi was able to initiate new instances, but wasn&#8217;t able to shutdown and delete. The support at DigitalOcean have asked for the log files from my server and I ended up paying the bill, because it was almost non-existant on my RaspPi. The lesson taken - log as much as possible and incorporate health checks for virtual machine in your scripts.</p>
+
+<h3>Results</h3>
+
+<p>I started my investments at Bondora in September 2014. At the beginning all my investments were done via Bondora&#8217;s investment engine, where you can define investment parameters (country, risk profile, etc.). Somewhere in November - December I decided, that I will rely on my own engine only. Below you can see, that the engine based on machine learning algorithms does good job by avoiding bad borrowers.</p>
+
+<p><img src="https://dl.dropboxusercontent.com/s/6xcbjtr92hnz36g/personal.png?dl=0" alt="Personal" /></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Dzidorius Martinaitis</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-03-11T16:25:00+01:00" pubdate data-updated="true">Mar 11<span>th</span>, 2015</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/ml/'>ML</a>, <a class='category' href='/blog/categories/data-analysis/'>data analysis</a>, <a class='category' href='/blog/categories/investment/'>investment</a>, <a class='category' href='/blog/categories/visualization/'>visualization</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://datalab.lu/blog/2015/03/11/applying-machine-learning-to-peer-to-peer-lending/" data-via="dzidorius" data-counturl="http://datalab.lu/blog/2015/03/11/applying-machine-learning-to-peer-to-peer-lending/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/04/30/data-based-review-of-strapless-mio-link-hrm/" title="Previous Post: Data Based Review of Strapless Mio Link HRM">&laquo; Data Based Review of Strapless Mio Link HRM</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/03/11/applying-machine-learning-to-peer-to-peer-lending/">Applying Machine Learning to Peer to Peer lending</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/04/30/data-based-review-of-strapless-mio-link-hrm/">Data Based Review of Strapless Mio Link HRM</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/04/09/credit-card-fraud/">Credit Card Fraud Detection</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/02/21/kaggle-event-recommentation-engine/">Kaggle Challenge - Event Recommendation Engine</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/10/23/machine-learning-for-hackers/">Machine Learning for Hackers</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/dzidorius"  data-widget-id=""  data-link-color="#1863a1" data-tweet-limit="4" data-chrome="noheader nofooter transparent noscrollbar">Tweets by @dzidorius</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+  </ul>
+  
+    <a href="http://twitter.com/dzidorius" class="twitter-follow-button" data-show-count="false">Follow @dzidorius</a>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Dzidorius Martinaitis -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'kafka399';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://datalab.lu/blog/2015/03/11/applying-machine-learning-to-peer-to-peer-lending/';
+        var disqus_url = 'http://datalab.lu/blog/2015/03/11/applying-machine-learning-to-peer-to-peer-lending/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: quant | DataLab.lu]]></title>
+  <link href="http://datalab.lu/blog/categories/quant/atom.xml" rel="self"/>
+  <link href="http://datalab.lu/"/>
+  <updated>2015-03-11T19:25:51+01:00</updated>
+  <id>http://datalab.lu/</id>
+  <author>
+    <name><![CDATA[Dzidorius Martinaitis]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Building a Presentation, Report or Paper in R]]></title>
+    <link href="http://datalab.lu/blog/2012/08/01/building-a-presentation-report-or-paper-in-r/"/>
+    <updated>2012-08-01T14:00:00+02:00</updated>
+    <id>http://datalab.lu/blog/2012/08/01/building-a-presentation-report-or-paper-in-r</id>
+    <content type="html"><![CDATA[<p>If you need to build a presentation, obviously you have following options:</p>
+
+<ul>
+<li><p>Powerpoint alike presentation</p></li>
+<li><p>Online engines</p></li>
+<li><p><a href="http://www.latex-project.org/">LaTex</a></p></li>
+</ul>
+
+
+<p>The first two are beloved by business people and the third one is widely used in academia. The objective of the first group is shiny presentation, contrary to the second where asceticism and demand for automation are top priorities. However, if you are data scientist or any other data specialist with a need to build an automated report, then you know, that LaTex is just wrong.
+LaTex allows you to build a shiny presentation or outstanding paper, however it can take light years to build something useful for beginners . If you never tried LaTex here is an example of the monster - you literally have to <strong><em>code</em></strong> a document or presentation:</p>
+
+<pre><code>&lt;code&gt;\documentclass{article}
+\title {Investment strategy}
+\author {Dzidorius Martinaitis}
+\begin{document}
+\maketitle&lt;/code&gt;
+</code></pre>
+
+<p>So, what do you do, if you need only 1% of all LaTex features and a report/document needs to be build automatically? Turns out, that HTML little brother <a href="http://en.wikipedia.org/wiki/Markdown">Markdown</a> is saving the world. Markdown(.md) source files are easy to read and easy to write and you can convert it into .html, .pdf, .docx, .tex or any other format. There are many ways to do conversion, however I use <a href="http://johnmacfarlane.net/pandoc/">Pandoc</a> utility. By the way this post was written in markdown in <a href="http://www.vim.org/about.php">Vim</a> and you can check the <a href="https://github.com/kafka399/haxogreen.lu">source file</a>.</p>
+
+<p>However, the nicest thing about Markdown is integration with R. You can build your report in one file, where R code would be embed in Markdown. <a href="http://yihui.name/knitr/">Knitr</a> package will help you to convert R code into Markdown simply by calling this piece of code:</p>
+
+<pre><code>&lt;code&gt;require(knitr);
+knit('workshop.Rmd', 'workshop.md');&lt;/code&gt;
+</code></pre>
+
+<p>Below you will find an excerpt of .Rmd file which is mix of R and Markdown:</p>
+
+<pre><code>&lt;code&gt;Get the data
+===
+
+Who is tweeting about #Haxogreen
+
+
+```{r results=asis,comment=NA, message=FALSE}
+require(twitteR)
+load('tweets.Rdata')
+names=sapply(tweets,function(x)x$screenName)
+rez=(aggregate(names,list(factor(names)),length))
+rez=rez[order(rez$x),]
+colnames(rez)=c('name','count')
+options(xtable.type = 'html')
+require(xtable)
+xtable(t(tail(rez,6)))
+```
+
+Plot top10 tweeters
+===
+```{r topspam, figure=TRUE,fig.cap=''}
+barplot(tail(rez$count,10),names.arg=as.character(tail(rez$name,10)),cex.names=.7,las=2)
+```&lt;/code&gt;
+</code></pre>
+
+<p><a href="http://dl.dropbox.com/u/6360678/workshop.html">Here is a workshop presentation</a> which contains the example above - I built it for <a href="http://datalab.lu/blog/2012/08/01/building-a-presentation-report-or-paper-in-r">Haxogreen</a> hackers camp and source code can be found on <a href="https://github.com/kafka399/haxogreen.lu/blob/master/workshop.Rmd">gitHub</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[My First Competition at Kaggle]]></title>
+    <link href="http://datalab.lu/blog/2012/07/02/my-first-competition-at-kaggle/"/>
+    <updated>2012-07-02T12:30:00+02:00</updated>
+    <id>http://datalab.lu/blog/2012/07/02/my-first-competition-at-kaggle</id>
+    <content type="html"><![CDATA[<p>For me <a href="http://www.kaggle.com/">Kaggle</a> becomes a social network for data scientist, as <a href="http://stackoverflow.com/questions/tagged/r">stackoverflow.com</a> or <a href="https://github.com/">github.com</a> for programmers. If you are data scientist, machine learner or statistician you better off to have a profile there, otherwise you do not exist.</p>
+
+<p>Nevertheless, I won't bet on rosy future for data scientist as journalists suggest (<a href="http://www.guardian.co.uk/news/datablog/2012/mar/02/data-scientist">sexy job for next decade</a>). For sure, the demand for such specialists is on rise. However, I see one big threat for data scientist - Kaggle and similar service providers. You see, such services allows to tap high end data scientists (think of PhD in hard science) at minuscule fraction of real price. Think of Hollywood business model - top players get majority of the pool and the rest is starving. If you try the same service model on IT projects you will most likely get burned. My reasoning can be wrong, but I suspect, that project timespan is the issue - IT projects can take for while to finish (1-10 years), but main stream ML project won't take that long.</p>
+
+<p>Notwithstanding these obstacles, machine learning, information retrieval, data mining and etc. is a must with ability to write code for production, deal with streaming big data and cope with performance of intelligent system. Then, in programmers parlance, you will became "data scientist ninja" and every company will die for you. There is a good post on the subject on <a href="http://blog.mikiobraun.de/2012/06/is-machine-learning-losing-impact.html">mikiobraun</a> blog, but I mind you, that it is a bit controversial.</p>
+
+<p>Although for last 4 years I often has been working on financial models and time-series, this competition added a new experience to me and hunger for the knowledge. During competition I found this book very practical and plentiful of ideas what to do next: <a href="http://www.amazon.com/gp/product/0123748569/ref=as_li_tf_tl?ie=UTF8&amp;tag=quantitativ0e-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=0123748569">Data Mining: Practical Machine Learning Tools and Techniques</a>. As complimentary book I used <a href="http://www.amazon.com/gp/product/0123814790/ref=as_li_tf_tl?ie=UTF8&amp;tag=quantitativ0e-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=0123814790">Data Mining: Concepts and Techniques</a>, though most of information can be found in one of them. I will try to summarize some chapters in my own story.</p>
+
+<p><strong><em>Understanding the data</em></strong>. "<a href="http://www.kaggle.com/c/online-sales">Online Product Sales</a>" competition metadata (data about data) is miserly - there are three types of the data - the date fields, categorical fields, quantitative fields and response data for next 12 months. However metadata is most important element in all ML projects, which can save you a lot of time once you understand it better and it leads to much better forecast if you have "domain knowledge".</p>
+
+<p><strong><em>Cleaning data</em></strong>. There is famous phrase: "garbage in garbage out", meaning, that before any further action you have to detect and fix incorrect, incomplete or missing data. You have many possibilities to deal with missing data - remove all rows, where the data is missing; replace it with mean or regressed value or nearest value and etc.  If your data is plentiful and missing values are random (meaning, that NA values do not bear any information) - just get rid of them. Otherwise you need impute new values based on mean or other technique. Mean based replacement worked best for me in this competition. Outliers are another type of the troubles. Suppose, that variable is normally distributed, but few variables are far away from the center. The easiest solution would be to remove such values - as many do in finance by removing "crisis period".  When next crisis hits, the journalists are rushing to learn a new buzzword- <a href="http://en.wikipedia.org/wiki/Black_swan_theory">black swan</a>. Turns out, that outliers can't be ignored, because the impact of them is huge.  So be precautious while dealing with outliers.</p>
+
+<p><strong><em>Feature selection</em></strong>. It was surprising to me that too many features or variables can pollute forecast, therefore you need to do feature selection. Such task can be done manually be checking correlation matrix, co-variance and etc. However, random forest or generalized boosted methods can lead to better selection. In R you just call randomForest() or gbm() and job is done.</p>
+
+<p><strong><em>Variable transformation</em></strong> - a way to get superior performance. "Online Product Sales" competition has two date fields, however these fields encoded as integers. By transforming these variables into date and retrieving year and month led to better performance of the model. In most of cases taking logarithm for numeric fields gives performance boost. Scaling (from 0 to 1 or from -1 to 1) and centering (normal distribution) might be considered when linear models are in use.  It is worth to transform categorical variables as well, where 1 would mean, that a feature belongs to the group and 0 otherwise. Check model.matrix function in R for latter transformation and preProcess function in caret package for numerical variables.</p>
+
+<p><strong><em>Validation stage</em></strong> - helps you to measure performance of the model. If you have huge database to build a model you can divide you set into two/three parts - for training, testing and cross validation and you are ready to start. However, if you are not so lucky, then other methods come to play. Most popular method is division of the set into two groups, namely "training" and "test" and rotating it for 10 times. For example, you have 100 rows, so you take first 75 for training and 25 for test and you check the performance ratio. In the next step you take the rows from 25 to 100 for training and you use first 25 for test. Once you repeat such procedure 10 times, you have 10 performance ratios and you take average of it. <a href="http://en.wikipedia.org/wiki/Stratified_sampling">Stratified sampling</a> is a buzzword, which you should know when you do a sampling. Keeping all this information in mind I wasn't able to to implement accurate cross validation and my results differ within 0.05 range.</p>
+
+<p><strong><em>Model selection and ensemble</em></strong>. Intuitively you want to choose the best performing algorithm, however the mix of them can lead to superior performance. For regression problem I trained four models (two random forest versions, gbm, svm), made the predictions, averaged the results and that led to better prediction.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Levenshtein Distance in C++ and Code Profiling in R]]></title>
+    <link href="http://datalab.lu/blog/2012/03/25/levenshtein-distance-in-c-and-code-profiling-in-r/"/>
+    <updated>2012-03-25T16:50:00+02:00</updated>
+    <id>http://datalab.lu/blog/2012/03/25/levenshtein-distance-in-c-and-code-profiling-in-r</id>
+    <content type="html"><![CDATA[<p>At work, the client requested, if existing search engine could accept singular and plural forms equally, e. g. "partner" and "partners" would lead to the same result.</p>
+
+<p>The first option - <a href="http://en.wikipedia.org/wiki/Stemming">stemming</a>. In that case, search engine would use root of a word, e. g. "partn". However, stemming has many weaknesses: two different words might have same root, a user can misspell the root of the word, except English and few others languages it is not that trivial to implement stemming.</p>
+
+<p><a href="http://en.wikipedia.org/wiki/Levenshtein_distance">Levenshtein distance</a> comes as the second option. The algorithm is simple - you have two words and you calculate the difference between them. You can insert, delete or replace any character, but it will cost you. Let's imagine, an user enters "Levenstin distances" into search engine and expects to find revalent information. However, he just made 2 errors by misspeling the author's name and he used plural form of "distance". If search engine accepts 3 errors - the user will get relevant information.</p>
+
+<p>The challenge comes, when you have a dictionary of terms (e. g. more that 1 mil.) and you want to get similar terms based on Levenshtein distance. You can visit every entry in the dictionary (very costly) or you can push dictionary into the <a href="http://en.wikipedia.org/wiki/Trie">trie</a>. Do you need a proof for the cost? There we go:</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=test.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/test.png" alt="" /></a></p>
+
+<p>Red color indicates the performance of the search, when all terms are in the trie, green - simple dictionary.</p>
+
+<p>Now we come to the second part of the post - why to bother and plot such graphs, if we could check few entries to determine average time and the winner? The reason is simple - we trust in God, all others must bring data. To say it differently - while profiling the code, you should be interested in average time AND variation. As you can see in the graph above, variation of the blue color is very small - it takes approximately the same time to scan whole dictionary. However, red has higher variation - the result can take for while or it can finish just at the beginning, but overall it works faster. Now, imagine, that a programmer wants to define, which implementation A or B for volatile cache is much faster. Let's assume, that big O notion is not going to help and she conducts 2 test for A and 2 for B. While running test A, cache size expands, while B - shrinks. As the result, B wins over A and she makes wrong choice. However, her colleague claims, that despite A has greater volatility, it is much faster and she tried with 500 queries! Whom should I trust?</p>
+
+<p>I use this piece for code profiling:</p>
+
+<pre><code>simple=read.table('simple.txt')
+node=read.table('node.txt')
+
+simple=cbind(simple,as.character(c('simple')))
+colnames(simple)=c('time','type')
+node=cbind(node,c('node'))
+colnames(node)=c('time','type')
+
+rez=data.frame(rbind(simple, node))
+
+require(ggplot2)
+
+ggplot(rez,aes(time,fill=type))+geom_density(alpha=0.6,size=1.3)+scale_x_log10()
+</code></pre>
+
+<p>The data, C++ code for Levenshtein distance and trie can be find on <a href="https://github.com/kafka399/Levenshtein-distance">GitHub</a>.</p>
+
+<p>I found this source very useful: <a href="http://stevehanov.ca/blog/index.php?id=114">http://stevehanov.ca/blog/index.php?id=114</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Vectorized R vs Rcpp]]></title>
+    <link href="http://datalab.lu/blog/2012/02/01/vectorized-r-vs-rcpp/"/>
+    <updated>2012-02-01T11:35:00+01:00</updated>
+    <id>http://datalab.lu/blog/2012/02/01/vectorized-r-vs-rcpp</id>
+    <content type="html"><![CDATA[<p><a href="http://www.investuotojas.eu/2012/01/30/the-power-of-rcpp/">In my previous post</a>, I tried to show, that Rcpp is 1000 faster than pure R and that generated the fuss in the comments. Being lazy, I didn't vectorize R code and at the end I was comparing apples vs oranges.</p>
+
+<p>To fix that problem, I built a new script, where I'm trying to compare apples against apples. First piece of code named "ifelse R" uses R "ifelse" function to vectorize code. Second piece of code is fully vectorized code written in R, third - pure C++ code and the last one is C++, where  Rcpp "ifelse" function is used.</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=performance.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/performance.png" alt="" /></a></p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th> Name  </th>
+<th> Seconds </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td> ifelse R </td>
+<td> 27.50</td>
+</tr>
+<tr>
+<td></td>
+<td> vectorized R </td>
+<td> 10.40</td>
+</tr>
+<tr>
+<td></td>
+<td> pure C++ </td>
+<td> 0.44</td>
+</tr>
+<tr>
+<td></td>
+<td> vectorized C++ </td>
+<td> 2.24</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>Here we go - vectorization truly helps, but pure C++ code still 23 times faster. Of course you pay the price when writing it in C++. I found a bit strange, that vectorized C++ code doesn't perform that well...</p>
+
+<p>You can get the code from <a href="https://github.com/kafka399/Rproject/blob/master/performance/performance.R">github</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How Big Block Trades Affect Stock Market Prices?]]></title>
+    <link href="http://datalab.lu/blog/2011/07/27/how_big_block_trades_affect_stock_market_prices/"/>
+    <updated>2011-07-27T16:01:00+02:00</updated>
+    <id>http://datalab.lu/blog/2011/07/27/how_big_block_trades_affect_stock_market_prices</id>
+    <content type="html"><![CDATA[<p>I will be giving a presentation on "Optimal transaction cost" in <a href="http://maps.google.com/maps?q=vilnius,Maironio+g.+11&amp;hl=en&amp;sll=54.689386,25.280024&amp;sspn=0.599292,1.226349&amp;z=16">Vilnius</a> on 16th of August. While preparing the presentation and looking for an optimal execution solution, a natural question arises: does the size of the trade affect stock market price? I'm sure, you would say 100 % yes. Well, you would be right, but what is the scale of such effect? Is it possible to profit from execution of the big block trades?</p>
+
+<p>Such test is not trivial and to conduct it, you need high frequency data, which is messy in most of the cases. For testing purpose I chose <a href="http://finance.yahoo.com/q?s=BNP.PA&amp;ql=0">BNP Paribas</a> stock from February 2011 to May 2011. Initially, I had more than 460 k. trades and more than 320k. quotes. However, the data was filtered by buyers initiated trades. To find buyers initiated trades, I used Lee-Ready Rule - short description can be found <a href="http://goo.gl/RWSqa">here</a> on page 2. I found about Lee - Ready rule while reading <a href="http://www.maxdama.com/?p=477">Maxdama</a> last post and a damn good <a href="http://dl.dropbox.com/u/39904/maxdama.pdf">summary</a> (check page 42).</p>
+
+<p>The first chart below shows the average return  one trade later (within seconds in most of the cases), when big or small trade was done. X axis represents difference between the trade and following trade, Y axis represents the trade size and the dot size represents number of trades within that cluster of volume. As you can see, small trades add 0.0004% to the price, while big ones (more than 980 of shares) increase the price on average 0.0007%</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=bnpNextTrade.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/bnpNextTrade.png" alt="" /></a></p>
+
+<p>The next figure shows average return one minute later. This time the different between small trades and big one are almost3 times!</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=bnpMinuteLater.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/bnpMinuteLater.png" alt="" /></a></p>
+
+<p>While we can see, that stock market prices are affected by big blocks, there's no easy way to profit from it. You have to take into account bid/ask spread, plus you are becoming liquidity demander when liquidity is dry. On other end, this test shows the cost for each volume cluster and this cost can be used when choosing an optimal strategy for portfolio/stock liquidation.</p>
+]]></content>
+  </entry>
+  
+</feed>

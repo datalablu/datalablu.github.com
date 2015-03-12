@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
+<<<<<<< HEAD
   <title><![CDATA[Category: books | DataLab]]></title>
   <link href="http://datalablu.github.com/blog/categories/books/atom.xml" rel="self"/>
   <link href="http://datalablu.github.com/"/>
   <updated>2014-05-16T15:21:41+02:00</updated>
   <id>http://datalablu.github.com/</id>
+=======
+  <title><![CDATA[Category: books | DataLab.lu]]></title>
+  <link href="http://datalab.lu/blog/categories/books/atom.xml" rel="self"/>
+  <link href="http://datalab.lu/"/>
+  <updated>2015-03-11T19:25:51+01:00</updated>
+  <id>http://datalab.lu/</id>
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
   <author>
     <name><![CDATA[Dzidorius Martinaitis]]></name>
     
@@ -14,10 +22,17 @@
 
   
   <entry>
+<<<<<<< HEAD
     <title type="html"><![CDATA[Machine learning for hackers]]></title>
     <link href="http://datalablu.github.com/blog/2012/10/23/machine-learning-for-hackers/"/>
     <updated>2012-10-23T18:48:35+02:00</updated>
     <id>http://datalablu.github.com/blog/2012/10/23/machine-learning-for-hackers</id>
+=======
+    <title type="html"><![CDATA[Machine Learning for Hackers]]></title>
+    <link href="http://datalab.lu/blog/2012/10/23/machine-learning-for-hackers/"/>
+    <updated>2012-10-23T15:06:00+02:00</updated>
+    <id>http://datalab.lu/blog/2012/10/23/machine-learning-for-hackers</id>
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
     <content type="html"><![CDATA[<p>Which way do you prefer to learn a new material - deep theoretical background first and practice later or do you like to break things in order to fix them? If latter is your way of learning things, then most likely you will enjoy <a href="http://www.amazon.com/gp/product/1449303714/ref=as_li_tf_tl?ie=UTF8&amp;camp=1789&amp;creative=9325&amp;creativeASIN=1449303714&amp;linkCode=as2&amp;tag=quantitativ0e-20">Machine Learning for Hackers</a>.</p>
 
 <p>The book has chapters on machine learning techniques such as PCA, kNN, analysis of social graphs hence even advanced R users might find something interesting. So I want you to show you my example of visualisation of similarity between parliamentarians in <a href="http://en.wikipedia.org/wiki/Lithuania">Lithuania</a> which idea is taken for chapter 9.</p>
@@ -30,8 +45,13 @@
 
 <p>Click on the image to enlarge.</p>
 
+<<<<<<< HEAD
 <p>The plot above reveals, that right wing party TSLKD has a majority in parliament and LSDP (socialists) are in opposition and liberals (LSF, JF, MG) are in the center. You might argue, that that is already known, however the plot is based on actual data, therefore differences in voting support outlooks of the parliamentarians(right, central, left).<br/>
 The map shows which members of the party are outliers and which one from the other party can be invited while forming a new parliament (second tour of the election is on the way).<br/>
+=======
+<p>The plot above reveals, that right wing party TSLKD has a majority in parliament and LSDP (socialists) are in opposition and liberals (LSF, JF, MG) are in the center. You might argue, that that is already known, however the plot is based on actual data, therefore differences in voting support outlooks of the parliamentarians(right, central, left).
+The map shows which members of the party are outliers and which one from the other party can be invited while forming a new parliament (second tour of the election is on the way).
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
 Members of the left wing are mixed up and it would make sense to them to merge or form a coalition.</p>
 
 <p>Are you looking for source code? <a href="https://github.com/kafka399/votingDistance">Click here</a>.</p>
@@ -39,6 +59,7 @@ Members of the left wing are mixed up and it would make sense to them to merge o
   </entry>
   
   <entry>
+<<<<<<< HEAD
     <title type="html"><![CDATA[Data mining for network security and intrusion detection]]></title>
     <link href="http://datalablu.github.com/blog/2012/07/17/data-mining-for-network-security-and-intrusion-detection/"/>
     <updated>2012-07-17T00:56:00+02:00</updated>
@@ -60,10 +81,32 @@ Although misuse detection can be built on your own data mining techniques, I wou
 <p>Anomaly detection systems constantly evolves - what was a norm year ago can be an anomaly today. The algorithm compares network flow with historical flow over given period and looks for outliers with are far away. Such dynamic approach allows to detect novel attacks, nevertheless it generates false positive alerts (marks normal flow as suspicious). Moreover, hackers can mimic normal profile, if they know that such system is deployed.</p>
 
 <p>The first task when implementing anomaly detection (AD) is collection of the data. If AD is going to be network based, there are two possibilities to collect aggregated data from network. Some Cisco products provide aggregated data as <a href="http://www.cisco.com/en/US/products/ps6601/products_ios_protocol_group_home.html">Netflow</a> protocol. However, you can use <a href="http://www.wireshark.org">Wireshark or tshark</a> to collect network flow data from the computer. For example:</p>
+=======
+    <title type="html"><![CDATA[Data Mining for Network Security and Intrusion Detection]]></title>
+    <link href="http://datalab.lu/blog/2012/07/17/data-mining-for-network-security-and-intrusion-detection/"/>
+    <updated>2012-07-17T13:34:00+02:00</updated>
+    <id>http://datalab.lu/blog/2012/07/17/data-mining-for-network-security-and-intrusion-detection</id>
+    <content type="html"><![CDATA[<p>In preparation for <a href="http://www.haxogreen.lu/">"Haxogreen" hackers summer camp</a> which takes place in Luxembourg, I was exploring network security world. My motivation was to find out how data mining is applicable to network security and intrusion detection.</p>
+
+<p><a href="http://en.wikipedia.org/wiki/Flame_(malware)">Flame virus</a>, <a href="http://en.wikipedia.org/wiki/Stuxnet">Stuxnet</a>, <a href="http://en.wikipedia.org/wiki/Duqu">Duqu</a> proved that static, signature based security systems are not able to detect very advanced, government sponsored threats. Nevertheless, signature based defense systems are mainstream today - think of antivirus, intrusion detection systems. What do you do when unknown is unknown? Data mining comes to mind as the answer.</p>
+
+<p>There are following areas where data mining is or can be employed: misuse/signature detection, anomaly detection, scan detection, etc.</p>
+
+<p>Misuse/signature detection systems are based on supervised learning. During learning phase, labeled examples of network packets or systems calls are provided, from which algorithm can learn about the threats. This is very efficient and fast way to find know threats. Nevertheless there are some important drawbacks, namely false positives, novel attacks and complication of obtaining initial data for training of the system. The false positives happens, when normal network flow or system calls are marked as a threat. For example, an user can fail to provide the correct password for three times in a row or start using the service which is deviation from the standard profile. Novel attack can be define as an attack not seen by the system, meaning that signature or the pattern of such attack is not learned and the system will be penetrated without the knowledge of the administrator. The latter obstacle (training dataset) can be overcome by collecting the data over time or relaying on public data, such as DARPA Intrusion Detection Data Set. Although misuse detection can be built on your own data mining techniques, I would suggest well known product like Snort which relays on crowd-sourcing.</p>
+
+<p>Anomaly/outlier detection systems looks for deviation from normal or established patterns within given data. In case of network security any threat will be marked as an anomaly. Below you can find two features graph, where number of logins are plotted on x axis and number of queries are plotter on y axis. The color indicates the group to which points are assigned - blue ones are normal, red ones - anomalies.</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=start_dec_anomalies.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/start_dec_anomalies.png" alt="" /></a></p>
+
+<p>Anomaly detection systems constantly evolves - what was a norm year ago can be an anomaly today. The algorithm compares network flow with historical flow over given period and looks for outliers with are far away. Such dynamic approach allows to detect novel attacks, nevertheless it generates false positive alerts (marks normal flow as suspicious). Moreover, hackers can mimic normal profile, if they know that such system is deployed.</p>
+
+<p>The first task when implementing anomaly detection (AD) is collection of the data. If AD is going to be network based, there are two possibilities to collect aggregated data from network. Some Cisco products provide aggregated data as <a href="http://www.cisco.com/en/US/products/ps6601/products_ios_protocol_group_home.html">Netflow</a> protocol. However, you can use <a href="http://www.wireshark.org/">Wireshark or tshark</a> to collect network flow data from the computer. For example:</p>
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
 
 <pre><code>tshark -T fields -E separator , -E quote d -e ip.src -e ip.dst -e tcp.srcport -e tcp.dstport -e udp.srcport -e upd.dstport -e tcp.len -e ip.len -e eth.type -e frame.time_epoch -e frame.len
 </code></pre>
 
+<<<<<<< HEAD
 <p>Once you have enough data for mining process, you need to preprocess acquired data. In the context of intrusion, anomalous actions happen in bursts rather than single event. <a href="http://minds.cs.umn.edu/publications/chapter.pdf">Varun Chandola et al.</a> proposed to derive following features:</p>
 
 <ul>
@@ -77,15 +120,28 @@ Number of flows to unique destination IP addresses inside the network in the las
 Number of flows from unique source IP addresses inside the network in the last N flows to the same destination
 Number of flows from the source IP to the same destination port in the last N flows
 Number of flows to the destination IP address using same source port in the last N flows</p></li>
+=======
+<p>Once you have enough data for mining process, you need to preprocess acquired data. In the context of intrusion, anomalous actions happen in bursts rather than single event. <a href="http://minds.cs.umn.edu/publications/chapter.pdf">Varun Chandola et al.</a> proposed to derive following features:</p>
+
+<ul>
+<li><p>Time window based: Number of flows to unique destination IP addresses inside the network in the last T seconds from the same source Number of flows from unique source IP addresses inside the network in the last T seconds to the same destination Number of flows from the source IP to the same destination port in the last T seconds host based - system calls network based - packet information Number of flows to the destination IP address using same source port in the last T seconds</p></li>
+<li><p>Connection based: Number of flows to unique destination IP addresses inside the network in the last N flows from the same source Number of flows from unique source IP addresses inside the network in the last N flows to the same destination Number of flows from the source IP to the same destination port in the last N flows Number of flows to the destination IP address using same source port in the last N flows</p></li>
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
 </ul>
 
 
 <p>Below you can find an example of feature creation in R. The dataset was created by calling tshark script, which is specified above.</p>
 
 <pre><code>#load data
+<<<<<<< HEAD
 tmp=read.csv(‘stats2.csv’,colClasses=c(rep(‘character’,11)),header=F)
 #get rid of everything below min. in timestamp
 tmp[,10]=as.integer(as.POSIXct(format(as.POSIXct(as.integer(tmp[,10]),origin=‘1970-01-01’),‘%Y-%m-%d %H:%M:00’)))
+=======
+tmp=read.csv("stats2.cs",colClasses=c(re"characer",11)),header=F)
+#get rid of everything below min. in timestamp
+tmp[,10]=as.integer(as.POSIXct(format(as.POSIXct(as.integer(tmp[,10]),origin="1970-01-01"),"%Y-%m-%d %H:%M:00")))
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
 #fix some rows
 tmp=tmp[-which(sapply(tmp[,1],function(x) nchar(x)&gt;15)),] tmp=tmp[which(!is.na(tmp[,4])),]
 
@@ -97,11 +153,16 @@ feature=do.call(rbind, sapply(seq(from=1,to=length(factor),by=4),function(x){ re
 
 <p>After preprocessing the data we can apply local outlier detection, KNN, random forest and others algorithms. I will provide R code and practical implementation of some algorithms in the following post.</p>
 
+<<<<<<< HEAD
 <p>While preparing this post, I was looking for the books, I found only few books covering data mining and network security. To my surprise <a href="http://www.amazon.com/gp/product/1439839425/ref=as_li_qf_sp_asin_tl?ie=UTF8&amp;tag=quantitativ0e-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=1439839425">Data Mining and Machine Learning in Cybersecurity</a> book includes both topics and well written. However, if you are security specialist looking for data mining books, you can read my <a href="http://www.investuotojas.eu/2012/07/02/my-first-competition-at-kaggle/">summary</a> of <a href="http://www.amazon.com/gp/product/0123748569/ref=as_li_tf_tl?ie=UTF8&amp;tag=quantitativ0e-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=0123748569%20%22Data%20Mining:%20Practical%20Machine%20Learning%20Tools%20and%20Techniques%22.">"Data Mining: Practical Machine Learning Tools and Techniques"</a></p>
+=======
+<p>While preparing this post, I was looking for the books, I found only few books covering data mining and network security. To my surprise <a href="http://www.amazon.com/gp/product/1439839425/ref=as_li_qf_sp_asin_tl?ie=UTF8&amp;tag=quantitativ0e-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=1439839425">Data Mining and Machine Learning in Cybersecurity</a> book includes both topics and it is well written. However, if you are security specialist looking for data mining books, you can read my <a href="http://www.investuotojas.eu/2012/07/02/my-first-competition-at-kaggle/">summary</a> of <a href="http://www.amazon.com/gp/product/0123748569/ref=as_li_tf_tl?ie=UTF8&amp;tag=quantitativ0e-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=0123748569%20%22Data%20Mining:%20Practical%20Machine%20Learning%20Tools%20and%20Techniques%22.">"Data Mining: Practical Machine Learning Tools and Techniques"</a></p>
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
 ]]></content>
   </entry>
   
   <entry>
+<<<<<<< HEAD
     <title type="html"><![CDATA[My first competition at Kaggle]]></title>
     <link href="http://datalablu.github.com/blog/2012/07/02/my-first-competition-at-kaggle/"/>
     <updated>2012-07-02T18:41:08+02:00</updated>
@@ -128,6 +189,31 @@ Outliers are another type of the troubles. Suppose, that variable is normally d
 Keeping all this information in mind I wasn't able to to implement accurate cross validation and my results differ within 0.05 range.</p>
 
 <p><strong>Model selection and ensemble. </strong>Intuitively you want to choose the best performing algorithm, however the mix of them can lead to superior performance. For regression problem I trained four models (two random forest versions, gbm, svm), made the predictions, averaged the results and that led to better prediction.</p>
+=======
+    <title type="html"><![CDATA[My First Competition at Kaggle]]></title>
+    <link href="http://datalab.lu/blog/2012/07/02/my-first-competition-at-kaggle/"/>
+    <updated>2012-07-02T12:30:00+02:00</updated>
+    <id>http://datalab.lu/blog/2012/07/02/my-first-competition-at-kaggle</id>
+    <content type="html"><![CDATA[<p>For me <a href="http://www.kaggle.com/">Kaggle</a> becomes a social network for data scientist, as <a href="http://stackoverflow.com/questions/tagged/r">stackoverflow.com</a> or <a href="https://github.com/">github.com</a> for programmers. If you are data scientist, machine learner or statistician you better off to have a profile there, otherwise you do not exist.</p>
+
+<p>Nevertheless, I won't bet on rosy future for data scientist as journalists suggest (<a href="http://www.guardian.co.uk/news/datablog/2012/mar/02/data-scientist">sexy job for next decade</a>). For sure, the demand for such specialists is on rise. However, I see one big threat for data scientist - Kaggle and similar service providers. You see, such services allows to tap high end data scientists (think of PhD in hard science) at minuscule fraction of real price. Think of Hollywood business model - top players get majority of the pool and the rest is starving. If you try the same service model on IT projects you will most likely get burned. My reasoning can be wrong, but I suspect, that project timespan is the issue - IT projects can take for while to finish (1-10 years), but main stream ML project won't take that long.</p>
+
+<p>Notwithstanding these obstacles, machine learning, information retrieval, data mining and etc. is a must with ability to write code for production, deal with streaming big data and cope with performance of intelligent system. Then, in programmers parlance, you will became "data scientist ninja" and every company will die for you. There is a good post on the subject on <a href="http://blog.mikiobraun.de/2012/06/is-machine-learning-losing-impact.html">mikiobraun</a> blog, but I mind you, that it is a bit controversial.</p>
+
+<p>Although for last 4 years I often has been working on financial models and time-series, this competition added a new experience to me and hunger for the knowledge. During competition I found this book very practical and plentiful of ideas what to do next: <a href="http://www.amazon.com/gp/product/0123748569/ref=as_li_tf_tl?ie=UTF8&amp;tag=quantitativ0e-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=0123748569">Data Mining: Practical Machine Learning Tools and Techniques</a>. As complimentary book I used <a href="http://www.amazon.com/gp/product/0123814790/ref=as_li_tf_tl?ie=UTF8&amp;tag=quantitativ0e-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=0123814790">Data Mining: Concepts and Techniques</a>, though most of information can be found in one of them. I will try to summarize some chapters in my own story.</p>
+
+<p><strong><em>Understanding the data</em></strong>. "<a href="http://www.kaggle.com/c/online-sales">Online Product Sales</a>" competition metadata (data about data) is miserly - there are three types of the data - the date fields, categorical fields, quantitative fields and response data for next 12 months. However metadata is most important element in all ML projects, which can save you a lot of time once you understand it better and it leads to much better forecast if you have "domain knowledge".</p>
+
+<p><strong><em>Cleaning data</em></strong>. There is famous phrase: "garbage in garbage out", meaning, that before any further action you have to detect and fix incorrect, incomplete or missing data. You have many possibilities to deal with missing data - remove all rows, where the data is missing; replace it with mean or regressed value or nearest value and etc.  If your data is plentiful and missing values are random (meaning, that NA values do not bear any information) - just get rid of them. Otherwise you need impute new values based on mean or other technique. Mean based replacement worked best for me in this competition. Outliers are another type of the troubles. Suppose, that variable is normally distributed, but few variables are far away from the center. The easiest solution would be to remove such values - as many do in finance by removing "crisis period".  When next crisis hits, the journalists are rushing to learn a new buzzword- <a href="http://en.wikipedia.org/wiki/Black_swan_theory">black swan</a>. Turns out, that outliers can't be ignored, because the impact of them is huge.  So be precautious while dealing with outliers.</p>
+
+<p><strong><em>Feature selection</em></strong>. It was surprising to me that too many features or variables can pollute forecast, therefore you need to do feature selection. Such task can be done manually be checking correlation matrix, co-variance and etc. However, random forest or generalized boosted methods can lead to better selection. In R you just call randomForest() or gbm() and job is done.</p>
+
+<p><strong><em>Variable transformation</em></strong> - a way to get superior performance. "Online Product Sales" competition has two date fields, however these fields encoded as integers. By transforming these variables into date and retrieving year and month led to better performance of the model. In most of cases taking logarithm for numeric fields gives performance boost. Scaling (from 0 to 1 or from -1 to 1) and centering (normal distribution) might be considered when linear models are in use.  It is worth to transform categorical variables as well, where 1 would mean, that a feature belongs to the group and 0 otherwise. Check model.matrix function in R for latter transformation and preProcess function in caret package for numerical variables.</p>
+
+<p><strong><em>Validation stage</em></strong> - helps you to measure performance of the model. If you have huge database to build a model you can divide you set into two/three parts - for training, testing and cross validation and you are ready to start. However, if you are not so lucky, then other methods come to play. Most popular method is division of the set into two groups, namely "training" and "test" and rotating it for 10 times. For example, you have 100 rows, so you take first 75 for training and 25 for test and you check the performance ratio. In the next step you take the rows from 25 to 100 for training and you use first 25 for test. Once you repeat such procedure 10 times, you have 10 performance ratios and you take average of it. <a href="http://en.wikipedia.org/wiki/Stratified_sampling">Stratified sampling</a> is a buzzword, which you should know when you do a sampling. Keeping all this information in mind I wasn't able to to implement accurate cross validation and my results differ within 0.05 range.</p>
+
+<p><strong><em>Model selection and ensemble</em></strong>. Intuitively you want to choose the best performing algorithm, however the mix of them can lead to superior performance. For regression problem I trained four models (two random forest versions, gbm, svm), made the predictions, averaged the results and that led to better prediction.</p>
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
 ]]></content>
   </entry>
   

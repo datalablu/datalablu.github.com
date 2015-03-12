@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
+<<<<<<< HEAD
   <title><![CDATA[Category: data analysis | DataLab]]></title>
   <link href="http://datalablu.github.com/blog/categories/data-analysis/atom.xml" rel="self"/>
   <link href="http://datalablu.github.com/"/>
   <updated>2014-05-16T15:21:41+02:00</updated>
   <id>http://datalablu.github.com/</id>
+=======
+  <title><![CDATA[Category: data analysis | DataLab.lu]]></title>
+  <link href="http://datalab.lu/blog/categories/data-analysis/atom.xml" rel="self"/>
+  <link href="http://datalab.lu/"/>
+  <updated>2015-03-11T19:25:51+01:00</updated>
+  <id>http://datalab.lu/</id>
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
   <author>
     <name><![CDATA[Dzidorius Martinaitis]]></name>
     
@@ -14,10 +22,101 @@
 
   
   <entry>
+<<<<<<< HEAD
     <title type="html"><![CDATA[Machine learning for hackers]]></title>
     <link href="http://datalablu.github.com/blog/2012/10/23/machine-learning-for-hackers/"/>
     <updated>2012-10-23T18:48:35+02:00</updated>
     <id>http://datalablu.github.com/blog/2012/10/23/machine-learning-for-hackers</id>
+=======
+    <title type="html"><![CDATA[Applying Machine Learning to Peer to Peer lending]]></title>
+    <link href="http://datalab.lu/blog/2015/03/11/applying-machine-learning-to-peer-to-peer-lending/"/>
+    <updated>2015-03-11T16:25:00+01:00</updated>
+    <id>http://datalab.lu/blog/2015/03/11/applying-machine-learning-to-peer-to-peer-lending</id>
+    <content type="html"><![CDATA[<p>Peer to peer lending allows to lend money to unrelated individuals without going through traditional financial service such as bank, credit union, etc. Nevertheless, there is an intermediary - service and platform provider. The provider verifies the identity of the borrower and income status, processes the payments, promotes its platform, deals with bad loans or demands bankruptcy for the borrower.<br/>
+The advantage of peer to peer lending for the borrowers is lower interest rate and higher rate for lenders. However, higher rate comes with higher risk - the return is more volatile than a bank deposit.</p>
+
+<p>Regardless of many lending platforms such us <a href="http://www.Prosper.com">Prosper.com</a> (US), <a href="http://zopa.co.uk">zopa.co.uk</a> (UK), <a href="http://www.fundingcircle.com">www.fundingcircle.com</a> (UK), <a href="http://auxmoney.com">auxmoney.com</a> (DE), <a href="http://pret-dunion.fr">pret-dunion.fr</a> (FR), <a href="http://comunitae.com">comunitae.com</a> (ES), <a href="http://lendico.com">lendico.com</a> (global), majority of platforms accept only the investment from local investors. However <a href="http://bondora.com">bondora.com</a> (EE) allows invest into three markets - Estonia, Finland and Spain and accepts investors from across Europe. Additionally, the rate of return at bondora.com is not fixed as in other platforms and allows much higher returns. However, there is a possibility that you may lose some or all of your initial investment as it is not protected by any financial compensation scheme.</p>
+
+<p>The company behind bondora.com is isePankur AS, which is based in Estonia, a small country in north of Europe. The really amazing thing about bondora.com, that they share <a href="https://www.bondora.ee/en/invest/statistics/data_export">data</a> with everyone. The data-set gives us an opportunity to glimpse at the performance of the company and a possibility to build our own credit scoring model!</p>
+
+<p>The data goes back to 2009 and the chart below shows the total number of loans and funded loans per month. It looks like the business exploded in 2013 and the following charts will give us a few clues.</p>
+
+<p><img src="https://dl.dropboxusercontent.com/s/85hu5gke4x7rxvw/unnamed-chunk-1-1.png?dl=0" alt="plot of chunk unnamed-chunk-1" /></p>
+
+<p>In 2013 bondora.com became more active in Finland and Spain markets, though it was in 2014, when the grow skyrocketed in these markets.</p>
+
+<p><img src="https://dl.dropboxusercontent.com/s/m1y7rnev0sm8vy9/unnamed-chunk-2-1.png?dl=0" alt="Countries" /></p>
+
+<p>Another big change, what might ignited the grow of bondora.com is shift in the duration of the loans. Dominant loan duration before 2013 was 1-2 years, but in 2013 the company started issuing 5 years loans, which became the primary duration in 2014 and was half of all loans.</p>
+
+<p><img src="https://dl.dropboxusercontent.com/s/ohha8j873ym6h4j/unnamed-chunk-3-1.png?dl=0" alt="plot of chunk unnamed-chunk-3" /></p>
+
+<p>The latest data-set has data about 29688 loans and 172 columns or features (depending which parlance you prefer). Below you can see a partial print screen of the interface and dozen of the features.</p>
+
+<p><img src="https://dl.dropboxusercontent.com/s/z1xsothaax10g06/interface.png?dl=0" alt="plot of interface" /></p>
+
+<h3>Model building</h3>
+
+<p>Now, that we are familiar with bondora's data-set, let's move to model building. The prediction model can predict two types of outcomes - categorical (yes/no, true/false classes) or numerical (one is less than one hundred). Although most credit scoring models are built to return a credit score for a borrower, I have opted for simple model, where the outcome has two classes: good or bad.</p>
+
+<p>The definition of "good" class is straight forward - the class in which you are willing to invest or give a credit, but "bad" class definition is complicated. The data-set has data about the borrowers who were late with their payments for 7, 14, 21, 60 days and defaulted loans. How bad is a borrower if he is late for X days? True, he doesn't respect the schedule and the contract for various reason such as harsh life, distraction or any other reason. However, once he is back on track he pays what he owns, plus late charges, which leads to higher return for additional risk.<br/>
+The defaulted loans really sounds as bad loans, right? Well, what if the loan defaults, but you get back the principal and partial interest rate? Doesn't sound that bad, does it? What you really don't like is the default on the loan and zero payments - these loans are the fraud and you want to avoid them. So let's mark them as a "bad" ones.</p>
+
+<p>Beside choosing the outcome, it took me awhile to realize another problem with the data-set - the shift in the business model. Nowadays, most of the loans are issued for 5 years and the data-set doesn't event have data on matured 5 years loans! So I did the trick - I marked all 5 years loans as repaid which are still "alive" after 2-3 years.</p>
+
+<p>While working on a few machine learning projects I quickly learned, that the biggest impact on performance of the model comes not from the fancy machine learning algorithms, but from well engineered features. In the chart below you can find, that 3rd feature is "total_interest", which is made of "Interest" and "LoanDuration". The two features perform well, but the derived feature has much bigger weight.<br/>
+Additionally, I have added data about <a href="http://en.wikipedia.org/wiki/VIX">VIX index</a>. The index tracks volatility of the stock market via S&amp;P500 index - its value increases during the crisis and falls back during calm times. By adding independent source the performance of the model increased 2%.</p>
+
+<p>After initial cleaning of the data-set and feature engineering it was time to build a simple model. My favorite machine learning algorithm is Random Forest for the following reasons: you can feed almost any raw data and it chew happily; the algorithm itself is easy to understand, nevertheless it is kind of black-box; it gives the weights of the features:</p>
+
+<p><img src="https://dl.dropboxusercontent.com/s/y5f7u1tch7tqtvo/weight.png?dl=0" alt="Weight" /></p>
+
+<h3>Model metrics</h3>
+
+<p>In classification task <a href="http://en.wikipedia.org/wiki/Precision_and_recall">precision and recall</a> are used frequently for model metrics. The predicted value can be assigned to four classes: True Positive - real fraud (model predicted True and value was True), True Negative - not a fraud (model predicted False value and value was False), False Positive - not fraud marked as a fraud (model predicted True, however value was False) and False Negative - real fraud marked as not fraud (model predicted False, but the value was True).</p>
+
+<p><img src="https://dl.dropboxusercontent.com/s/kk5st4vandt7i9j/metrics.png?dl=0" alt="Metrics " /></p>
+
+<p>In case of p2p lending, if you commit False Positive error (Type I), you just miss one investment. You main concern is False Negative (Type II) errors, because you will be loosing money on the bad investment. <a href="http://en.wikipedia.org/wiki/Positive_predictive_value">Positive predictive value</a> metrics is used for performance evaluation: <code>sum(True positive)/sum(Test outcome positive)</code></p>
+
+<h3>Blending</h3>
+
+<p>Funny, but the blending works well with ML algorithms and with the people. Michael Nielsen in his book <a href="http://www.amazon.com/gp/product/0691160198/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=9325&amp;creativeASIN=0691160198&amp;linkCode=as2&amp;tag=quantitativ0e-20&amp;linkId=SHCTNV7H7ED2OEKM">"Reinventing Discovery: The New Era of Networked Science"</a> gives many examples how the collective intelligence can be more powerful than single mind. The idea is very simple - if you gather predictions from dozen of people or ML models then the average score will better than the best single prediction. There is one pitfall - if the predictions are given by "herd mind" then the result most likely be horrible. So, in ML environment try to include very different algorithms - decision trees, linear models, neural networks, etc. to sustain diversity.</p>
+
+<p>For my final model I blend tree algorithms - Random forest, SVM and generalized boosted modeling (GBM). If all of them predict, that the loan is not a fraud, then I will make an investment.</p>
+
+<h3>Real time data</h3>
+
+<p>The modeling part is done, but without real time data it is just waste of time. Fortunately, there is a nice Python framework for web crawling - <a href="http://scrapy.org/">Scrapy</a>. Initial time investment in the tool might look significant, but because it is robust it won't be your concern any time soon, unless the platform gets face-lift...</p>
+
+<h3>Automated investment</h3>
+
+<p><a href="http://www.seleniumhq.org/">Selenium</a> is a suite of tools to automate web browsers across many platforms. It is widely used for web interface testing purpose, however any web-based task can be automated.</p>
+
+<p>Once I have real time data I feed my model with it to find out which loans are good for the investment. Acquired list is send to Selenium script, which logins into the platform and makes the investments.</p>
+
+<h3>Infrastructure</h3>
+
+<p>My first idea was to use Raspberry Pi for the project, however I had the problems setting up R-language and Python frameworks. So, I rented an instance on DigitalOcean for 10 dollars a month (there is 5$/month option as well) and it worked well. Meanwhile, I realized, that I don't need the server for 24 hours a day.</p>
+
+<p>The solution was to power-on four times a day and shutdown the server once the job is finished. But as you probably know, powering-off your server is not enough to save you from paying - you need to archive your virtual instance (the same applies to Amazon AWS). So, I came up with the script, which creates a virtual image from the archive, powers it on, runs the crawler, runs R mining module, makes the investments if necessary and then shutdowns the instance, archives the image and deletes virtual machine.</p>
+
+<p>Does it sounds good? Well, it was good, until I went on holiday for one week without almost any access to Internet. At the end of my vacation, I found, that every day four new servers were created and were still spinning... Turns out, that Raspberry Pi was able to initiate new instances, but wasn't able to shutdown and delete. The support at DigitalOcean have asked for the log files from my server and I ended up paying the bill, because it was almost non-existant on my RaspPi. The lesson taken - log as much as possible and incorporate health checks for virtual machine in your scripts.</p>
+
+<h3>Results</h3>
+
+<p>I started my investments at Bondora in September 2014. At the beginning all my investments were done via Bondora's investment engine, where you can define investment parameters (country, risk profile, etc.). Somewhere in November - December I decided, that I will rely on my own engine only. Below you can see, that the engine based on machine learning algorithms does good job by avoiding bad borrowers.</p>
+
+<p><img src="https://dl.dropboxusercontent.com/s/6xcbjtr92hnz36g/personal.png?dl=0" alt="Personal" /></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Machine Learning for Hackers]]></title>
+    <link href="http://datalab.lu/blog/2012/10/23/machine-learning-for-hackers/"/>
+    <updated>2012-10-23T15:06:00+02:00</updated>
+    <id>http://datalab.lu/blog/2012/10/23/machine-learning-for-hackers</id>
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
     <content type="html"><![CDATA[<p>Which way do you prefer to learn a new material - deep theoretical background first and practice later or do you like to break things in order to fix them? If latter is your way of learning things, then most likely you will enjoy <a href="http://www.amazon.com/gp/product/1449303714/ref=as_li_tf_tl?ie=UTF8&amp;camp=1789&amp;creative=9325&amp;creativeASIN=1449303714&amp;linkCode=as2&amp;tag=quantitativ0e-20">Machine Learning for Hackers</a>.</p>
 
 <p>The book has chapters on machine learning techniques such as PCA, kNN, analysis of social graphs hence even advanced R users might find something interesting. So I want you to show you my example of visualisation of similarity between parliamentarians in <a href="http://en.wikipedia.org/wiki/Lithuania">Lithuania</a> which idea is taken for chapter 9.</p>
@@ -30,8 +129,13 @@
 
 <p>Click on the image to enlarge.</p>
 
+<<<<<<< HEAD
 <p>The plot above reveals, that right wing party TSLKD has a majority in parliament and LSDP (socialists) are in opposition and liberals (LSF, JF, MG) are in the center. You might argue, that that is already known, however the plot is based on actual data, therefore differences in voting support outlooks of the parliamentarians(right, central, left).<br/>
 The map shows which members of the party are outliers and which one from the other party can be invited while forming a new parliament (second tour of the election is on the way).<br/>
+=======
+<p>The plot above reveals, that right wing party TSLKD has a majority in parliament and LSDP (socialists) are in opposition and liberals (LSF, JF, MG) are in the center. You might argue, that that is already known, however the plot is based on actual data, therefore differences in voting support outlooks of the parliamentarians(right, central, left).
+The map shows which members of the party are outliers and which one from the other party can be invited while forming a new parliament (second tour of the election is on the way).
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
 Members of the left wing are mixed up and it would make sense to them to merge or form a coalition.</p>
 
 <p>Are you looking for source code? <a href="https://github.com/kafka399/votingDistance">Click here</a>.</p>
@@ -39,15 +143,26 @@ Members of the left wing are mixed up and it would make sense to them to merge o
   </entry>
   
   <entry>
+<<<<<<< HEAD
     <title type="html"><![CDATA[Garmin data visualization]]></title>
     <link href="http://datalablu.github.com/blog/2012/10/04/garmin-data-visualization/"/>
     <updated>2012-10-04T18:52:14+02:00</updated>
     <id>http://datalablu.github.com/blog/2012/10/04/garmin-data-visualization</id>
+=======
+    <title type="html"><![CDATA[Garmin Data Visualization]]></title>
+    <link href="http://datalab.lu/blog/2012/10/04/garmin-data-visualization/"/>
+    <updated>2012-10-04T14:38:00+02:00</updated>
+    <id>http://datalab.lu/blog/2012/10/04/garmin-data-visualization</id>
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
     <content type="html"><![CDATA[<p>People go on rage, when governments initiate surveillance projects like <a href="http://www.edri.org/cleanIT">CleanIT</a>, nevertheless share very private data without a doubt.</p>
 
 <p>I have to admit, that some data leaks are well buried in the process. Take for example Garmin which produces GPS training devices for runners. In order to see your workouts you are forced to upload sensitive data on internet. In response you are given a visualization tool and a storage facility. What are alternatives? It seems, that in the past there was a desktop version, however I was not able to find it. So, we are left with the last option - hack it.</p>
 
+<<<<<<< HEAD
 <p>First of all you need to transfer data from Garmin device to computer. I own Forerunner 610 with relays on <a href="http://en.wikipedia.org/wiki/ANT_(network">ANT</a>) network and I found Python <a href="https://github.com/kafka399/Garmin-Forerunner-610-Extractor">script</a> with takes care of data transfer. Once data is transfered there is another obstacle - Garmin uses a proprietary format <a href="http://www.thisisant.com/pages/developer-zone/fit-sdk">FIT</a>. In order to tackle this problem I use another <a href="https://github.com/dtcooper/python-fitparse">Python script</a> which I have adapted to have <a href="https://github.com/kafka399/fitparse/blob/master/run.py">csv format</a>.</p>
+=======
+<p>First of all you need to transfer data from Garmin device to computer. I own Forerunner 610 with relays on <a href="http://en.wikipedia.org/wiki/ANT_(network)">ANT</a> network and I found Python <a href="https://github.com/kafka399/Garmin-Forerunner-610-Extractor">script</a> with takes care of data transfer. Once data is transfered there is another obstacle - Garmin uses a proprietary format <a href="http://www.thisisant.com/pages/developer-zone/fit-sdk">FIT</a>. In order to tackle this problem I use another <a href="https://github.com/dtcooper/python-fitparse">Python script</a> which I have adapted to have <a href="https://github.com/kafka399/fitparse/blob/master/run.py">csv format</a>.</p>
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
 
 <p>Once data is in CSV format R can be used to plot data.</p>
 
@@ -57,19 +172,32 @@ Members of the left wing are mixed up and it would make sense to them to merge o
 
 <p>I had a lot of fun by trying to understand Garmin longitude and latitude coordinates. Here is a short explantion by Hal Mueller:</p>
 
+<<<<<<< HEAD
 <blockquote><p>The mapping Garmin uses (180 degrees to 2<sup>31</sup> semicircles) allows them to use a standard 32 bit unsigned integer to represent the full 360 degrees of longitude. Thus you get the maximum precision that 32 bits allows you (about double what youâd get from a floating point value), and they still get to use integer arithmetic instead of floating point.</p></blockquote>
 
 <p><img src="http://dl.dropbox.com/u/6360678/blog/garmin_map.png" alt="" /></p>
 
 <p><a href="https://github.com/kafka399/fitparse">Source code</a></p>
+=======
+<blockquote><p>The mapping Garmin uses (180 degrees to 2<sup>31</sup> semicircles) allows them to use a standard 32 bit unsigned integer to represent the full 360 degrees of longitude. Thus you get the maximum precision that 32 bits allows you (about double what you get from a floating point value), and they still get to use integer arithmetic instead of floating point.</p></blockquote>
+
+<p><img src="http://dl.dropbox.com/u/6360678/blog/garmin_map.png" alt="" /></p>
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
 ]]></content>
   </entry>
   
   <entry>
+<<<<<<< HEAD
     <title type="html"><![CDATA[Building a presentation, report or paper in R]]></title>
     <link href="http://datalablu.github.com/blog/2012/08/01/building-a-presentation-report-or-paper-in-r/"/>
     <updated>2012-08-01T13:40:35+02:00</updated>
     <id>http://datalablu.github.com/blog/2012/08/01/building-a-presentation-report-or-paper-in-r</id>
+=======
+    <title type="html"><![CDATA[Building a Presentation, Report or Paper in R]]></title>
+    <link href="http://datalab.lu/blog/2012/08/01/building-a-presentation-report-or-paper-in-r/"/>
+    <updated>2012-08-01T14:00:00+02:00</updated>
+    <id>http://datalab.lu/blog/2012/08/01/building-a-presentation-report-or-paper-in-r</id>
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
     <content type="html"><![CDATA[<p>If you need to build a presentation, obviously you have following options:</p>
 
 <ul>
@@ -79,8 +207,13 @@ Members of the left wing are mixed up and it would make sense to them to merge o
 </ul>
 
 
+<<<<<<< HEAD
 <p>The first two are beloved by business people and the third one is widely used in academia. The objective of the first group is shiny presentation, contrary to the second where asceticism and demand for automation are top priorities. However, if you are data scientist or any other data specialist with a need to build an automated report, then you know, that LaTex is just wrong.<br/>
 LaTex allows you to build a shiny presentation or outstanding paper, however it can take light years to build something useful for beginners . If you never tried LaTex here is an example of the monster - you literally have to <strong>code</strong> a document or presentation:</p>
+=======
+<p>The first two are beloved by business people and the third one is widely used in academia. The objective of the first group is shiny presentation, contrary to the second where asceticism and demand for automation are top priorities. However, if you are data scientist or any other data specialist with a need to build an automated report, then you know, that LaTex is just wrong.
+LaTex allows you to build a shiny presentation or outstanding paper, however it can take light years to build something useful for beginners . If you never tried LaTex here is an example of the monster - you literally have to <strong><em>code</em></strong> a document or presentation:</p>
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
 
 <pre><code>&lt;code&gt;\documentclass{article}
 \title {Investment strategy}
@@ -104,6 +237,10 @@ knit('workshop.Rmd', 'workshop.md');&lt;/code&gt;
 
 Who is tweeting about #Haxogreen
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
 ```{r results=asis,comment=NA, message=FALSE}
 require(twitteR)
 load('tweets.Rdata')
@@ -123,6 +260,7 @@ barplot(tail(rez$count,10),names.arg=as.character(tail(rez$name,10)),cex.names=.
 ```&lt;/code&gt;
 </code></pre>
 
+<<<<<<< HEAD
 <p><a href="http://dl.dropbox.com/u/6360678/workshop.html">Here is a workshop presentation</a> which contains the example above - I built it for <a href="www.haxogreen.lu">Haxogreen</a> hackers camp and source code can be found on <a href="https://github.com/kafka399/haxogreen.lu/blob/master/workshop.Rmd">gitHub</a>.</p>
 ]]></content>
   </entry>
@@ -190,10 +328,14 @@ write.table(as.character(tmp),'users.csv')
 <strong>Location:</strong> Luxembourg
 Java, C++ and R developer &amp; data junkie
 <strong>Last status:</strong> It is rainy summer in #Luxembourg but there is a party! http://t.co/FZ7eZq6u</p>
+=======
+<p><a href="http://dl.dropbox.com/u/6360678/workshop.html">Here is a workshop presentation</a> which contains the example above - I built it for <a href="http://datalab.lu/blog/2012/08/01/building-a-presentation-report-or-paper-in-r">Haxogreen</a> hackers camp and source code can be found on <a href="https://github.com/kafka399/haxogreen.lu/blob/master/workshop.Rmd">gitHub</a>.</p>
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
 ]]></content>
   </entry>
   
   <entry>
+<<<<<<< HEAD
     <title type="html"><![CDATA[Data mining for network security and intrusion detection]]></title>
     <link href="http://datalablu.github.com/blog/2012/07/17/data-mining-for-network-security-and-intrusion-detection/"/>
     <updated>2012-07-17T00:56:00+02:00</updated>
@@ -215,10 +357,32 @@ Although misuse detection can be built on your own data mining techniques, I wou
 <p>Anomaly detection systems constantly evolves - what was a norm year ago can be an anomaly today. The algorithm compares network flow with historical flow over given period and looks for outliers with are far away. Such dynamic approach allows to detect novel attacks, nevertheless it generates false positive alerts (marks normal flow as suspicious). Moreover, hackers can mimic normal profile, if they know that such system is deployed.</p>
 
 <p>The first task when implementing anomaly detection (AD) is collection of the data. If AD is going to be network based, there are two possibilities to collect aggregated data from network. Some Cisco products provide aggregated data as <a href="http://www.cisco.com/en/US/products/ps6601/products_ios_protocol_group_home.html">Netflow</a> protocol. However, you can use <a href="http://www.wireshark.org">Wireshark or tshark</a> to collect network flow data from the computer. For example:</p>
+=======
+    <title type="html"><![CDATA[Data Mining for Network Security and Intrusion Detection]]></title>
+    <link href="http://datalab.lu/blog/2012/07/17/data-mining-for-network-security-and-intrusion-detection/"/>
+    <updated>2012-07-17T13:34:00+02:00</updated>
+    <id>http://datalab.lu/blog/2012/07/17/data-mining-for-network-security-and-intrusion-detection</id>
+    <content type="html"><![CDATA[<p>In preparation for <a href="http://www.haxogreen.lu/">"Haxogreen" hackers summer camp</a> which takes place in Luxembourg, I was exploring network security world. My motivation was to find out how data mining is applicable to network security and intrusion detection.</p>
+
+<p><a href="http://en.wikipedia.org/wiki/Flame_(malware)">Flame virus</a>, <a href="http://en.wikipedia.org/wiki/Stuxnet">Stuxnet</a>, <a href="http://en.wikipedia.org/wiki/Duqu">Duqu</a> proved that static, signature based security systems are not able to detect very advanced, government sponsored threats. Nevertheless, signature based defense systems are mainstream today - think of antivirus, intrusion detection systems. What do you do when unknown is unknown? Data mining comes to mind as the answer.</p>
+
+<p>There are following areas where data mining is or can be employed: misuse/signature detection, anomaly detection, scan detection, etc.</p>
+
+<p>Misuse/signature detection systems are based on supervised learning. During learning phase, labeled examples of network packets or systems calls are provided, from which algorithm can learn about the threats. This is very efficient and fast way to find know threats. Nevertheless there are some important drawbacks, namely false positives, novel attacks and complication of obtaining initial data for training of the system. The false positives happens, when normal network flow or system calls are marked as a threat. For example, an user can fail to provide the correct password for three times in a row or start using the service which is deviation from the standard profile. Novel attack can be define as an attack not seen by the system, meaning that signature or the pattern of such attack is not learned and the system will be penetrated without the knowledge of the administrator. The latter obstacle (training dataset) can be overcome by collecting the data over time or relaying on public data, such as DARPA Intrusion Detection Data Set. Although misuse detection can be built on your own data mining techniques, I would suggest well known product like Snort which relays on crowd-sourcing.</p>
+
+<p>Anomaly/outlier detection systems looks for deviation from normal or established patterns within given data. In case of network security any threat will be marked as an anomaly. Below you can find two features graph, where number of logins are plotted on x axis and number of queries are plotter on y axis. The color indicates the group to which points are assigned - blue ones are normal, red ones - anomalies.</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=start_dec_anomalies.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/start_dec_anomalies.png" alt="" /></a></p>
+
+<p>Anomaly detection systems constantly evolves - what was a norm year ago can be an anomaly today. The algorithm compares network flow with historical flow over given period and looks for outliers with are far away. Such dynamic approach allows to detect novel attacks, nevertheless it generates false positive alerts (marks normal flow as suspicious). Moreover, hackers can mimic normal profile, if they know that such system is deployed.</p>
+
+<p>The first task when implementing anomaly detection (AD) is collection of the data. If AD is going to be network based, there are two possibilities to collect aggregated data from network. Some Cisco products provide aggregated data as <a href="http://www.cisco.com/en/US/products/ps6601/products_ios_protocol_group_home.html">Netflow</a> protocol. However, you can use <a href="http://www.wireshark.org/">Wireshark or tshark</a> to collect network flow data from the computer. For example:</p>
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
 
 <pre><code>tshark -T fields -E separator , -E quote d -e ip.src -e ip.dst -e tcp.srcport -e tcp.dstport -e udp.srcport -e upd.dstport -e tcp.len -e ip.len -e eth.type -e frame.time_epoch -e frame.len
 </code></pre>
 
+<<<<<<< HEAD
 <p>Once you have enough data for mining process, you need to preprocess acquired data. In the context of intrusion, anomalous actions happen in bursts rather than single event. <a href="http://minds.cs.umn.edu/publications/chapter.pdf">Varun Chandola et al.</a> proposed to derive following features:</p>
 
 <ul>
@@ -232,15 +396,28 @@ Number of flows to unique destination IP addresses inside the network in the las
 Number of flows from unique source IP addresses inside the network in the last N flows to the same destination
 Number of flows from the source IP to the same destination port in the last N flows
 Number of flows to the destination IP address using same source port in the last N flows</p></li>
+=======
+<p>Once you have enough data for mining process, you need to preprocess acquired data. In the context of intrusion, anomalous actions happen in bursts rather than single event. <a href="http://minds.cs.umn.edu/publications/chapter.pdf">Varun Chandola et al.</a> proposed to derive following features:</p>
+
+<ul>
+<li><p>Time window based: Number of flows to unique destination IP addresses inside the network in the last T seconds from the same source Number of flows from unique source IP addresses inside the network in the last T seconds to the same destination Number of flows from the source IP to the same destination port in the last T seconds host based - system calls network based - packet information Number of flows to the destination IP address using same source port in the last T seconds</p></li>
+<li><p>Connection based: Number of flows to unique destination IP addresses inside the network in the last N flows from the same source Number of flows from unique source IP addresses inside the network in the last N flows to the same destination Number of flows from the source IP to the same destination port in the last N flows Number of flows to the destination IP address using same source port in the last N flows</p></li>
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
 </ul>
 
 
 <p>Below you can find an example of feature creation in R. The dataset was created by calling tshark script, which is specified above.</p>
 
 <pre><code>#load data
+<<<<<<< HEAD
 tmp=read.csv(‘stats2.csv’,colClasses=c(rep(‘character’,11)),header=F)
 #get rid of everything below min. in timestamp
 tmp[,10]=as.integer(as.POSIXct(format(as.POSIXct(as.integer(tmp[,10]),origin=‘1970-01-01’),‘%Y-%m-%d %H:%M:00’)))
+=======
+tmp=read.csv("stats2.cs",colClasses=c(re"characer",11)),header=F)
+#get rid of everything below min. in timestamp
+tmp[,10]=as.integer(as.POSIXct(format(as.POSIXct(as.integer(tmp[,10]),origin="1970-01-01"),"%Y-%m-%d %H:%M:00")))
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
 #fix some rows
 tmp=tmp[-which(sapply(tmp[,1],function(x) nchar(x)&gt;15)),] tmp=tmp[which(!is.na(tmp[,4])),]
 
@@ -252,7 +429,11 @@ feature=do.call(rbind, sapply(seq(from=1,to=length(factor),by=4),function(x){ re
 
 <p>After preprocessing the data we can apply local outlier detection, KNN, random forest and others algorithms. I will provide R code and practical implementation of some algorithms in the following post.</p>
 
+<<<<<<< HEAD
 <p>While preparing this post, I was looking for the books, I found only few books covering data mining and network security. To my surprise <a href="http://www.amazon.com/gp/product/1439839425/ref=as_li_qf_sp_asin_tl?ie=UTF8&amp;tag=quantitativ0e-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=1439839425">Data Mining and Machine Learning in Cybersecurity</a> book includes both topics and well written. However, if you are security specialist looking for data mining books, you can read my <a href="http://www.investuotojas.eu/2012/07/02/my-first-competition-at-kaggle/">summary</a> of <a href="http://www.amazon.com/gp/product/0123748569/ref=as_li_tf_tl?ie=UTF8&amp;tag=quantitativ0e-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=0123748569%20%22Data%20Mining:%20Practical%20Machine%20Learning%20Tools%20and%20Techniques%22.">"Data Mining: Practical Machine Learning Tools and Techniques"</a></p>
+=======
+<p>While preparing this post, I was looking for the books, I found only few books covering data mining and network security. To my surprise <a href="http://www.amazon.com/gp/product/1439839425/ref=as_li_qf_sp_asin_tl?ie=UTF8&amp;tag=quantitativ0e-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=1439839425">Data Mining and Machine Learning in Cybersecurity</a> book includes both topics and it is well written. However, if you are security specialist looking for data mining books, you can read my <a href="http://www.investuotojas.eu/2012/07/02/my-first-competition-at-kaggle/">summary</a> of <a href="http://www.amazon.com/gp/product/0123748569/ref=as_li_tf_tl?ie=UTF8&amp;tag=quantitativ0e-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=0123748569%20%22Data%20Mining:%20Practical%20Machine%20Learning%20Tools%20and%20Techniques%22.">"Data Mining: Practical Machine Learning Tools and Techniques"</a></p>
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
 ]]></content>
   </entry>
   

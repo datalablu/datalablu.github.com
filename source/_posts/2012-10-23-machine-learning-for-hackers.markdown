@@ -1,0 +1,41 @@
+---
+layout: post
+title: "Machine Learning for Hackers"
+date: 2012-10-23 15:06
+comments: true
+categories: [EN, R-language, books, data analysis, machine learning] 
+---
+
+Which way do you prefer to learn a new material - deep theoretical background first and practice later or do you like to break things in order to fix them? If latter is your way of learning things, then most likely you will enjoy [Machine Learning for Hackers][hack].
+
+The book has chapters on machine learning techniques such as PCA, kNN, analysis of social graphs hence even advanced R users might find something interesting. So I want you to show you my example of visualisation of similarity between parliamentarians in [Lithuania][lt] which idea is taken for chapter 9.
+
+In most of the cases you should be able to get access to voting results of legislative body in your country. Nevertheless the data can be buried in "wrong" format such as html or pdf. I use [Scrapy][scrapy] framework to parse html pages, however I have faced a problem, when my IP address was blocked due to many requests (10 000) within 2 hours. But in cloud age the problem was quickly solved and I made a delay in my crawler. [Here is][csv] the examples of the data in CSV format.
+
+With data in hand it was easy to proceed further. To find similarities between parliamentarians I took voting results of approximately 4000 legislations and built a matrix, where rows represent parliamentarians and columns - legislations. "Yes" votes were encoded as 1, "No" as -1 and the rest as 0. R has a handy function `dist` to compute the distances between the rows (parliamentarians) of a data matrix. The result of the function is one dimension data of the distance between parliamentarians, however to reveal the structure of a data set we need two dimensions. Once again, R has a function `cmdscale` which does [Classical Multidimensional Scaling (CMS)][class]. I found [this document][doc] very useful in explaining Multidimensional Scaling. Here is the final result:
+
+
+[![](http://dl.dropbox.com/u/6360678/blog/small_mds.png)][pic]
+
+
+Click on the image to enlarge.
+
+
+The plot above reveals, that right wing party TSLKD has a majority in parliament and LSDP (socialists) are in opposition and liberals (LSF, JF, MG) are in the center. You might argue, that that is already known, however the plot is based on actual data, therefore differences in voting support outlooks of the parliamentarians(right, central, left).
+The map shows which members of the party are outliers and which one from the other party can be invited while forming a new parliament (second tour of the election is on the way).
+Members of the left wing are mixed up and it would make sense to them to merge or form a coalition.
+
+
+Are you looking for source code? [Click here][hub].
+
+
+[pic]:http://dl.dropbox.com/u/6360678/blog/big_mds.png
+[lt]:http://en.wikipedia.org/wiki/Lithuania
+[csv]:https://github.com/kafka399/votingDistance/tree/master/getdata
+
+[class]:http://en.wikipedia.org/wiki/Multidimensional_scaling
+
+[doc]:http://www.bristol.ac.uk/cmm/publications/aimdss-2nd-ed/chapter3.pdf
+[hub]:https://github.com/kafka399/votingDistance
+[scrapy]:http://scrapy.org/
+[hack]:http://www.amazon.com/gp/product/1449303714/ref=as_li_tf_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=1449303714&linkCode=as2&tag=quantitativ0e-20

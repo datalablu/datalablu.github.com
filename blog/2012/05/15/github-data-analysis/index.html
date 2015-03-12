@@ -5,7 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
+<<<<<<< HEAD
   <title>GitHub data analysis - DataLab</title>
+=======
+  <title>GitHub Data Analysis - DataLab.lu</title>
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
   <meta name="author" content="Dzidorius Martinaitis">
 
   
@@ -18,13 +22,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
+<<<<<<< HEAD
   <link rel="canonical" href="http://datalablu.github.com/blog/2012/05/15/github-data-analysis/">
+=======
+  <link rel="canonical" href="http://datalab.lu/blog/2012/05/15/github-data-analysis/">
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
   <script src="/javascripts/ender.js"></script>
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
+<<<<<<< HEAD
   <link href="/atom.xml" rel="alternate" title="DataLab" type="application/atom+xml">
+=======
+  <link href="/atom.xml" rel="alternate" title="DataLab.lu" type="application/atom+xml">
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
@@ -53,7 +65,11 @@
   
 <form action="http://google.com/search" method="get">
   <fieldset role="search">
+<<<<<<< HEAD
     <input type="hidden" name="q" value="site:datalablu.github.com" />
+=======
+    <input type="hidden" name="q" value="site:datalab.lu" />
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
     <input class="search" type="text" name="q" results="0" placeholder="Search"/>
   </fieldset>
 </form>
@@ -61,11 +77,19 @@
 <ul class="main-navigation">
     <li><a href="/">
         <span class="blue_light">
+<<<<<<< HEAD
             DataLab
         </span>
        
            <span class="blue_dark">
              Data based innovations
+=======
+            DataLab.lu
+        </span>
+       
+           <span class="blue_dark">
+             Data based inventions.
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
            </span>
        
     </a></li>
@@ -98,7 +122,11 @@
   
 
 
+<<<<<<< HEAD
 <time datetime="2012-05-15T13:48:49+02:00" pubdate data-updated="true">May 15<span>th</span>, 2012</time>
+=======
+<time datetime="2012-05-15T12:04:00+02:00" pubdate data-updated="true">May 15<span>th</span>, 2012</time>
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -107,14 +135,21 @@
   </header>
 
 
+<<<<<<< HEAD
 <div class="entry-content"><p>Few weeks ago GitHub <a href="https://github.com/blog/1112-data-at-github">announced</a>, that its timeline data is available on <a href="https://bigquery.cloud.google.com">bigquery</a> for analysis. Moreover, it <a href="https://github.com/blog/1118-the-github-data-challenge">offers prizes</a> for the best visualization of the data. Despite my art skills and minimal chances to win beauty contest, I decided to crunch GitHub data and run data analysis.</p>
 
 <p>After initial trial of bigquery service, I found hard to know, what price, if any, I&#8217;m going to pay for the service. Hence, I pulled the data (6.5 GB) from bigquery on my machine and further I used my machine for analysis. Bash scripts have been used to clean up and extract necessary data, R for data analysis and visualization and C++ for text extraction.</p>
+=======
+<div class="entry-content"><p>Few weeks ago GitHub <a href="https://github.com/blog/1112-data-at-github">announced</a>, that its timeline data is available on <a href="https://bigquery.cloud.google.com/">bigquery</a> for analysis. Moreover, it <a href="https://github.com/blog/1118-the-github-data-challenge">offers prizes</a> for the best visualization of the data. Despite my art skills and minimal chances to win beauty contest, I decided to crunch GitHub data and run data analysis.</p>
+
+<p>After initial trial of bigquery service, I found hard to know, what price, if any, I&#8217;m going to pay for the service. Hence, I pulled the data (6.5 GB) from bigquery on my machine and further I used my machine for analysis. Bash scripts have been used to clean up and extract necessary data, R for data analysis and visualization and C++ for text extraction.</p>
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
 
 <p>GitHub dataset is one table, where each row consist of information about repository (i.e. path, date of creation, name, description, programming language, number of forks/watchers and etc.) and action, which was done by user (i.e. username, location, timestamp and etc.).</p>
 
 <p>As a result, we can check how GitHub users actions are spread over time during the day. The X axis on the graph below is labeled with the hours of the day (GMT) and the Y axis represent median values of the actions for each hour. From it, we can make a deduction, that highest load for GitHub can be expected between 15:00 and 17:00 GMT and lowest to be expected between 05:00 and 07:00 GMT. The color of the line indicates how busy was the day based on quantiles: green are calm days (20% of days), blue - normal days (50% quantile) and red are busy days (80% quantile). I should to mention, that auto-correlation or serial correlation is high (70% for following hour), which means, that busy hours tend to be followed by busy hours and calm hours tend to be followed by calm hours. Moreover, busy days tend happen after busy days.</p>
 
+<<<<<<< HEAD
 <p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=actions.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/actions.png" alt="Photobucket" /></a></p>
 
 <p>Second graph below shows median of actions divided by weekdays. There is not big surprise - weekends are more slow than weekdays, nevertheless the programmers are slightly less productive on Mondays and Fridays.</p>
@@ -147,6 +182,39 @@ The same pattern persist over the days - activity in Asia increases around midni
 <p>What else can be done with GitHub dataset? Most repositories have description field, which can be used to find similar projects by implementing <a href="http://en.wikipedia.org/wiki/Tf*idf">tf-idf</a> method. I tried that method and the results are satisfying.</p>
 
 <p>Most of the graphs shown above are reproducible (except word clouds) and the code can be found on <a href="https://github.com/kafka399/githubdata">GitHub</a>.</p>
+=======
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=actions.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/actions.png" alt="" /></a></p>
+
+<p>Second graph below shows median of actions divided by weekdays. There is not big surprise - weekends are more slow than weekdays, nevertheless the programmers are slightly less productive on Mondays and Fridays.</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=actions_weekdays.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/actions_weekdays.png" alt="" /></a></p>
+
+<p>The analysis of creation of new repository shows, that the pattern of busy or calm hours remains over the years. This can be attributed to the fact, that majority of the users comes from North America and Europe. Another hypothesis can be drawn from this information, that number of creation of the new repositories grow exponentially. However, I mind you, that the graph below is biased - most likely, GitHub users update recent projects, consequently more recent projects appeared on timeline. Even though, 2009-2011 years show exponential grow. The X axis of the graph below is labeled with the hour of the day, the Y axis - log of median values of new repositories.</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=new_repos.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/new_repos.png" alt="" /></a></p>
+
+<p>Following graph shows the number of forks per project (the X axis, log scale) versus number of watchers (the Y axis, log scale). As expected, there is linear correlation between forks and watchers. Even so there is something interesting about outliers, which are below bottom line - the projects, where number of watchers is low, but number of forks is high. These are anomalies and worth to check.</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=fork_watch.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/fork_watch.png" alt="" /></a></p>
+
+<p>The next thing to do is to look at the repository description. Let&#8217;s group the repositories by programming language and count most dominant words in the description. The graph below has C++ word cloud on the left and Java - right . C++ projects are about library, game, simple(?), engine, Arduino. Java is dominated by android, plugin, server, minecraft, spring, maven.</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=cpp_java.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/cpp_java.png" alt="" /></a></p>
+
+<p>Ruby (left) vs Python(right ):</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=ruby_python.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/ruby_python.png" alt="" /></a></p>
+
+<p>&#8220;Surprise&#8221;, &#8220;surprise&#8221; - R projects (left) are largely about data analysis, however &#8220;machine&#8221; word, which corresponds to Machine learning is very tiny. Shell (right) is dominated by configuration, managing, git(?).</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=r_bash.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/r_bash.png" alt="" /></a></p>
+
+<p>GitHub dataset includes location field. Unfortunately, the users can enter whatever they want - country, city or leave it empty. Nevertheless, I was able to extract good chunk of actions, where location field has meaningful value.  The video below shows country based users activity, where dark red corresponds to high activity and light red - minor. Only 30 most active countries are included, the rest are grey. The same pattern persist over the days - activity in Asia increases around midnight, Europe wakes up around 8:00 or 9:00, where America starts around 15:00. Who said, that hackers and programmers work at night?</p>
+
+<p>What else can be done with GitHub dataset? Most repositories have description field, which can be used to find similar projects by implementing <a href="http://en.wikipedia.org/wiki/Tf*idf">tf-idf</a> method. I tried that method and the results are satisfying.</p>
+
+<p>Most of the graphs shown above are reproducible (except word clouds) and the code can be found on <a href="https://github.com/kafka399/githubdata">GitHub</a>.</p>
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
 </div>
 
 
@@ -169,7 +237,11 @@ The same pattern persist over the days - activity in Asia increases around midni
   
 
 
+<<<<<<< HEAD
 <time datetime="2012-05-15T13:48:49+02:00" pubdate data-updated="true">May 15<span>th</span>, 2012</time>
+=======
+<time datetime="2012-05-15T12:04:00+02:00" pubdate data-updated="true">May 15<span>th</span>, 2012</time>
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
       
 
 <span class="categories">
@@ -183,6 +255,7 @@ The same pattern persist over the days - activity in Asia increases around midni
     
       <div class="sharing">
   
+<<<<<<< HEAD
   <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://datalablu.github.com/blog/2012/05/15/github-data-analysis/" data-via="dzidorius" data-counturl="http://datalablu.github.com/blog/2012/05/15/github-data-analysis/" >Tweet</a>
   
   
@@ -190,6 +263,11 @@ The same pattern persist over the days - activity in Asia increases around midni
   
   
     <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+=======
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://datalab.lu/blog/2012/05/15/github-data-analysis/" data-via="dzidorius" data-counturl="http://datalab.lu/blog/2012/05/15/github-data-analysis/" >Tweet</a>
+  
+  
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
   
 </div>
 
@@ -199,7 +277,11 @@ The same pattern persist over the days - activity in Asia increases around midni
         <a class="basic-alignment left" href="/blog/2012/04/22/machine-learning-for-identification-of-cars/" title="Previous Post: Machine learning for identification of cars">&laquo; Machine learning for identification of cars</a>
       
       
+<<<<<<< HEAD
         <a class="basic-alignment right" href="/blog/2012/07/02/my-first-competition-at-kaggle/" title="Next Post: My first competition at Kaggle">My first competition at Kaggle &raquo;</a>
+=======
+        <a class="basic-alignment right" href="/blog/2012/07/02/my-first-competition-at-kaggle/" title="Next Post: My First Competition at Kaggle">My First Competition at Kaggle &raquo;</a>
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
       
     </p>
   </footer>
@@ -216,15 +298,19 @@ The same pattern persist over the days - activity in Asia increases around midni
 <aside class="sidebar">
   
     <section>
+<<<<<<< HEAD
   <h1>Contact me</h1>
 	<p>email: <a href="mailto:dm@datalab.lu">dm@datalab.lu</a></p>
 </section>
 
 <section>
+=======
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
     
       <li class="post">
+<<<<<<< HEAD
         <a href="/blog/2014/04/30/data-based-review-of-strapless-mio-link-hrm/">Data based review of strapless Mio Link HRM</a>
       </li>
     
@@ -242,11 +328,34 @@ The same pattern persist over the days - activity in Asia increases around midni
     
       <li class="post">
         <a href="/blog/2012/10/23/machine-learning-for-hackers/">Machine learning for hackers</a>
+=======
+        <a href="/blog/2015/03/11/applying-machine-learning-to-peer-to-peer-lending/">Applying Machine Learning to Peer to Peer lending</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/04/30/data-based-review-of-strapless-mio-link-hrm/">Data Based Review of Strapless Mio Link HRM</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/04/09/credit-card-fraud/">Credit Card Fraud Detection</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/02/21/kaggle-event-recommentation-engine/">Kaggle Challenge - Event Recommendation Engine</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/10/23/machine-learning-for-hackers/">Machine Learning for Hackers</a>
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
       </li>
     
   </ul>
 </section>
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
 <section>
   <h1>Latest Tweets</h1>
   <ul id="tweets">
@@ -254,7 +363,11 @@ The same pattern persist over the days - activity in Asia increases around midni
     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
   </ul>
   
+<<<<<<< HEAD
     <a href="http://twitter.com/dzidorius" class="twitter-follow-button" data-show-count="true">Follow @dzidorius</a>
+=======
+    <a href="http://twitter.com/dzidorius" class="twitter-follow-button" data-show-count="false">Follow @dzidorius</a>
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
   
 </section>
 
@@ -262,7 +375,10 @@ The same pattern persist over the days - activity in Asia increases around midni
 
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
   
 </aside>
 
@@ -270,7 +386,11 @@ The same pattern persist over the days - activity in Asia increases around midni
     </div>
   </div>
   <footer role="contentinfo"><p>
+<<<<<<< HEAD
   Copyright &copy; 2014 - Dzidorius Martinaitis -
+=======
+  Copyright &copy; 2015 - Dzidorius Martinaitis -
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
@@ -278,12 +398,21 @@ The same pattern persist over the days - activity in Asia increases around midni
   
 
 <script type="text/javascript">
+<<<<<<< HEAD
       var disqus_shortname = 'datalab';
       
         
         // var disqus_developer = 1;
         var disqus_identifier = 'http://datalablu.github.com/blog/2012/05/15/github-data-analysis/';
         var disqus_url = 'http://datalablu.github.com/blog/2012/05/15/github-data-analysis/';
+=======
+      var disqus_shortname = 'kafka399';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://datalab.lu/blog/2012/05/15/github-data-analysis/';
+        var disqus_url = 'http://datalab.lu/blog/2012/05/15/github-data-analysis/';
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
         var disqus_script = 'embed.js';
       
     (function () {
@@ -295,6 +424,7 @@ The same pattern persist over the days - activity in Asia increases around midni
 
 
 
+<<<<<<< HEAD
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
@@ -314,6 +444,10 @@ The same pattern persist over the days - activity in Asia increases around midni
     })();
   </script>
 
+=======
+
+
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
 
 
   <script type="text/javascript">

@@ -5,11 +5,19 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
+<<<<<<< HEAD
   <title>Levenshtein distance in C++ and code profiling in R - DataLab</title>
   <meta name="author" content="Dzidorius Martinaitis">
 
   
   <meta name="description" content="At work, the client requested, if existing search engine could accept singular and plural forms equally, e. g. &#8220;partner&#8221; and &#8220; &hellip;">
+=======
+  <title>Levenshtein Distance in C++ and Code Profiling in R - DataLab.lu</title>
+  <meta name="author" content="Dzidorius Martinaitis">
+
+  
+  <meta name="description" content="At work, the client requested, if existing search engine could accept singular and plural forms equally, e. g. &#8220;partner&#8221; and &#8220; &hellip;">
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,13 +26,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
+<<<<<<< HEAD
   <link rel="canonical" href="http://datalablu.github.com/blog/2012/03/25/levenshtein-distance-in-c-and-code-profiling-in-r/">
+=======
+  <link rel="canonical" href="http://datalab.lu/blog/2012/03/25/levenshtein-distance-in-c-and-code-profiling-in-r/">
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
   <script src="/javascripts/ender.js"></script>
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
+<<<<<<< HEAD
   <link href="/atom.xml" rel="alternate" title="DataLab" type="application/atom+xml">
+=======
+  <link href="/atom.xml" rel="alternate" title="DataLab.lu" type="application/atom+xml">
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
@@ -53,7 +69,11 @@
   
 <form action="http://google.com/search" method="get">
   <fieldset role="search">
+<<<<<<< HEAD
     <input type="hidden" name="q" value="site:datalablu.github.com" />
+=======
+    <input type="hidden" name="q" value="site:datalab.lu" />
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
     <input class="search" type="text" name="q" results="0" placeholder="Search"/>
   </fieldset>
 </form>
@@ -61,11 +81,19 @@
 <ul class="main-navigation">
     <li><a href="/">
         <span class="blue_light">
+<<<<<<< HEAD
             DataLab
         </span>
        
            <span class="blue_dark">
              Data based innovations
+=======
+            DataLab.lu
+        </span>
+       
+           <span class="blue_dark">
+             Data based inventions.
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
            </span>
        
     </a></li>
@@ -98,7 +126,11 @@
   
 
 
+<<<<<<< HEAD
 <time datetime="2012-03-25T18:26:23+02:00" pubdate data-updated="true">Mar 25<span>th</span>, 2012</time>
+=======
+<time datetime="2012-03-25T16:50:00+02:00" pubdate data-updated="true">Mar 25<span>th</span>, 2012</time>
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -107,6 +139,7 @@
   </header>
 
 
+<<<<<<< HEAD
 <div class="entry-content"><p>At work, the client requested, if existing search engine could accept singular and plural forms equally, e. g. &#8220;partner&#8221; and &#8220;partners&#8221; would lead to the same result.</p>
 
 <p>The first option - <a href="http://en.wikipedia.org/wiki/Stemming">stemming</a>. In that case, search engine would use root of a word, e. g. &#8220;partn&#8221;. However, stemming has many weaknesses: two different words might have same root, a user can misspell the root of the word, except English and few others languages it is not that trivial to implement stemming.</p>
@@ -125,6 +158,25 @@ Now, imagine, that a programmer wants to define, which implementation A or B for
 <p>I use this piece for code profiling:</p>
 
 <pre><code> simple=read.table('simple.txt')
+=======
+<div class="entry-content"><p>At work, the client requested, if existing search engine could accept singular and plural forms equally, e. g. &#8220;partner&#8221; and &#8220;partners&#8221; would lead to the same result.</p>
+
+<p>The first option - <a href="http://en.wikipedia.org/wiki/Stemming">stemming</a>. In that case, search engine would use root of a word, e. g. &#8220;partn&#8221;. However, stemming has many weaknesses: two different words might have same root, a user can misspell the root of the word, except English and few others languages it is not that trivial to implement stemming.</p>
+
+<p><a href="http://en.wikipedia.org/wiki/Levenshtein_distance">Levenshtein distance</a> comes as the second option. The algorithm is simple - you have two words and you calculate the difference between them. You can insert, delete or replace any character, but it will cost you. Let&#8217;s imagine, an user enters &#8220;Levenstin distances&#8221; into search engine and expects to find revalent information. However, he just made 2 errors by misspeling the author&#8217;s name and he used plural form of &#8220;distance&#8221;. If search engine accepts 3 errors - the user will get relevant information.</p>
+
+<p>The challenge comes, when you have a dictionary of terms (e. g. more that 1 mil.) and you want to get similar terms based on Levenshtein distance. You can visit every entry in the dictionary (very costly) or you can push dictionary into the <a href="http://en.wikipedia.org/wiki/Trie">trie</a>. Do you need a proof for the cost? There we go:</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=test.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/test.png" alt="" /></a></p>
+
+<p>Red color indicates the performance of the search, when all terms are in the trie, green - simple dictionary.</p>
+
+<p>Now we come to the second part of the post - why to bother and plot such graphs, if we could check few entries to determine average time and the winner? The reason is simple - we trust in God, all others must bring data. To say it differently - while profiling the code, you should be interested in average time AND variation. As you can see in the graph above, variation of the blue color is very small - it takes approximately the same time to scan whole dictionary. However, red has higher variation - the result can take for while or it can finish just at the beginning, but overall it works faster. Now, imagine, that a programmer wants to define, which implementation A or B for volatile cache is much faster. Let&#8217;s assume, that big O notion is not going to help and she conducts 2 test for A and 2 for B. While running test A, cache size expands, while B - shrinks. As the result, B wins over A and she makes wrong choice. However, her colleague claims, that despite A has greater volatility, it is much faster and she tried with 500 queries! Whom should I trust?</p>
+
+<p>I use this piece for code profiling:</p>
+
+<pre><code>simple=read.table('simple.txt')
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
 node=read.table('node.txt')
 
 simple=cbind(simple,as.character(c('simple')))
@@ -164,7 +216,11 @@ ggplot(rez,aes(time,fill=type))+geom_density(alpha=0.6,size=1.3)+scale_x_log10()
   
 
 
+<<<<<<< HEAD
 <time datetime="2012-03-25T18:26:23+02:00" pubdate data-updated="true">Mar 25<span>th</span>, 2012</time>
+=======
+<time datetime="2012-03-25T16:50:00+02:00" pubdate data-updated="true">Mar 25<span>th</span>, 2012</time>
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
       
 
 <span class="categories">
@@ -178,6 +234,7 @@ ggplot(rez,aes(time,fill=type))+geom_density(alpha=0.6,size=1.3)+scale_x_log10()
     
       <div class="sharing">
   
+<<<<<<< HEAD
   <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://datalablu.github.com/blog/2012/03/25/levenshtein-distance-in-c-and-code-profiling-in-r/" data-via="dzidorius" data-counturl="http://datalablu.github.com/blog/2012/03/25/levenshtein-distance-in-c-and-code-profiling-in-r/" >Tweet</a>
   
   
@@ -185,6 +242,11 @@ ggplot(rez,aes(time,fill=type))+geom_density(alpha=0.6,size=1.3)+scale_x_log10()
   
   
     <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+=======
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://datalab.lu/blog/2012/03/25/levenshtein-distance-in-c-and-code-profiling-in-r/" data-via="dzidorius" data-counturl="http://datalab.lu/blog/2012/03/25/levenshtein-distance-in-c-and-code-profiling-in-r/" >Tweet</a>
+  
+  
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
   
 </div>
 
@@ -211,15 +273,19 @@ ggplot(rez,aes(time,fill=type))+geom_density(alpha=0.6,size=1.3)+scale_x_log10()
 <aside class="sidebar">
   
     <section>
+<<<<<<< HEAD
   <h1>Contact me</h1>
 	<p>email: <a href="mailto:dm@datalab.lu">dm@datalab.lu</a></p>
 </section>
 
 <section>
+=======
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
     
       <li class="post">
+<<<<<<< HEAD
         <a href="/blog/2014/04/30/data-based-review-of-strapless-mio-link-hrm/">Data based review of strapless Mio Link HRM</a>
       </li>
     
@@ -237,11 +303,34 @@ ggplot(rez,aes(time,fill=type))+geom_density(alpha=0.6,size=1.3)+scale_x_log10()
     
       <li class="post">
         <a href="/blog/2012/10/23/machine-learning-for-hackers/">Machine learning for hackers</a>
+=======
+        <a href="/blog/2015/03/11/applying-machine-learning-to-peer-to-peer-lending/">Applying Machine Learning to Peer to Peer lending</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/04/30/data-based-review-of-strapless-mio-link-hrm/">Data Based Review of Strapless Mio Link HRM</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/04/09/credit-card-fraud/">Credit Card Fraud Detection</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/02/21/kaggle-event-recommentation-engine/">Kaggle Challenge - Event Recommendation Engine</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/10/23/machine-learning-for-hackers/">Machine Learning for Hackers</a>
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
       </li>
     
   </ul>
 </section>
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
 <section>
   <h1>Latest Tweets</h1>
   <ul id="tweets">
@@ -249,7 +338,11 @@ ggplot(rez,aes(time,fill=type))+geom_density(alpha=0.6,size=1.3)+scale_x_log10()
     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
   </ul>
   
+<<<<<<< HEAD
     <a href="http://twitter.com/dzidorius" class="twitter-follow-button" data-show-count="true">Follow @dzidorius</a>
+=======
+    <a href="http://twitter.com/dzidorius" class="twitter-follow-button" data-show-count="false">Follow @dzidorius</a>
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
   
 </section>
 
@@ -257,7 +350,10 @@ ggplot(rez,aes(time,fill=type))+geom_density(alpha=0.6,size=1.3)+scale_x_log10()
 
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
   
 </aside>
 
@@ -265,7 +361,11 @@ ggplot(rez,aes(time,fill=type))+geom_density(alpha=0.6,size=1.3)+scale_x_log10()
     </div>
   </div>
   <footer role="contentinfo"><p>
+<<<<<<< HEAD
   Copyright &copy; 2014 - Dzidorius Martinaitis -
+=======
+  Copyright &copy; 2015 - Dzidorius Martinaitis -
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
@@ -273,12 +373,21 @@ ggplot(rez,aes(time,fill=type))+geom_density(alpha=0.6,size=1.3)+scale_x_log10()
   
 
 <script type="text/javascript">
+<<<<<<< HEAD
       var disqus_shortname = 'datalab';
       
         
         // var disqus_developer = 1;
         var disqus_identifier = 'http://datalablu.github.com/blog/2012/03/25/levenshtein-distance-in-c-and-code-profiling-in-r/';
         var disqus_url = 'http://datalablu.github.com/blog/2012/03/25/levenshtein-distance-in-c-and-code-profiling-in-r/';
+=======
+      var disqus_shortname = 'kafka399';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://datalab.lu/blog/2012/03/25/levenshtein-distance-in-c-and-code-profiling-in-r/';
+        var disqus_url = 'http://datalab.lu/blog/2012/03/25/levenshtein-distance-in-c-and-code-profiling-in-r/';
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
         var disqus_script = 'embed.js';
       
     (function () {
@@ -290,6 +399,7 @@ ggplot(rez,aes(time,fill=type))+geom_density(alpha=0.6,size=1.3)+scale_x_log10()
 
 
 
+<<<<<<< HEAD
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
@@ -310,6 +420,11 @@ ggplot(rez,aes(time,fill=type))+geom_density(alpha=0.6,size=1.3)+scale_x_log10()
   </script>
 
 
+=======
+
+
+
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
 
   <script type="text/javascript">
     (function(){

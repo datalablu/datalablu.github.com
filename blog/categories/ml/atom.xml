@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
+<<<<<<< HEAD
   <title><![CDATA[Category: ML | DataLab]]></title>
   <link href="http://datalablu.github.com/blog/categories/ml/atom.xml" rel="self"/>
   <link href="http://datalablu.github.com/"/>
   <updated>2014-05-16T15:21:41+02:00</updated>
   <id>http://datalablu.github.com/</id>
+=======
+  <title><![CDATA[Category: ML | DataLab.lu]]></title>
+  <link href="http://datalab.lu/blog/categories/ml/atom.xml" rel="self"/>
+  <link href="http://datalab.lu/"/>
+  <updated>2015-03-11T19:25:51+01:00</updated>
+  <id>http://datalab.lu/</id>
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
   <author>
     <name><![CDATA[Dzidorius Martinaitis]]></name>
     
@@ -14,6 +22,7 @@
 
   
   <entry>
+<<<<<<< HEAD
     <title type="html"><![CDATA[Credit card fraud detection]]></title>
     <link href="http://datalablu.github.com/blog/2013/04/09/credit-card-fraud/"/>
     <updated>2013-04-09T06:06:00+02:00</updated>
@@ -24,6 +33,102 @@
 Additionally, if you wish to build a CCFD system or at least a prototype you most likely missing the data and you won't get it. Chicken and egg problem.</p>
 
 <p>How does the data set might look? Think of millions rows where less than 0.002% of data are the fraud operations. If you train your model with unadjusted data set, it will predict all future events as normal operations. In order to avoid such behavior you need to throw away most of the data with normal operations and balance data where distribution would be 1% of fraud vs 99% normal or 5% vs 95%. You can play with freely available <a href="http://www.ll.mit.edu/mission/communications/cyber/CSTcorpora/ideval/data/">network intrusion data</a> to get idea how imbalanced data would look like.</p>
+=======
+    <title type="html"><![CDATA[Applying Machine Learning to Peer to Peer lending]]></title>
+    <link href="http://datalab.lu/blog/2015/03/11/applying-machine-learning-to-peer-to-peer-lending/"/>
+    <updated>2015-03-11T16:25:00+01:00</updated>
+    <id>http://datalab.lu/blog/2015/03/11/applying-machine-learning-to-peer-to-peer-lending</id>
+    <content type="html"><![CDATA[<p>Peer to peer lending allows to lend money to unrelated individuals without going through traditional financial service such as bank, credit union, etc. Nevertheless, there is an intermediary - service and platform provider. The provider verifies the identity of the borrower and income status, processes the payments, promotes its platform, deals with bad loans or demands bankruptcy for the borrower.<br/>
+The advantage of peer to peer lending for the borrowers is lower interest rate and higher rate for lenders. However, higher rate comes with higher risk - the return is more volatile than a bank deposit.</p>
+
+<p>Regardless of many lending platforms such us <a href="http://www.Prosper.com">Prosper.com</a> (US), <a href="http://zopa.co.uk">zopa.co.uk</a> (UK), <a href="http://www.fundingcircle.com">www.fundingcircle.com</a> (UK), <a href="http://auxmoney.com">auxmoney.com</a> (DE), <a href="http://pret-dunion.fr">pret-dunion.fr</a> (FR), <a href="http://comunitae.com">comunitae.com</a> (ES), <a href="http://lendico.com">lendico.com</a> (global), majority of platforms accept only the investment from local investors. However <a href="http://bondora.com">bondora.com</a> (EE) allows invest into three markets - Estonia, Finland and Spain and accepts investors from across Europe. Additionally, the rate of return at bondora.com is not fixed as in other platforms and allows much higher returns. However, there is a possibility that you may lose some or all of your initial investment as it is not protected by any financial compensation scheme.</p>
+
+<p>The company behind bondora.com is isePankur AS, which is based in Estonia, a small country in north of Europe. The really amazing thing about bondora.com, that they share <a href="https://www.bondora.ee/en/invest/statistics/data_export">data</a> with everyone. The data-set gives us an opportunity to glimpse at the performance of the company and a possibility to build our own credit scoring model!</p>
+
+<p>The data goes back to 2009 and the chart below shows the total number of loans and funded loans per month. It looks like the business exploded in 2013 and the following charts will give us a few clues.</p>
+
+<p><img src="https://dl.dropboxusercontent.com/s/85hu5gke4x7rxvw/unnamed-chunk-1-1.png?dl=0" alt="plot of chunk unnamed-chunk-1" /></p>
+
+<p>In 2013 bondora.com became more active in Finland and Spain markets, though it was in 2014, when the grow skyrocketed in these markets.</p>
+
+<p><img src="https://dl.dropboxusercontent.com/s/m1y7rnev0sm8vy9/unnamed-chunk-2-1.png?dl=0" alt="Countries" /></p>
+
+<p>Another big change, what might ignited the grow of bondora.com is shift in the duration of the loans. Dominant loan duration before 2013 was 1-2 years, but in 2013 the company started issuing 5 years loans, which became the primary duration in 2014 and was half of all loans.</p>
+
+<p><img src="https://dl.dropboxusercontent.com/s/ohha8j873ym6h4j/unnamed-chunk-3-1.png?dl=0" alt="plot of chunk unnamed-chunk-3" /></p>
+
+<p>The latest data-set has data about 29688 loans and 172 columns or features (depending which parlance you prefer). Below you can see a partial print screen of the interface and dozen of the features.</p>
+
+<p><img src="https://dl.dropboxusercontent.com/s/z1xsothaax10g06/interface.png?dl=0" alt="plot of interface" /></p>
+
+<h3>Model building</h3>
+
+<p>Now, that we are familiar with bondora's data-set, let's move to model building. The prediction model can predict two types of outcomes - categorical (yes/no, true/false classes) or numerical (one is less than one hundred). Although most credit scoring models are built to return a credit score for a borrower, I have opted for simple model, where the outcome has two classes: good or bad.</p>
+
+<p>The definition of "good" class is straight forward - the class in which you are willing to invest or give a credit, but "bad" class definition is complicated. The data-set has data about the borrowers who were late with their payments for 7, 14, 21, 60 days and defaulted loans. How bad is a borrower if he is late for X days? True, he doesn't respect the schedule and the contract for various reason such as harsh life, distraction or any other reason. However, once he is back on track he pays what he owns, plus late charges, which leads to higher return for additional risk.<br/>
+The defaulted loans really sounds as bad loans, right? Well, what if the loan defaults, but you get back the principal and partial interest rate? Doesn't sound that bad, does it? What you really don't like is the default on the loan and zero payments - these loans are the fraud and you want to avoid them. So let's mark them as a "bad" ones.</p>
+
+<p>Beside choosing the outcome, it took me awhile to realize another problem with the data-set - the shift in the business model. Nowadays, most of the loans are issued for 5 years and the data-set doesn't event have data on matured 5 years loans! So I did the trick - I marked all 5 years loans as repaid which are still "alive" after 2-3 years.</p>
+
+<p>While working on a few machine learning projects I quickly learned, that the biggest impact on performance of the model comes not from the fancy machine learning algorithms, but from well engineered features. In the chart below you can find, that 3rd feature is "total_interest", which is made of "Interest" and "LoanDuration". The two features perform well, but the derived feature has much bigger weight.<br/>
+Additionally, I have added data about <a href="http://en.wikipedia.org/wiki/VIX">VIX index</a>. The index tracks volatility of the stock market via S&amp;P500 index - its value increases during the crisis and falls back during calm times. By adding independent source the performance of the model increased 2%.</p>
+
+<p>After initial cleaning of the data-set and feature engineering it was time to build a simple model. My favorite machine learning algorithm is Random Forest for the following reasons: you can feed almost any raw data and it chew happily; the algorithm itself is easy to understand, nevertheless it is kind of black-box; it gives the weights of the features:</p>
+
+<p><img src="https://dl.dropboxusercontent.com/s/y5f7u1tch7tqtvo/weight.png?dl=0" alt="Weight" /></p>
+
+<h3>Model metrics</h3>
+
+<p>In classification task <a href="http://en.wikipedia.org/wiki/Precision_and_recall">precision and recall</a> are used frequently for model metrics. The predicted value can be assigned to four classes: True Positive - real fraud (model predicted True and value was True), True Negative - not a fraud (model predicted False value and value was False), False Positive - not fraud marked as a fraud (model predicted True, however value was False) and False Negative - real fraud marked as not fraud (model predicted False, but the value was True).</p>
+
+<p><img src="https://dl.dropboxusercontent.com/s/kk5st4vandt7i9j/metrics.png?dl=0" alt="Metrics " /></p>
+
+<p>In case of p2p lending, if you commit False Positive error (Type I), you just miss one investment. You main concern is False Negative (Type II) errors, because you will be loosing money on the bad investment. <a href="http://en.wikipedia.org/wiki/Positive_predictive_value">Positive predictive value</a> metrics is used for performance evaluation: <code>sum(True positive)/sum(Test outcome positive)</code></p>
+
+<h3>Blending</h3>
+
+<p>Funny, but the blending works well with ML algorithms and with the people. Michael Nielsen in his book <a href="http://www.amazon.com/gp/product/0691160198/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=9325&amp;creativeASIN=0691160198&amp;linkCode=as2&amp;tag=quantitativ0e-20&amp;linkId=SHCTNV7H7ED2OEKM">"Reinventing Discovery: The New Era of Networked Science"</a> gives many examples how the collective intelligence can be more powerful than single mind. The idea is very simple - if you gather predictions from dozen of people or ML models then the average score will better than the best single prediction. There is one pitfall - if the predictions are given by "herd mind" then the result most likely be horrible. So, in ML environment try to include very different algorithms - decision trees, linear models, neural networks, etc. to sustain diversity.</p>
+
+<p>For my final model I blend tree algorithms - Random forest, SVM and generalized boosted modeling (GBM). If all of them predict, that the loan is not a fraud, then I will make an investment.</p>
+
+<h3>Real time data</h3>
+
+<p>The modeling part is done, but without real time data it is just waste of time. Fortunately, there is a nice Python framework for web crawling - <a href="http://scrapy.org/">Scrapy</a>. Initial time investment in the tool might look significant, but because it is robust it won't be your concern any time soon, unless the platform gets face-lift...</p>
+
+<h3>Automated investment</h3>
+
+<p><a href="http://www.seleniumhq.org/">Selenium</a> is a suite of tools to automate web browsers across many platforms. It is widely used for web interface testing purpose, however any web-based task can be automated.</p>
+
+<p>Once I have real time data I feed my model with it to find out which loans are good for the investment. Acquired list is send to Selenium script, which logins into the platform and makes the investments.</p>
+
+<h3>Infrastructure</h3>
+
+<p>My first idea was to use Raspberry Pi for the project, however I had the problems setting up R-language and Python frameworks. So, I rented an instance on DigitalOcean for 10 dollars a month (there is 5$/month option as well) and it worked well. Meanwhile, I realized, that I don't need the server for 24 hours a day.</p>
+
+<p>The solution was to power-on four times a day and shutdown the server once the job is finished. But as you probably know, powering-off your server is not enough to save you from paying - you need to archive your virtual instance (the same applies to Amazon AWS). So, I came up with the script, which creates a virtual image from the archive, powers it on, runs the crawler, runs R mining module, makes the investments if necessary and then shutdowns the instance, archives the image and deletes virtual machine.</p>
+
+<p>Does it sounds good? Well, it was good, until I went on holiday for one week without almost any access to Internet. At the end of my vacation, I found, that every day four new servers were created and were still spinning... Turns out, that Raspberry Pi was able to initiate new instances, but wasn't able to shutdown and delete. The support at DigitalOcean have asked for the log files from my server and I ended up paying the bill, because it was almost non-existant on my RaspPi. The lesson taken - log as much as possible and incorporate health checks for virtual machine in your scripts.</p>
+
+<h3>Results</h3>
+
+<p>I started my investments at Bondora in September 2014. At the beginning all my investments were done via Bondora's investment engine, where you can define investment parameters (country, risk profile, etc.). Somewhere in November - December I decided, that I will rely on my own engine only. Below you can see, that the engine based on machine learning algorithms does good job by avoiding bad borrowers.</p>
+
+<p><img src="https://dl.dropboxusercontent.com/s/6xcbjtr92hnz36g/personal.png?dl=0" alt="Personal" /></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Credit Card Fraud Detection]]></title>
+    <link href="http://datalab.lu/blog/2013/04/09/credit-card-fraud/"/>
+    <updated>2013-04-09T15:44:00+02:00</updated>
+    <id>http://datalab.lu/blog/2013/04/09/credit-card-fraud</id>
+    <content type="html"><![CDATA[<p>During the last Data Science community meeting in Luxembourg Phd Candidate Alejandro Correa Bahnsen gave a presentation about Credit Card Fraud Detection(CCFD). In short - CCFD is just another machine learning problem which is similar to <a href="http://datalab.lu/blog/2012/07/16/data-mining-for-network-security-and-intrusion-detection/">Network Security and Intrusion Detection(NSID)</a> problem, but it has its own obstacles.</p>
+
+<p>From business perspectives - card fraud detection system directly impacts profitability of all credit card operators, therefore are very desirable. The cost of card fraud in <a href="http://en.wikipedia.org/wiki/Credit_card_fraud">UK</a> alone in 2006 was estimated ~ 500 millions pounds. Assuming, that CCFD system can identify 30% (Churn models at TelComs are able to save that much) of all fraud would lead to 150 millions pound savings a year. Hence, we have a desirable product with price range from 1.5 to 15 millions pounds in the UK. Here is the catch - in any given country there are a few credit card operators, for ex. only <a href="http://www.cetrel.lu/">CETREL</a> operates in Luxembourg. So, if you want to sell a solution you play all or nothing game.<br/>
+Additionally, if you wish to build a CCFD system or at least a prototype you most likely missing the data and you won't get it. Chicken and egg problem.</p>
+
+<p>How does the data set might look? Think of millions rows where less than 0.002% of data are the fraud operations. If you train your model with unadjusted data set, it will predict all future events as normal operations. In order to avoid such behavior you need to throw away most of the data with normal operations and balance data where distribution would be 1% of fraud vs 99% normal or 5% vs 95%. You can play with freely available [network intrusion data] to get idea how imbalanced data would look like.</p>
+>>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
 
 <p>Another thing to keep in mind is the size of data set. Conventional wisdom - the more data you have, the better model you can build, but it is not true if you run a real time system, where latency is big deal. In such case you have to think about something similar to map-reduce framework, where you keep only the averages of the variables per client.</p>
 

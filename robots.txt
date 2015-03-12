@@ -2,7 +2,11 @@ User-agent: *
 Disallow: 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Sitemap: http://datalablu.github.com/sitemap.xml 
 =======
 Sitemap: http://datalab.lu/sitemap.xml 
 >>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
+=======
+Sitemap: http://datalab.lu/sitemap.xml 
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51

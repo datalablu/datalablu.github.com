@@ -2,6 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   <title><![CDATA[Category: TCA | DataLab]]></title>
   <link href="http://datalablu.github.com/blog/categories/tca/atom.xml" rel="self"/>
   <link href="http://datalablu.github.com/"/>
@@ -14,6 +15,13 @@
   <updated>2015-03-11T19:25:51+01:00</updated>
   <id>http://datalab.lu/</id>
 >>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
+=======
+  <title><![CDATA[Category: TCA | DataLab.lu]]></title>
+  <link href="http://datalab.lu/blog/categories/tca/atom.xml" rel="self"/>
+  <link href="http://datalab.lu/"/>
+  <updated>2015-03-12T14:09:16+01:00</updated>
+  <id>http://datalab.lu/</id>
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
   <author>
     <name><![CDATA[Dzidorius Martinaitis]]></name>
     
@@ -22,6 +30,7 @@
 
   
   <entry>
+<<<<<<< HEAD
 <<<<<<< HEAD
     <title type="html"><![CDATA[How big block trades affect stock market prices?]]></title>
     <link href="http://datalablu.github.com/blog/2011/07/27/how_big_block_trades_affect_stock_market_prices/"/>
@@ -41,6 +50,8 @@
 
 <p>While we can see, that stock market prices are affected by big blocks, there's no easy way to profit from it. You have to take into account bid/ask spread, plus you are becoming liquidity demander when liquidity is dry. On other end, this test shows the cost for each volume cluster and this cost can be used when choosing an optimal strategy for portfolio/stock liquidation.</p>
 =======
+=======
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
     <title type="html"><![CDATA[How Big Block Trades Affect Stock Market Prices?]]></title>
     <link href="http://datalab.lu/blog/2011/07/27/how_big_block_trades_affect_stock_market_prices/"/>
     <updated>2011-07-27T16:01:00+02:00</updated>
@@ -58,22 +69,31 @@
 <p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=bnpMinuteLater.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/bnpMinuteLater.png" alt="" /></a></p>
 
 <p>While we can see, that stock market prices are affected by big blocks, there's no easy way to profit from it. You have to take into account bid/ask spread, plus you are becoming liquidity demander when liquidity is dry. On other end, this test shows the cost for each volume cluster and this cost can be used when choosing an optimal strategy for portfolio/stock liquidation.</p>
+<<<<<<< HEAD
 >>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
+=======
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
 ]]></content>
   </entry>
   
   <entry>
+<<<<<<< HEAD
 <<<<<<< HEAD
     <title type="html"><![CDATA[Transaction cost analysis and pre-trade analysis]]></title>
     <link href="http://datalablu.github.com/blog/2011/04/20/transaction-cost-analysis-and-pre-trade-analysis/"/>
     <updated>2011-04-20T13:37:40+02:00</updated>
     <id>http://datalablu.github.com/blog/2011/04/20/transaction-cost-analysis-and-pre-trade-analysis</id>
 =======
+=======
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
     <title type="html"><![CDATA[Transaction Cost Analysis and Pre-trade Analysis]]></title>
     <link href="http://datalab.lu/blog/2011/04/20/transaction-cost-analysis-and-pre-trade-analysis/"/>
     <updated>2011-04-20T14:33:00+02:00</updated>
     <id>http://datalab.lu/blog/2011/04/20/transaction-cost-analysis-and-pre-trade-analysis</id>
+<<<<<<< HEAD
 >>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
+=======
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
     <content type="html"><![CDATA[<p>Transaction cost analysis (TCA) is the framework to achieve best execution in trading context. TCA can be split into three groups: pre-trade analysis, intraday analysis, and post-trade measurement.</p>
 
 <p>Pre-trade analysis allows us to get insight about the future volatility of the price, forecast intra-day and daily volumes, market impact. It evaluates all strategies and advises the strategy that is most consistent with manager preferences for the risk.</p>
@@ -83,15 +103,20 @@
 <p>Post-trade analysis measures the implementation of the investment decision to ensure, that pre-trade models are accurate and best execution is delivered.</p>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 <p>If you want to learn more about the transaction cost analysis, I highly recommend <a href="http://www.amazon.com/gp/product/0814407242/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;tag=quantitativ0e-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=0814407242">Optimal Trading Strategies: Quantitative Approaches for Managing Market Impact and Trading Risk </a>by Robert Kissell. The book not only covers all type of mentioned analysis, but also considers the practical aspects of the implementation of trading strategy and algorithms. The book includes very interesting part about Principal Bid Transactions or blind bids.</p>
 =======
 <p>If you want to learn more about the transaction cost analysis, I highly recommend <a href="http://www.amazon.com/gp/product/0814407242/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;tag=quantitativ0e-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=0814407242">Optimal Trading Strategies: Quantitative Approaches for Managing Market Impact and Trading Risk</a> by Robert Kissell. The book not only covers all type of mentioned analysis, but also considers the practical aspects of the implementation of trading strategy and algorithms. The book includes very interesting part about Principal Bid Transactions or blind bids.</p>
 >>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
+=======
+<p>If you want to learn more about the transaction cost analysis, I highly recommend <a href="http://www.amazon.com/gp/product/0814407242/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;tag=quantitativ0e-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=0814407242">Optimal Trading Strategies: Quantitative Approaches for Managing Market Impact and Trading Risk</a> by Robert Kissell. The book not only covers all type of mentioned analysis, but also considers the practical aspects of the implementation of trading strategy and algorithms. The book includes very interesting part about Principal Bid Transactions or blind bids.</p>
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
 
 <p>To build a forecast model we need some input parameters. Pre-trade analysis can be split into two parts - fundamental part and statistically based part. It is much ease to derive fundamental facts such as market capitalization, company profile, the sectors in which company operates, than statistically based parameters. For the latter I'm going to use R and the raw stock price data to derive it. The former can easily be found on Internet, Bloomber or Reuter.</p>
 
 <p>The first input parameter that I'm are going to derive is average daily trading volume of the traded security. It is very easy to obtain it - only daily data is necessary. I used 20 days rolling window to get average volume. Here's an example of IBM security:</p>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=avgDailyVolume.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/avgDailyVolume.png" alt="Photobucket" /></a></p>
 
@@ -100,17 +125,23 @@ One of possible solutions would be using confidence intervals estimate daily vol
 
 <p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=volumeDensity.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/volumeDensity.png" alt="Photobucket" /></a></p>
 =======
+=======
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
 <p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=avgDailyVolume.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/avgDailyVolume.png" alt="" /></a></p>
 
 <p>The graph shows, how the 20 days average volume evolved since last September - the minimum was 3.5 millions and the maximum was 6 millions traded a day. But the average can be misleading - it takes into account last 20 days and then it derives one number. In most of the case, we are going to deal with short time prediction such as 1 day or 1 hour, so approximation of 20 days does not make a lot sense. One of possible solutions would be using confidence intervals estimate daily volume. 95% confidence interval is wide used in finance - I will use the same interval answering the following question: based on this interval, what volume will be traded next day.</p>
 
 <p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=volumeDensity.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/volumeDensity.png" alt="" /></a></p>
+<<<<<<< HEAD
 >>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
+=======
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
 
 <p>The density diagram shows distribution of daily volume of IBM security. As you can see most of the days the volume was above 3 millions. However, 5% of the days the volume was below 3 millions. Based on this diagram, we can predict, that tomorrow's volume will be higher than 3 millions.</p>
 
 <p>Before we finish with the daily volume, we have to test for weekly seasonality. If there is weekday seasonality, then the volume forecast has to be adjusted.</p>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=weekday.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/weekday.png" alt="Photobucket" /></a>
 The chart above clearly indicates, that the traded volume on Monday is below (~5%) the day average. There is increase in the volume on Friday, but the significance is under question. Let's check density diagram to get rid of any doubt about the volatility on Monday and Friday.</p>
@@ -123,6 +154,8 @@ The chart above clearly indicates, that the traded volume on Monday is below (~5
 
 <p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=hourlyVolume.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/hourlyVolume.png" alt="Photobucket" /></a></p>
 =======
+=======
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
 <p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=weekday.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/weekday.png" alt="" /></a></p>
 
 <p>The chart above clearly indicates, that the traded volume on Monday is below (~5%) the day average. There is increase in the volume on Friday, but the significance is under question. Let's check density diagram to get rid of any doubt about the volatility on Monday and Friday.</p>
@@ -134,17 +167,24 @@ The chart above clearly indicates, that the traded volume on Monday is below (~5
 <p>Once we finished with daily data we can move to intra-day. Then liquidating (or acquiring) a position in a security, the position has to be sliced into smaller parts to avoid influence of the market and to hide the intentions. For this reason, intra-day volume patterns have to be known. With that in mind, let's look at how the volume is distributed in relation to the trading hour.</p>
 
 <p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=hourlyVolume.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/hourlyVolume.png" alt="" /></a></p>
+<<<<<<< HEAD
 >>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
+=======
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
 
 <p>The graph above shows hourly volume pattern, where the volume is grouped by hour. The black dots indicate the median of the hour. Please keep in mind, that the trading starts at 9:30 and the first trading hour has only 30 minutes (if you want align the first hour to the others, then you need to multiply the volume of the first hour by two). As we can see, the first and the last are most traded and the volume drops in the middle of the day.</p>
 
 <p>The next useful thing then liquidating a big position is average trade size. We need to know, how behaves average Joe and what he trades.</p>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 <p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=tradeSize.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/tradeSize.png" alt="Photobucket" /></a></p>
 =======
 <p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=tradeSize.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/tradeSize.png" alt="" /></a></p>
 >>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
+=======
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=tradeSize.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/tradeSize.png" alt="" /></a></p>
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
 
 <p>The chart above shows all trades grouped by hour - the black dots indicate median of the trades. The following table is supplementary to the chart - here you find median of the hour.</p>
 
@@ -153,17 +193,23 @@ The chart above clearly indicates, that the traded volume on Monday is below (~5
 <tr>
 <th></th>
 <<<<<<< HEAD
+<<<<<<< HEAD
 <th> <strong>Hour </strong> </th>
 <th> <strong>Volume</strong>   </th>
 =======
 <th> Hour  </th>
 <th> Volume </th>
 >>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
+=======
+<th> Hour  </th>
+<th> Volume </th>
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
 </tr>
 </thead>
 <tbody>
 <tr>
 <td></td>
+<<<<<<< HEAD
 <<<<<<< HEAD
 <td> 10    </td>
 <td> 842.5     </td>
@@ -198,6 +244,8 @@ The chart above clearly indicates, that the traded volume on Monday is below (~5
 <td> 16    </td>
 <td> 708.5    </td>
 =======
+=======
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
 <td> 10 </td>
 <td> 842.5 |</td>
 </tr>
@@ -230,7 +278,10 @@ The chart above clearly indicates, that the traded volume on Monday is below (~5
 <td></td>
 <td> 16 </td>
 <td> 708.5 |</td>
+<<<<<<< HEAD
 >>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
+=======
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
 </tr>
 </tbody>
 </table>
@@ -239,10 +290,14 @@ The chart above clearly indicates, that the traded volume on Monday is below (~5
 <p>Once again, average trade size is much higher in the first and last hours and it drops ~2.5 times during the trading session.</p>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 <p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=hourlyVolatility.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/hourlyVolatility.png" alt="Photobucket" /></a></p>
 =======
 <p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=hourlyVolatility.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/hourlyVolatility.png" alt="" /></a></p>
 >>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
+=======
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=hourlyVolatility.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/hourlyVolatility.png" alt="" /></a></p>
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
 
 <p>The final chart shows the volatility grouped by hour. There is a lot jittery, then the market opens, it becomes calmer during the lunch time and slightly increases then the market closes. These are the numbers for each hour:</p>
 
@@ -251,17 +306,23 @@ The chart above clearly indicates, that the traded volume on Monday is below (~5
 <tr>
 <th></th>
 <<<<<<< HEAD
+<<<<<<< HEAD
 <th> <strong>Hour </strong> </th>
 <th> <strong>Volatility (standard deviation)</strong></th>
 =======
 <th> Hour  </th>
 <th> Volume </th>
 >>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
+=======
+<th> Hour  </th>
+<th> Volume </th>
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
 </tr>
 </thead>
 <tbody>
 <tr>
 <td></td>
+<<<<<<< HEAD
 <<<<<<< HEAD
 <td> 10    </td>
 <td>   0.16%</td>
@@ -296,6 +357,8 @@ The chart above clearly indicates, that the traded volume on Monday is below (~5
 <td> 16    </td>
 <td>   0.07%</td>
 =======
+=======
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
 <td> 10 </td>
 <td> 0.16% |</td>
 </tr>
@@ -328,7 +391,10 @@ The chart above clearly indicates, that the traded volume on Monday is below (~5
 <td></td>
 <td> 16 </td>
 <td> 0.07% |</td>
+<<<<<<< HEAD
 >>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
+=======
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
 </tr>
 </tbody>
 </table>

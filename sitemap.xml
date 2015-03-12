@@ -3,6 +3,7 @@
     <url>
         <loc>
 <<<<<<< HEAD
+<<<<<<< HEAD
             http://datalablu.github.com/blog/2011/04/20/transaction-cost-analysis-and-pre-trade-analysis/
         </loc>
         <lastmod>2014-02-20T20:05:07+01:00</lastmod>
@@ -128,21 +129,35 @@
             http://datalab.lu/blog/2011/04/20/transaction-cost-analysis-and-pre-trade-analysis/
         </loc>
         <lastmod>2015-03-11T19:25:51+01:00</lastmod>
+=======
+            http://datalab.lu/blog/2011/04/20/transaction-cost-analysis-and-pre-trade-analysis/
+        </loc>
+        <lastmod>2015-03-12T14:00:45+01:00</lastmod>
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
     </url>
     <url>
         <loc>
             http://datalab.lu/blog/2011/07/27/how_big_block_trades_affect_stock_market_prices/
         </loc>
+<<<<<<< HEAD
         <lastmod>2015-03-11T19:25:51+01:00</lastmod>
     </url>
     <url>
         <loc>http://datalab.lu/blog/2012/02/01/vectorized-r-vs-rcpp/</loc>
         <lastmod>2015-03-11T19:25:51+01:00</lastmod>
+=======
+        <lastmod>2015-03-12T14:00:45+01:00</lastmod>
+    </url>
+    <url>
+        <loc>http://datalab.lu/blog/2012/02/01/vectorized-r-vs-rcpp/</loc>
+        <lastmod>2015-03-12T14:00:45+01:00</lastmod>
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
     </url>
     <url>
         <loc>
             http://datalab.lu/blog/2012/03/25/levenshtein-distance-in-c-and-code-profiling-in-r/
         </loc>
+<<<<<<< HEAD
         <lastmod>2015-03-11T19:25:51+01:00</lastmod>
     </url>
     <url>
@@ -156,11 +171,27 @@
     <url>
         <loc>http://datalab.lu/blog/2012/07/02/my-first-competition-at-kaggle/</loc>
         <lastmod>2015-03-11T19:25:51+01:00</lastmod>
+=======
+        <lastmod>2015-03-12T14:00:45+01:00</lastmod>
+    </url>
+    <url>
+        <loc>http://datalab.lu/blog/2012/04/22/machine-learning-for-identification-of-cars/</loc>
+        <lastmod>2015-03-12T14:00:45+01:00</lastmod>
+    </url>
+    <url>
+        <loc>http://datalab.lu/blog/2012/05/15/github-data-analysis/</loc>
+        <lastmod>2015-03-12T14:00:45+01:00</lastmod>
+    </url>
+    <url>
+        <loc>http://datalab.lu/blog/2012/07/02/my-first-competition-at-kaggle/</loc>
+        <lastmod>2015-03-12T14:00:45+01:00</lastmod>
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
     </url>
     <url>
         <loc>
             http://datalab.lu/blog/2012/07/17/data-mining-for-network-security-and-intrusion-detection/
         </loc>
+<<<<<<< HEAD
         <lastmod>2015-03-11T19:25:51+01:00</lastmod>
     </url>
     <url>
@@ -186,11 +217,39 @@
     <url>
         <loc>http://datalab.lu/blog/2014/04/30/data-based-review-of-strapless-mio-link-hrm/</loc>
         <lastmod>2015-03-11T19:25:51+01:00</lastmod>
+=======
+        <lastmod>2015-03-12T14:00:45+01:00</lastmod>
+    </url>
+    <url>
+        <loc>http://datalab.lu/blog/2012/08/01/building-a-presentation-report-or-paper-in-r/</loc>
+        <lastmod>2015-03-12T14:00:45+01:00</lastmod>
+    </url>
+    <url>
+        <loc>http://datalab.lu/blog/2012/10/04/garmin-data-visualization/</loc>
+        <lastmod>2015-03-12T14:00:45+01:00</lastmod>
+    </url>
+    <url>
+        <loc>http://datalab.lu/blog/2012/10/23/machine-learning-for-hackers/</loc>
+        <lastmod>2015-03-12T14:00:45+01:00</lastmod>
+    </url>
+    <url>
+        <loc>http://datalab.lu/blog/2013/02/21/kaggle-event-recommentation-engine/</loc>
+        <lastmod>2015-03-12T14:00:45+01:00</lastmod>
+    </url>
+    <url>
+        <loc>http://datalab.lu/blog/2013/04/09/credit-card-fraud/</loc>
+        <lastmod>2015-03-12T14:00:45+01:00</lastmod>
+    </url>
+    <url>
+        <loc>http://datalab.lu/blog/2014/04/30/data-based-review-of-strapless-mio-link-hrm/</loc>
+        <lastmod>2015-03-12T14:00:45+01:00</lastmod>
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
     </url>
     <url>
         <loc>
             http://datalab.lu/blog/2015/03/11/applying-machine-learning-to-peer-to-peer-lending/
         </loc>
+<<<<<<< HEAD
         <lastmod>2015-03-11T19:25:51+01:00</lastmod>
     </url>
     <url>
@@ -217,5 +276,36 @@
         <loc>http://datalab.lu/</loc>
         <lastmod>2015-03-11T19:25:51+01:00</lastmod>
 >>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
+=======
+        <lastmod>2015-03-12T14:00:45+01:00</lastmod>
+    </url>
+    <url>
+        <loc>http://datalab.lu/blog/</loc>
+        <lastmod>2015-03-12T14:00:45+01:00</lastmod>
+    </url>
+    <url>
+        <loc>http://datalab.lu/blog/archives/</loc>
+        <lastmod>2015-03-12T14:00:45+01:00</lastmod>
+    </url>
+    <url>
+        <loc>http://datalab.lu/robots.txt</loc>
+        <lastmod>2015-03-12T14:00:45+01:00</lastmod>
+    </url>
+    <url>
+        <loc>http://datalab.lu/</loc>
+        <lastmod>2015-03-12T14:00:45+01:00</lastmod>
+    </url>
+    <url>
+        <loc>http://datalab.lu/archives/</loc>
+        <lastmod>2015-03-12T14:00:45+01:00</lastmod>
+    </url>
+    <url>
+        <loc>http://datalab.lu/new-page/</loc>
+        <lastmod>2015-03-12T14:00:45+01:00</lastmod>
+    </url>
+    <url>
+        <loc>http://datalab.lu/about/</loc>
+        <lastmod>2015-03-12T14:00:45+01:00</lastmod>
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
     </url>
 </urlset>

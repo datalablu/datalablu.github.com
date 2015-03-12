@@ -2,6 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   <title><![CDATA[Category: R-language | DataLab]]></title>
   <link href="http://datalablu.github.com/blog/categories/r-language/atom.xml" rel="self"/>
   <link href="http://datalablu.github.com/"/>
@@ -14,6 +15,13 @@
   <updated>2015-03-11T19:25:51+01:00</updated>
   <id>http://datalab.lu/</id>
 >>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
+=======
+  <title><![CDATA[Category: R-language | DataLab.lu]]></title>
+  <link href="http://datalab.lu/blog/categories/r-language/atom.xml" rel="self"/>
+  <link href="http://datalab.lu/"/>
+  <updated>2015-03-12T14:09:16+01:00</updated>
+  <id>http://datalab.lu/</id>
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
   <author>
     <name><![CDATA[Dzidorius Martinaitis]]></name>
     
@@ -23,16 +31,22 @@
   
   <entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <title type="html"><![CDATA[Machine learning for hackers]]></title>
     <link href="http://datalablu.github.com/blog/2012/10/23/machine-learning-for-hackers/"/>
     <updated>2012-10-23T18:48:35+02:00</updated>
     <id>http://datalablu.github.com/blog/2012/10/23/machine-learning-for-hackers</id>
 =======
+=======
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
     <title type="html"><![CDATA[Machine Learning for Hackers]]></title>
     <link href="http://datalab.lu/blog/2012/10/23/machine-learning-for-hackers/"/>
     <updated>2012-10-23T15:06:00+02:00</updated>
     <id>http://datalab.lu/blog/2012/10/23/machine-learning-for-hackers</id>
+<<<<<<< HEAD
 >>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
+=======
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
     <content type="html"><![CDATA[<p>Which way do you prefer to learn a new material - deep theoretical background first and practice later or do you like to break things in order to fix them? If latter is your way of learning things, then most likely you will enjoy <a href="http://www.amazon.com/gp/product/1449303714/ref=as_li_tf_tl?ie=UTF8&amp;camp=1789&amp;creative=9325&amp;creativeASIN=1449303714&amp;linkCode=as2&amp;tag=quantitativ0e-20">Machine Learning for Hackers</a>.</p>
 
 <p>The book has chapters on machine learning techniques such as PCA, kNN, analysis of social graphs hence even advanced R users might find something interesting. So I want you to show you my example of visualisation of similarity between parliamentarians in <a href="http://en.wikipedia.org/wiki/Lithuania">Lithuania</a> which idea is taken for chapter 9.</p>
@@ -46,12 +60,17 @@
 <p>Click on the image to enlarge.</p>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 <p>The plot above reveals, that right wing party TSLKD has a majority in parliament and LSDP (socialists) are in opposition and liberals (LSF, JF, MG) are in the center. You might argue, that that is already known, however the plot is based on actual data, therefore differences in voting support outlooks of the parliamentarians(right, central, left).<br/>
 The map shows which members of the party are outliers and which one from the other party can be invited while forming a new parliament (second tour of the election is on the way).<br/>
 =======
 <p>The plot above reveals, that right wing party TSLKD has a majority in parliament and LSDP (socialists) are in opposition and liberals (LSF, JF, MG) are in the center. You might argue, that that is already known, however the plot is based on actual data, therefore differences in voting support outlooks of the parliamentarians(right, central, left).
 The map shows which members of the party are outliers and which one from the other party can be invited while forming a new parliament (second tour of the election is on the way).
 >>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
+=======
+<p>The plot above reveals, that right wing party TSLKD has a majority in parliament and LSDP (socialists) are in opposition and liberals (LSF, JF, MG) are in the center. You might argue, that that is already known, however the plot is based on actual data, therefore differences in voting support outlooks of the parliamentarians(right, central, left).
+The map shows which members of the party are outliers and which one from the other party can be invited while forming a new parliament (second tour of the election is on the way).
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
 Members of the left wing are mixed up and it would make sense to them to merge or form a coalition.</p>
 
 <p>Are you looking for source code? <a href="https://github.com/kafka399/votingDistance">Click here</a>.</p>
@@ -60,25 +79,35 @@ Members of the left wing are mixed up and it would make sense to them to merge o
   
   <entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <title type="html"><![CDATA[Garmin data visualization]]></title>
     <link href="http://datalablu.github.com/blog/2012/10/04/garmin-data-visualization/"/>
     <updated>2012-10-04T18:52:14+02:00</updated>
     <id>http://datalablu.github.com/blog/2012/10/04/garmin-data-visualization</id>
 =======
+=======
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
     <title type="html"><![CDATA[Garmin Data Visualization]]></title>
     <link href="http://datalab.lu/blog/2012/10/04/garmin-data-visualization/"/>
     <updated>2012-10-04T14:38:00+02:00</updated>
     <id>http://datalab.lu/blog/2012/10/04/garmin-data-visualization</id>
+<<<<<<< HEAD
 >>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
+=======
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
     <content type="html"><![CDATA[<p>People go on rage, when governments initiate surveillance projects like <a href="http://www.edri.org/cleanIT">CleanIT</a>, nevertheless share very private data without a doubt.</p>
 
 <p>I have to admit, that some data leaks are well buried in the process. Take for example Garmin which produces GPS training devices for runners. In order to see your workouts you are forced to upload sensitive data on internet. In response you are given a visualization tool and a storage facility. What are alternatives? It seems, that in the past there was a desktop version, however I was not able to find it. So, we are left with the last option - hack it.</p>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 <p>First of all you need to transfer data from Garmin device to computer. I own Forerunner 610 with relays on <a href="http://en.wikipedia.org/wiki/ANT_(network">ANT</a>) network and I found Python <a href="https://github.com/kafka399/Garmin-Forerunner-610-Extractor">script</a> with takes care of data transfer. Once data is transfered there is another obstacle - Garmin uses a proprietary format <a href="http://www.thisisant.com/pages/developer-zone/fit-sdk">FIT</a>. In order to tackle this problem I use another <a href="https://github.com/dtcooper/python-fitparse">Python script</a> which I have adapted to have <a href="https://github.com/kafka399/fitparse/blob/master/run.py">csv format</a>.</p>
 =======
 <p>First of all you need to transfer data from Garmin device to computer. I own Forerunner 610 with relays on <a href="http://en.wikipedia.org/wiki/ANT_(network)">ANT</a> network and I found Python <a href="https://github.com/kafka399/Garmin-Forerunner-610-Extractor">script</a> with takes care of data transfer. Once data is transfered there is another obstacle - Garmin uses a proprietary format <a href="http://www.thisisant.com/pages/developer-zone/fit-sdk">FIT</a>. In order to tackle this problem I use another <a href="https://github.com/dtcooper/python-fitparse">Python script</a> which I have adapted to have <a href="https://github.com/kafka399/fitparse/blob/master/run.py">csv format</a>.</p>
 >>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
+=======
+<p>First of all you need to transfer data from Garmin device to computer. I own Forerunner 610 with relays on <a href="http://en.wikipedia.org/wiki/ANT_(network)">ANT</a> network and I found Python <a href="https://github.com/kafka399/Garmin-Forerunner-610-Extractor">script</a> with takes care of data transfer. Once data is transfered there is another obstacle - Garmin uses a proprietary format <a href="http://www.thisisant.com/pages/developer-zone/fit-sdk">FIT</a>. In order to tackle this problem I use another <a href="https://github.com/dtcooper/python-fitparse">Python script</a> which I have adapted to have <a href="https://github.com/kafka399/fitparse/blob/master/run.py">csv format</a>.</p>
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
 
 <p>Once data is in CSV format R can be used to plot data.</p>
 
@@ -88,6 +117,7 @@ Members of the left wing are mixed up and it would make sense to them to merge o
 
 <p>I had a lot of fun by trying to understand Garmin longitude and latitude coordinates. Here is a short explantion by Hal Mueller:</p>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <blockquote><p>The mapping Garmin uses (180 degrees to 2<sup>31</sup> semicircles) allows them to use a standard 32 bit unsigned integer to represent the full 360 degrees of longitude. Thus you get the maximum precision that 32 bits allows you (about double what youâd get from a floating point value), and they still get to use integer arithmetic instead of floating point.</p></blockquote>
 
@@ -99,21 +129,32 @@ Members of the left wing are mixed up and it would make sense to them to merge o
 
 <p><img src="http://dl.dropbox.com/u/6360678/blog/garmin_map.png" alt="" /></p>
 >>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
+=======
+<blockquote><p>The mapping Garmin uses (180 degrees to 2<sup>31</sup> semicircles) allows them to use a standard 32 bit unsigned integer to represent the full 360 degrees of longitude. Thus you get the maximum precision that 32 bits allows you (about double what you get from a floating point value), and they still get to use integer arithmetic instead of floating point.</p></blockquote>
+
+<p><img src="http://dl.dropbox.com/u/6360678/blog/garmin_map.png" alt="" /></p>
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
 ]]></content>
   </entry>
   
   <entry>
+<<<<<<< HEAD
 <<<<<<< HEAD
     <title type="html"><![CDATA[Building a presentation, report or paper in R]]></title>
     <link href="http://datalablu.github.com/blog/2012/08/01/building-a-presentation-report-or-paper-in-r/"/>
     <updated>2012-08-01T13:40:35+02:00</updated>
     <id>http://datalablu.github.com/blog/2012/08/01/building-a-presentation-report-or-paper-in-r</id>
 =======
+=======
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
     <title type="html"><![CDATA[Building a Presentation, Report or Paper in R]]></title>
     <link href="http://datalab.lu/blog/2012/08/01/building-a-presentation-report-or-paper-in-r/"/>
     <updated>2012-08-01T14:00:00+02:00</updated>
     <id>http://datalab.lu/blog/2012/08/01/building-a-presentation-report-or-paper-in-r</id>
+<<<<<<< HEAD
 >>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
+=======
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
     <content type="html"><![CDATA[<p>If you need to build a presentation, obviously you have following options:</p>
 
 <ul>
@@ -124,12 +165,17 @@ Members of the left wing are mixed up and it would make sense to them to merge o
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 <p>The first two are beloved by business people and the third one is widely used in academia. The objective of the first group is shiny presentation, contrary to the second where asceticism and demand for automation are top priorities. However, if you are data scientist or any other data specialist with a need to build an automated report, then you know, that LaTex is just wrong.<br/>
 LaTex allows you to build a shiny presentation or outstanding paper, however it can take light years to build something useful for beginners . If you never tried LaTex here is an example of the monster - you literally have to <strong>code</strong> a document or presentation:</p>
 =======
 <p>The first two are beloved by business people and the third one is widely used in academia. The objective of the first group is shiny presentation, contrary to the second where asceticism and demand for automation are top priorities. However, if you are data scientist or any other data specialist with a need to build an automated report, then you know, that LaTex is just wrong.
 LaTex allows you to build a shiny presentation or outstanding paper, however it can take light years to build something useful for beginners . If you never tried LaTex here is an example of the monster - you literally have to <strong><em>code</em></strong> a document or presentation:</p>
 >>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
+=======
+<p>The first two are beloved by business people and the third one is widely used in academia. The objective of the first group is shiny presentation, contrary to the second where asceticism and demand for automation are top priorities. However, if you are data scientist or any other data specialist with a need to build an automated report, then you know, that LaTex is just wrong.
+LaTex allows you to build a shiny presentation or outstanding paper, however it can take light years to build something useful for beginners . If you never tried LaTex here is an example of the monster - you literally have to <strong><em>code</em></strong> a document or presentation:</p>
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
 
 <pre><code>&lt;code&gt;\documentclass{article}
 \title {Investment strategy}
@@ -154,9 +200,13 @@ knit('workshop.Rmd', 'workshop.md');&lt;/code&gt;
 Who is tweeting about #Haxogreen
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
+=======
+
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
 ```{r results=asis,comment=NA, message=FALSE}
 require(twitteR)
 load('tweets.Rdata')
@@ -176,6 +226,7 @@ barplot(tail(rez$count,10),names.arg=as.character(tail(rez$name,10)),cex.names=.
 ```&lt;/code&gt;
 </code></pre>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <p><a href="http://dl.dropbox.com/u/6360678/workshop.html">Here is a workshop presentation</a> which contains the example above - I built it for <a href="www.haxogreen.lu">Haxogreen</a> hackers camp and source code can be found on <a href="https://github.com/kafka399/haxogreen.lu/blob/master/workshop.Rmd">gitHub</a>.</p>
 ]]></content>
@@ -247,10 +298,14 @@ Java, C++ and R developer &amp; data junkie
 =======
 <p><a href="http://dl.dropbox.com/u/6360678/workshop.html">Here is a workshop presentation</a> which contains the example above - I built it for <a href="http://datalab.lu/blog/2012/08/01/building-a-presentation-report-or-paper-in-r">Haxogreen</a> hackers camp and source code can be found on <a href="https://github.com/kafka399/haxogreen.lu/blob/master/workshop.Rmd">gitHub</a>.</p>
 >>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
+=======
+<p><a href="http://dl.dropbox.com/u/6360678/workshop.html">Here is a workshop presentation</a> which contains the example above - I built it for <a href="http://datalab.lu/blog/2012/08/01/building-a-presentation-report-or-paper-in-r">Haxogreen</a> hackers camp and source code can be found on <a href="https://github.com/kafka399/haxogreen.lu/blob/master/workshop.Rmd">gitHub</a>.</p>
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
 ]]></content>
   </entry>
   
   <entry>
+<<<<<<< HEAD
 <<<<<<< HEAD
     <title type="html"><![CDATA[Data mining for network security and intrusion detection]]></title>
     <link href="http://datalablu.github.com/blog/2012/07/17/data-mining-for-network-security-and-intrusion-detection/"/>
@@ -274,6 +329,8 @@ Although misuse detection can be built on your own data mining techniques, I wou
 
 <p>The first task when implementing anomaly detection (AD) is collection of the data. If AD is going to be network based, there are two possibilities to collect aggregated data from network. Some Cisco products provide aggregated data as <a href="http://www.cisco.com/en/US/products/ps6601/products_ios_protocol_group_home.html">Netflow</a> protocol. However, you can use <a href="http://www.wireshark.org">Wireshark or tshark</a> to collect network flow data from the computer. For example:</p>
 =======
+=======
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
     <title type="html"><![CDATA[Data Mining for Network Security and Intrusion Detection]]></title>
     <link href="http://datalab.lu/blog/2012/07/17/data-mining-for-network-security-and-intrusion-detection/"/>
     <updated>2012-07-17T13:34:00+02:00</updated>
@@ -293,11 +350,15 @@ Although misuse detection can be built on your own data mining techniques, I wou
 <p>Anomaly detection systems constantly evolves - what was a norm year ago can be an anomaly today. The algorithm compares network flow with historical flow over given period and looks for outliers with are far away. Such dynamic approach allows to detect novel attacks, nevertheless it generates false positive alerts (marks normal flow as suspicious). Moreover, hackers can mimic normal profile, if they know that such system is deployed.</p>
 
 <p>The first task when implementing anomaly detection (AD) is collection of the data. If AD is going to be network based, there are two possibilities to collect aggregated data from network. Some Cisco products provide aggregated data as <a href="http://www.cisco.com/en/US/products/ps6601/products_ios_protocol_group_home.html">Netflow</a> protocol. However, you can use <a href="http://www.wireshark.org/">Wireshark or tshark</a> to collect network flow data from the computer. For example:</p>
+<<<<<<< HEAD
 >>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
+=======
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
 
 <pre><code>tshark -T fields -E separator , -E quote d -e ip.src -e ip.dst -e tcp.srcport -e tcp.dstport -e udp.srcport -e upd.dstport -e tcp.len -e ip.len -e eth.type -e frame.time_epoch -e frame.len
 </code></pre>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <p>Once you have enough data for mining process, you need to preprocess acquired data. In the context of intrusion, anomalous actions happen in bursts rather than single event. <a href="http://minds.cs.umn.edu/publications/chapter.pdf">Varun Chandola et al.</a> proposed to derive following features:</p>
 
@@ -313,18 +374,24 @@ Number of flows from unique source IP addresses inside the network in the last N
 Number of flows from the source IP to the same destination port in the last N flows
 Number of flows to the destination IP address using same source port in the last N flows</p></li>
 =======
+=======
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
 <p>Once you have enough data for mining process, you need to preprocess acquired data. In the context of intrusion, anomalous actions happen in bursts rather than single event. <a href="http://minds.cs.umn.edu/publications/chapter.pdf">Varun Chandola et al.</a> proposed to derive following features:</p>
 
 <ul>
 <li><p>Time window based: Number of flows to unique destination IP addresses inside the network in the last T seconds from the same source Number of flows from unique source IP addresses inside the network in the last T seconds to the same destination Number of flows from the source IP to the same destination port in the last T seconds host based - system calls network based - packet information Number of flows to the destination IP address using same source port in the last T seconds</p></li>
 <li><p>Connection based: Number of flows to unique destination IP addresses inside the network in the last N flows from the same source Number of flows from unique source IP addresses inside the network in the last N flows to the same destination Number of flows from the source IP to the same destination port in the last N flows Number of flows to the destination IP address using same source port in the last N flows</p></li>
+<<<<<<< HEAD
 >>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
+=======
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
 </ul>
 
 
 <p>Below you can find an example of feature creation in R. The dataset was created by calling tshark script, which is specified above.</p>
 
 <pre><code>#load data
+<<<<<<< HEAD
 <<<<<<< HEAD
 tmp=read.csv(‘stats2.csv’,colClasses=c(rep(‘character’,11)),header=F)
 #get rid of everything below min. in timestamp
@@ -334,6 +401,11 @@ tmp=read.csv("stats2.cs",colClasses=c(re"characer",11)),header=F)
 #get rid of everything below min. in timestamp
 tmp[,10]=as.integer(as.POSIXct(format(as.POSIXct(as.integer(tmp[,10]),origin="1970-01-01"),"%Y-%m-%d %H:%M:00")))
 >>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
+=======
+tmp=read.csv("stats2.cs",colClasses=c(re"characer",11)),header=F)
+#get rid of everything below min. in timestamp
+tmp[,10]=as.integer(as.POSIXct(format(as.POSIXct(as.integer(tmp[,10]),origin="1970-01-01"),"%Y-%m-%d %H:%M:00")))
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
 #fix some rows
 tmp=tmp[-which(sapply(tmp[,1],function(x) nchar(x)&gt;15)),] tmp=tmp[which(!is.na(tmp[,4])),]
 
@@ -346,8 +418,11 @@ feature=do.call(rbind, sapply(seq(from=1,to=length(factor),by=4),function(x){ re
 <p>After preprocessing the data we can apply local outlier detection, KNN, random forest and others algorithms. I will provide R code and practical implementation of some algorithms in the following post.</p>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 <p>While preparing this post, I was looking for the books, I found only few books covering data mining and network security. To my surprise <a href="http://www.amazon.com/gp/product/1439839425/ref=as_li_qf_sp_asin_tl?ie=UTF8&amp;tag=quantitativ0e-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=1439839425">Data Mining and Machine Learning in Cybersecurity</a> book includes both topics and well written. However, if you are security specialist looking for data mining books, you can read my <a href="http://www.investuotojas.eu/2012/07/02/my-first-competition-at-kaggle/">summary</a> of <a href="http://www.amazon.com/gp/product/0123748569/ref=as_li_tf_tl?ie=UTF8&amp;tag=quantitativ0e-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=0123748569%20%22Data%20Mining:%20Practical%20Machine%20Learning%20Tools%20and%20Techniques%22.">"Data Mining: Practical Machine Learning Tools and Techniques"</a></p>
 =======
+=======
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
 <p>While preparing this post, I was looking for the books, I found only few books covering data mining and network security. To my surprise <a href="http://www.amazon.com/gp/product/1439839425/ref=as_li_qf_sp_asin_tl?ie=UTF8&amp;tag=quantitativ0e-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=1439839425">Data Mining and Machine Learning in Cybersecurity</a> book includes both topics and it is well written. However, if you are security specialist looking for data mining books, you can read my <a href="http://www.investuotojas.eu/2012/07/02/my-first-competition-at-kaggle/">summary</a> of <a href="http://www.amazon.com/gp/product/0123748569/ref=as_li_tf_tl?ie=UTF8&amp;tag=quantitativ0e-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=0123748569%20%22Data%20Mining:%20Practical%20Machine%20Learning%20Tools%20and%20Techniques%22.">"Data Mining: Practical Machine Learning Tools and Techniques"</a></p>
 ]]></content>
   </entry>
@@ -376,7 +451,10 @@ feature=do.call(rbind, sapply(seq(from=1,to=length(factor),by=4),function(x){ re
 <p><strong><em>Validation stage</em></strong> - helps you to measure performance of the model. If you have huge database to build a model you can divide you set into two/three parts - for training, testing and cross validation and you are ready to start. However, if you are not so lucky, then other methods come to play. Most popular method is division of the set into two groups, namely "training" and "test" and rotating it for 10 times. For example, you have 100 rows, so you take first 75 for training and 25 for test and you check the performance ratio. In the next step you take the rows from 25 to 100 for training and you use first 25 for test. Once you repeat such procedure 10 times, you have 10 performance ratios and you take average of it. <a href="http://en.wikipedia.org/wiki/Stratified_sampling">Stratified sampling</a> is a buzzword, which you should know when you do a sampling. Keeping all this information in mind I wasn't able to to implement accurate cross validation and my results differ within 0.05 range.</p>
 
 <p><strong><em>Model selection and ensemble</em></strong>. Intuitively you want to choose the best performing algorithm, however the mix of them can lead to superior performance. For regression problem I trained four models (two random forest versions, gbm, svm), made the predictions, averaged the results and that led to better prediction.</p>
+<<<<<<< HEAD
 >>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
+=======
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
 ]]></content>
   </entry>
   

@@ -2,6 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   <title><![CDATA[Category: quant | DataLab]]></title>
   <link href="http://datalablu.github.com/blog/categories/quant/atom.xml" rel="self"/>
   <link href="http://datalablu.github.com/"/>
@@ -14,6 +15,13 @@
   <updated>2015-03-11T19:25:51+01:00</updated>
   <id>http://datalab.lu/</id>
 >>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
+=======
+  <title><![CDATA[Category: quant | DataLab.lu]]></title>
+  <link href="http://datalab.lu/blog/categories/quant/atom.xml" rel="self"/>
+  <link href="http://datalab.lu/"/>
+  <updated>2015-03-12T14:09:16+01:00</updated>
+  <id>http://datalab.lu/</id>
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
   <author>
     <name><![CDATA[Dzidorius Martinaitis]]></name>
     
@@ -23,16 +31,22 @@
   
   <entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <title type="html"><![CDATA[Building a presentation, report or paper in R]]></title>
     <link href="http://datalablu.github.com/blog/2012/08/01/building-a-presentation-report-or-paper-in-r/"/>
     <updated>2012-08-01T13:40:35+02:00</updated>
     <id>http://datalablu.github.com/blog/2012/08/01/building-a-presentation-report-or-paper-in-r</id>
 =======
+=======
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
     <title type="html"><![CDATA[Building a Presentation, Report or Paper in R]]></title>
     <link href="http://datalab.lu/blog/2012/08/01/building-a-presentation-report-or-paper-in-r/"/>
     <updated>2012-08-01T14:00:00+02:00</updated>
     <id>http://datalab.lu/blog/2012/08/01/building-a-presentation-report-or-paper-in-r</id>
+<<<<<<< HEAD
 >>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
+=======
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
     <content type="html"><![CDATA[<p>If you need to build a presentation, obviously you have following options:</p>
 
 <ul>
@@ -43,12 +57,17 @@
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 <p>The first two are beloved by business people and the third one is widely used in academia. The objective of the first group is shiny presentation, contrary to the second where asceticism and demand for automation are top priorities. However, if you are data scientist or any other data specialist with a need to build an automated report, then you know, that LaTex is just wrong.<br/>
 LaTex allows you to build a shiny presentation or outstanding paper, however it can take light years to build something useful for beginners . If you never tried LaTex here is an example of the monster - you literally have to <strong>code</strong> a document or presentation:</p>
 =======
 <p>The first two are beloved by business people and the third one is widely used in academia. The objective of the first group is shiny presentation, contrary to the second where asceticism and demand for automation are top priorities. However, if you are data scientist or any other data specialist with a need to build an automated report, then you know, that LaTex is just wrong.
 LaTex allows you to build a shiny presentation or outstanding paper, however it can take light years to build something useful for beginners . If you never tried LaTex here is an example of the monster - you literally have to <strong><em>code</em></strong> a document or presentation:</p>
 >>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
+=======
+<p>The first two are beloved by business people and the third one is widely used in academia. The objective of the first group is shiny presentation, contrary to the second where asceticism and demand for automation are top priorities. However, if you are data scientist or any other data specialist with a need to build an automated report, then you know, that LaTex is just wrong.
+LaTex allows you to build a shiny presentation or outstanding paper, however it can take light years to build something useful for beginners . If you never tried LaTex here is an example of the monster - you literally have to <strong><em>code</em></strong> a document or presentation:</p>
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
 
 <pre><code>&lt;code&gt;\documentclass{article}
 \title {Investment strategy}
@@ -73,9 +92,13 @@ knit('workshop.Rmd', 'workshop.md');&lt;/code&gt;
 Who is tweeting about #Haxogreen
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
+=======
+
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
 ```{r results=asis,comment=NA, message=FALSE}
 require(twitteR)
 load('tweets.Rdata')
@@ -96,14 +119,19 @@ barplot(tail(rez$count,10),names.arg=as.character(tail(rez$name,10)),cex.names=.
 </code></pre>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 <p><a href="http://dl.dropbox.com/u/6360678/workshop.html">Here is a workshop presentation</a> which contains the example above - I built it for <a href="www.haxogreen.lu">Haxogreen</a> hackers camp and source code can be found on <a href="https://github.com/kafka399/haxogreen.lu/blob/master/workshop.Rmd">gitHub</a>.</p>
 =======
 <p><a href="http://dl.dropbox.com/u/6360678/workshop.html">Here is a workshop presentation</a> which contains the example above - I built it for <a href="http://datalab.lu/blog/2012/08/01/building-a-presentation-report-or-paper-in-r">Haxogreen</a> hackers camp and source code can be found on <a href="https://github.com/kafka399/haxogreen.lu/blob/master/workshop.Rmd">gitHub</a>.</p>
 >>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
+=======
+<p><a href="http://dl.dropbox.com/u/6360678/workshop.html">Here is a workshop presentation</a> which contains the example above - I built it for <a href="http://datalab.lu/blog/2012/08/01/building-a-presentation-report-or-paper-in-r">Haxogreen</a> hackers camp and source code can be found on <a href="https://github.com/kafka399/haxogreen.lu/blob/master/workshop.Rmd">gitHub</a>.</p>
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
 ]]></content>
   </entry>
   
   <entry>
+<<<<<<< HEAD
 <<<<<<< HEAD
     <title type="html"><![CDATA[My first competition at Kaggle]]></title>
     <link href="http://datalablu.github.com/blog/2012/07/02/my-first-competition-at-kaggle/"/>
@@ -132,6 +160,8 @@ Keeping all this information in mind I wasn't able to to implement accurate cr
 
 <p><strong>Model selection and ensemble. </strong>Intuitively you want to choose the best performing algorithm, however the mix of them can lead to superior performance. For regression problem I trained four models (two random forest versions, gbm, svm), made the predictions, averaged the results and that led to better prediction.</p>
 =======
+=======
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
     <title type="html"><![CDATA[My First Competition at Kaggle]]></title>
     <link href="http://datalab.lu/blog/2012/07/02/my-first-competition-at-kaggle/"/>
     <updated>2012-07-02T12:30:00+02:00</updated>
@@ -155,11 +185,15 @@ Keeping all this information in mind I wasn't able to to implement accurate cr
 <p><strong><em>Validation stage</em></strong> - helps you to measure performance of the model. If you have huge database to build a model you can divide you set into two/three parts - for training, testing and cross validation and you are ready to start. However, if you are not so lucky, then other methods come to play. Most popular method is division of the set into two groups, namely "training" and "test" and rotating it for 10 times. For example, you have 100 rows, so you take first 75 for training and 25 for test and you check the performance ratio. In the next step you take the rows from 25 to 100 for training and you use first 25 for test. Once you repeat such procedure 10 times, you have 10 performance ratios and you take average of it. <a href="http://en.wikipedia.org/wiki/Stratified_sampling">Stratified sampling</a> is a buzzword, which you should know when you do a sampling. Keeping all this information in mind I wasn't able to to implement accurate cross validation and my results differ within 0.05 range.</p>
 
 <p><strong><em>Model selection and ensemble</em></strong>. Intuitively you want to choose the best performing algorithm, however the mix of them can lead to superior performance. For regression problem I trained four models (two random forest versions, gbm, svm), made the predictions, averaged the results and that led to better prediction.</p>
+<<<<<<< HEAD
 >>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
+=======
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
 ]]></content>
   </entry>
   
   <entry>
+<<<<<<< HEAD
 <<<<<<< HEAD
     <title type="html"><![CDATA[Levenshtein distance in C++ and code profiling in R]]></title>
     <link href="http://datalablu.github.com/blog/2012/03/25/levenshtein-distance-in-c-and-code-profiling-in-r/"/>
@@ -184,6 +218,8 @@ Now, imagine, that a programmer wants to define, which implementation A or B for
 
 <pre><code> simple=read.table('simple.txt')
 =======
+=======
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
     <title type="html"><![CDATA[Levenshtein Distance in C++ and Code Profiling in R]]></title>
     <link href="http://datalab.lu/blog/2012/03/25/levenshtein-distance-in-c-and-code-profiling-in-r/"/>
     <updated>2012-03-25T16:50:00+02:00</updated>
@@ -205,7 +241,10 @@ Now, imagine, that a programmer wants to define, which implementation A or B for
 <p>I use this piece for code profiling:</p>
 
 <pre><code>simple=read.table('simple.txt')
+<<<<<<< HEAD
 >>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
+=======
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
 node=read.table('node.txt')
 
 simple=cbind(simple,as.character(c('simple')))
@@ -229,6 +268,7 @@ ggplot(rez,aes(time,fill=type))+geom_density(alpha=0.6,size=1.3)+scale_x_log10()
   <entry>
     <title type="html"><![CDATA[Vectorized R vs Rcpp]]></title>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <link href="http://datalablu.github.com/blog/2012/02/01/vectorized-r-vs-rcpp/"/>
     <updated>2012-02-01T22:03:09+01:00</updated>
     <id>http://datalablu.github.com/blog/2012/02/01/vectorized-r-vs-rcpp</id>
@@ -238,6 +278,8 @@ ggplot(rez,aes(time,fill=type))+geom_density(alpha=0.6,size=1.3)+scale_x_log10()
 
 <p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=performance.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/performance.png" alt="Photobucket" /></a></p>
 =======
+=======
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
     <link href="http://datalab.lu/blog/2012/02/01/vectorized-r-vs-rcpp/"/>
     <updated>2012-02-01T11:35:00+01:00</updated>
     <id>http://datalab.lu/blog/2012/02/01/vectorized-r-vs-rcpp</id>
@@ -246,12 +288,16 @@ ggplot(rez,aes(time,fill=type))+geom_density(alpha=0.6,size=1.3)+scale_x_log10()
 <p>To fix that problem, I built a new script, where I'm trying to compare apples against apples. First piece of code named "ifelse R" uses R "ifelse" function to vectorize code. Second piece of code is fully vectorized code written in R, third - pure C++ code and the last one is C++, where  Rcpp "ifelse" function is used.</p>
 
 <p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=performance.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/performance.png" alt="" /></a></p>
+<<<<<<< HEAD
 >>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
+=======
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
 
 <table>
 <thead>
 <tr>
 <th></th>
+<<<<<<< HEAD
 <<<<<<< HEAD
 <th> <em>Name</em> ** </th>
 <th> <strong>Seconds</strong></th>
@@ -259,34 +305,50 @@ ggplot(rez,aes(time,fill=type))+geom_density(alpha=0.6,size=1.3)+scale_x_log10()
 <th> Name  </th>
 <th> Seconds </th>
 >>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
+=======
+<th> Name  </th>
+<th> Seconds </th>
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
 </tr>
 </thead>
 <tbody>
 <tr>
 <td></td>
 <<<<<<< HEAD
+<<<<<<< HEAD
 <td> ifelse R    </td>
 =======
 <td> ifelse R </td>
 >>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
+=======
+<td> ifelse R </td>
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
 <td> 27.50</td>
 </tr>
 <tr>
 <td></td>
 <<<<<<< HEAD
+<<<<<<< HEAD
 <td> vectorized R   </td>
 =======
 <td> vectorized R </td>
 >>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
+=======
+<td> vectorized R </td>
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
 <td> 10.40</td>
 </tr>
 <tr>
 <td></td>
 <<<<<<< HEAD
+<<<<<<< HEAD
 <td> pure C++    </td>
 =======
 <td> pure C++ </td>
 >>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
+=======
+<td> pure C++ </td>
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
 <td> 0.44</td>
 </tr>
 <tr>
@@ -299,17 +361,22 @@ ggplot(rez,aes(time,fill=type))+geom_density(alpha=0.6,size=1.3)+scale_x_log10()
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 <p>Here we go - vectorization truly helps, but pure C++ code still 23 times faster. Of course you pay the price when writing it in C++.
 I found a bit strange, that vectorized C++ code doesn't perform that well...</p>
 =======
 <p>Here we go - vectorization truly helps, but pure C++ code still 23 times faster. Of course you pay the price when writing it in C++. I found a bit strange, that vectorized C++ code doesn't perform that well...</p>
 >>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
+=======
+<p>Here we go - vectorization truly helps, but pure C++ code still 23 times faster. Of course you pay the price when writing it in C++. I found a bit strange, that vectorized C++ code doesn't perform that well...</p>
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
 
 <p>You can get the code from <a href="https://github.com/kafka399/Rproject/blob/master/performance/performance.R">github</a>.</p>
 ]]></content>
   </entry>
   
   <entry>
+<<<<<<< HEAD
 <<<<<<< HEAD
     <title type="html"><![CDATA[How big block trades affect stock market prices?]]></title>
     <link href="http://datalablu.github.com/blog/2011/07/27/how_big_block_trades_affect_stock_market_prices/"/>
@@ -329,6 +396,8 @@ I found a bit strange, that vectorized C++ code doesn't perform that well...</p>
 
 <p>While we can see, that stock market prices are affected by big blocks, there's no easy way to profit from it. You have to take into account bid/ask spread, plus you are becoming liquidity demander when liquidity is dry. On other end, this test shows the cost for each volume cluster and this cost can be used when choosing an optimal strategy for portfolio/stock liquidation.</p>
 =======
+=======
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
     <title type="html"><![CDATA[How Big Block Trades Affect Stock Market Prices?]]></title>
     <link href="http://datalab.lu/blog/2011/07/27/how_big_block_trades_affect_stock_market_prices/"/>
     <updated>2011-07-27T16:01:00+02:00</updated>
@@ -346,7 +415,10 @@ I found a bit strange, that vectorized C++ code doesn't perform that well...</p>
 <p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=bnpMinuteLater.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/bnpMinuteLater.png" alt="" /></a></p>
 
 <p>While we can see, that stock market prices are affected by big blocks, there's no easy way to profit from it. You have to take into account bid/ask spread, plus you are becoming liquidity demander when liquidity is dry. On other end, this test shows the cost for each volume cluster and this cost can be used when choosing an optimal strategy for portfolio/stock liquidation.</p>
+<<<<<<< HEAD
 >>>>>>> ef737a4d17d423a08897efdc582e322cfc8a20fd
+=======
+>>>>>>> e754dec33c68f8f9968e4806a84c6764f2fb5b51
 ]]></content>
   </entry>
   

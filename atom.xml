@@ -1,0 +1,825 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[DataLab.lu]]></title>
+  <link href="http://datalab.lu/atom.xml" rel="self"/>
+  <link href="http://datalab.lu/"/>
+  <updated>2015-03-11T19:25:51+01:00</updated>
+  <id>http://datalab.lu/</id>
+  <author>
+    <name><![CDATA[Dzidorius Martinaitis]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Applying Machine Learning to Peer to Peer lending]]></title>
+    <link href="http://datalab.lu/blog/2015/03/11/applying-machine-learning-to-peer-to-peer-lending/"/>
+    <updated>2015-03-11T16:25:00+01:00</updated>
+    <id>http://datalab.lu/blog/2015/03/11/applying-machine-learning-to-peer-to-peer-lending</id>
+    <content type="html"><![CDATA[<p>Peer to peer lending allows to lend money to unrelated individuals without going through traditional financial service such as bank, credit union, etc. Nevertheless, there is an intermediary - service and platform provider. The provider verifies the identity of the borrower and income status, processes the payments, promotes its platform, deals with bad loans or demands bankruptcy for the borrower.<br/>
+The advantage of peer to peer lending for the borrowers is lower interest rate and higher rate for lenders. However, higher rate comes with higher risk - the return is more volatile than a bank deposit.</p>
+
+<p>Regardless of many lending platforms such us <a href="http://www.Prosper.com">Prosper.com</a> (US), <a href="http://zopa.co.uk">zopa.co.uk</a> (UK), <a href="http://www.fundingcircle.com">www.fundingcircle.com</a> (UK), <a href="http://auxmoney.com">auxmoney.com</a> (DE), <a href="http://pret-dunion.fr">pret-dunion.fr</a> (FR), <a href="http://comunitae.com">comunitae.com</a> (ES), <a href="http://lendico.com">lendico.com</a> (global), majority of platforms accept only the investment from local investors. However <a href="http://bondora.com">bondora.com</a> (EE) allows invest into three markets - Estonia, Finland and Spain and accepts investors from across Europe. Additionally, the rate of return at bondora.com is not fixed as in other platforms and allows much higher returns. However, there is a possibility that you may lose some or all of your initial investment as it is not protected by any financial compensation scheme.</p>
+
+<p>The company behind bondora.com is isePankur AS, which is based in Estonia, a small country in north of Europe. The really amazing thing about bondora.com, that they share <a href="https://www.bondora.ee/en/invest/statistics/data_export">data</a> with everyone. The data-set gives us an opportunity to glimpse at the performance of the company and a possibility to build our own credit scoring model!</p>
+
+<p>The data goes back to 2009 and the chart below shows the total number of loans and funded loans per month. It looks like the business exploded in 2013 and the following charts will give us a few clues.</p>
+
+<p><img src="https://dl.dropboxusercontent.com/s/85hu5gke4x7rxvw/unnamed-chunk-1-1.png?dl=0" alt="plot of chunk unnamed-chunk-1" /></p>
+
+<p>In 2013 bondora.com became more active in Finland and Spain markets, though it was in 2014, when the grow skyrocketed in these markets.</p>
+
+<p><img src="https://dl.dropboxusercontent.com/s/m1y7rnev0sm8vy9/unnamed-chunk-2-1.png?dl=0" alt="Countries" /></p>
+
+<p>Another big change, what might ignited the grow of bondora.com is shift in the duration of the loans. Dominant loan duration before 2013 was 1-2 years, but in 2013 the company started issuing 5 years loans, which became the primary duration in 2014 and was half of all loans.</p>
+
+<p><img src="https://dl.dropboxusercontent.com/s/ohha8j873ym6h4j/unnamed-chunk-3-1.png?dl=0" alt="plot of chunk unnamed-chunk-3" /></p>
+
+<p>The latest data-set has data about 29688 loans and 172 columns or features (depending which parlance you prefer). Below you can see a partial print screen of the interface and dozen of the features.</p>
+
+<p><img src="https://dl.dropboxusercontent.com/s/z1xsothaax10g06/interface.png?dl=0" alt="plot of interface" /></p>
+
+<h3>Model building</h3>
+
+<p>Now, that we are familiar with bondora&#8217;s data-set, let&#8217;s move to model building. The prediction model can predict two types of outcomes - categorical (yes/no, true/false classes) or numerical (one is less than one hundred). Although most credit scoring models are built to return a credit score for a borrower, I have opted for simple model, where the outcome has two classes: good or bad.</p>
+
+<p>The definition of &#8220;good&#8221; class is straight forward - the class in which you are willing to invest or give a credit, but &#8220;bad&#8221; class definition is complicated. The data-set has data about the borrowers who were late with their payments for 7, 14, 21, 60 days and defaulted loans. How bad is a borrower if he is late for X days? True, he doesn&#8217;t respect the schedule and the contract for various reason such as harsh life, distraction or any other reason. However, once he is back on track he pays what he owns, plus late charges, which leads to higher return for additional risk.<br/>
+The defaulted loans really sounds as bad loans, right? Well, what if the loan defaults, but you get back the principal and partial interest rate? Doesn&#8217;t sound that bad, does it? What you really don&#8217;t like is the default on the loan and zero payments - these loans are the fraud and you want to avoid them. So let&#8217;s mark them as a &#8220;bad&#8221; ones.</p>
+
+<p>Beside choosing the outcome, it took me awhile to realize another problem with the data-set - the shift in the business model. Nowadays, most of the loans are issued for 5 years and the data-set doesn&#8217;t event have data on matured 5 years loans! So I did the trick - I marked all 5 years loans as repaid which are still &#8220;alive&#8221; after 2-3 years.</p>
+
+<p>While working on a few machine learning projects I quickly learned, that the biggest impact on performance of the model comes not from the fancy machine learning algorithms, but from well engineered features. In the chart below you can find, that 3rd feature is &#8220;total_interest&#8221;, which is made of &#8220;Interest&#8221; and &#8220;LoanDuration&#8221;. The two features perform well, but the derived feature has much bigger weight.<br/>
+Additionally, I have added data about <a href="http://en.wikipedia.org/wiki/VIX">VIX index</a>. The index tracks volatility of the stock market via S&amp;P500 index - its value increases during the crisis and falls back during calm times. By adding independent source the performance of the model increased 2%.</p>
+
+<p>After initial cleaning of the data-set and feature engineering it was time to build a simple model. My favorite machine learning algorithm is Random Forest for the following reasons: you can feed almost any raw data and it chew happily; the algorithm itself is easy to understand, nevertheless it is kind of black-box; it gives the weights of the features:</p>
+
+<p><img src="https://dl.dropboxusercontent.com/s/y5f7u1tch7tqtvo/weight.png?dl=0" alt="Weight" /></p>
+
+<h3>Model metrics</h3>
+
+<p>In classification task <a href="http://en.wikipedia.org/wiki/Precision_and_recall">precision and recall</a> are used frequently for model metrics. The predicted value can be assigned to four classes: True Positive - real fraud (model predicted True and value was True), True Negative - not a fraud (model predicted False value and value was False), False Positive - not fraud marked as a fraud (model predicted True, however value was False) and False Negative - real fraud marked as not fraud (model predicted False, but the value was True).</p>
+
+<p><img src="https://dl.dropboxusercontent.com/s/kk5st4vandt7i9j/metrics.png?dl=0" alt="Metrics " /></p>
+
+<p>In case of p2p lending, if you commit False Positive error (Type I), you just miss one investment. You main concern is False Negative (Type II) errors, because you will be loosing money on the bad investment. <a href="http://en.wikipedia.org/wiki/Positive_predictive_value">Positive predictive value</a> metrics is used for performance evaluation: <code>sum(True positive)/sum(Test outcome positive)</code></p>
+
+<h3>Blending</h3>
+
+<p>Funny, but the blending works well with ML algorithms and with the people. Michael Nielsen in his book <a href="http://www.amazon.com/gp/product/0691160198/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=9325&amp;creativeASIN=0691160198&amp;linkCode=as2&amp;tag=quantitativ0e-20&amp;linkId=SHCTNV7H7ED2OEKM">&#8220;Reinventing Discovery: The New Era of Networked Science&#8221;</a> gives many examples how the collective intelligence can be more powerful than single mind. The idea is very simple - if you gather predictions from dozen of people or ML models then the average score will better than the best single prediction. There is one pitfall - if the predictions are given by &#8220;herd mind&#8221; then the result most likely be horrible. So, in ML environment try to include very different algorithms - decision trees, linear models, neural networks, etc. to sustain diversity.</p>
+
+<p>For my final model I blend tree algorithms - Random forest, SVM and generalized boosted modeling (GBM). If all of them predict, that the loan is not a fraud, then I will make an investment.</p>
+
+<h3>Real time data</h3>
+
+<p>The modeling part is done, but without real time data it is just waste of time. Fortunately, there is a nice Python framework for web crawling - <a href="http://scrapy.org/">Scrapy</a>. Initial time investment in the tool might look significant, but because it is robust it won&#8217;t be your concern any time soon, unless the platform gets face-lift&#8230;</p>
+
+<h3>Automated investment</h3>
+
+<p><a href="http://www.seleniumhq.org/">Selenium</a> is a suite of tools to automate web browsers across many platforms. It is widely used for web interface testing purpose, however any web-based task can be automated.</p>
+
+<p>Once I have real time data I feed my model with it to find out which loans are good for the investment. Acquired list is send to Selenium script, which logins into the platform and makes the investments.</p>
+
+<h3>Infrastructure</h3>
+
+<p>My first idea was to use Raspberry Pi for the project, however I had the problems setting up R-language and Python frameworks. So, I rented an instance on DigitalOcean for 10 dollars a month (there is 5$/month option as well) and it worked well. Meanwhile, I realized, that I don&#8217;t need the server for 24 hours a day.</p>
+
+<p>The solution was to power-on four times a day and shutdown the server once the job is finished. But as you probably know, powering-off your server is not enough to save you from paying - you need to archive your virtual instance (the same applies to Amazon AWS). So, I came up with the script, which creates a virtual image from the archive, powers it on, runs the crawler, runs R mining module, makes the investments if necessary and then shutdowns the instance, archives the image and deletes virtual machine.</p>
+
+<p>Does it sounds good? Well, it was good, until I went on holiday for one week without almost any access to Internet. At the end of my vacation, I found, that every day four new servers were created and were still spinning&#8230; Turns out, that Raspberry Pi was able to initiate new instances, but wasn&#8217;t able to shutdown and delete. The support at DigitalOcean have asked for the log files from my server and I ended up paying the bill, because it was almost non-existant on my RaspPi. The lesson taken - log as much as possible and incorporate health checks for virtual machine in your scripts.</p>
+
+<h3>Results</h3>
+
+<p>I started my investments at Bondora in September 2014. At the beginning all my investments were done via Bondora&#8217;s investment engine, where you can define investment parameters (country, risk profile, etc.). Somewhere in November - December I decided, that I will rely on my own engine only. Below you can see, that the engine based on machine learning algorithms does good job by avoiding bad borrowers.</p>
+
+<p><img src="https://dl.dropboxusercontent.com/s/6xcbjtr92hnz36g/personal.png?dl=0" alt="Personal" /></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Data Based Review of Strapless Mio Link HRM]]></title>
+    <link href="http://datalab.lu/blog/2014/04/30/data-based-review-of-strapless-mio-link-hrm/"/>
+    <updated>2014-04-30T16:01:00+02:00</updated>
+    <id>http://datalab.lu/blog/2014/04/30/data-based-review-of-strapless-mio-link-hrm</id>
+    <content type="html"><![CDATA[<p>Our bodies generate a lot of data - blood pressure, heart rate, amount of glucose in blood, etc. However, the struggle is how to collect data? Until recently, heart rate monitors(HRM) were popular only among practitioners of endurance sports - runners, cyclists, swimmers, etc. Nevertheless, a strapless, wristband heart rate monitor seduces a new category of users - data minded people who are interested in quantified self movement.</p>
+
+<p><a href="http://www.amazon.com/gp/product/B00IVF04LQ/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;camp=1789&amp;creative=9325&amp;creativeASIN=B00IVF04LQ&amp;linkCode=as2&amp;tag=quantitativ0e-20&amp;linkId=P6FG6UOAAIH32K2T">Mio Link</a> looks like a watch on your wrist, allowing to wear it around the clock. Have you ever tried to wear chest based HRM outside workout?</p>
+
+<p><img src="https://dl.dropboxusercontent.com/u/6360678/blog/mio_.jpg" alt="Mio on the wrist" /></p>
+
+<p>The technology behind wristband HRM is quite simple - integrated LEDs beams light into the skin and pulsing volume of blood flow is collected. Wristband HRM might provide better accuracy than chest based HRM, because latter is affected in lower air temperatures. Below you can see data comparison between <a href="http://www.amazon.com/gp/product/B00IVF04LQ/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;camp=1789&amp;creative=9325&amp;creativeASIN=B00IVF04LQ&amp;linkCode=as2&amp;tag=quantitativ0e-20&amp;linkId=P6FG6UOAAIH32K2T">Mio Link</a> and <a href="http://www.amazon.com/gp/product/B00BI9X1QM/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=9325&amp;creativeASIN=B00BI9X1QM&amp;linkCode=as2&amp;tag=quantitativ0e-20&amp;linkId=NHAWYZKZN4NPAATG">Garmin Soft Strap</a> from one of my workouts:</p>
+
+<p><img src="https://dl.dropboxusercontent.com/u/6360678/blog/mio_garmin.png" alt="Mio Link vs Garmin Soft Strap" /></p>
+
+<p>There some data discrepancy, but most importantly peaks and valleys are intact. However, sport workouts are limited in time and I wanted to know, how does wristband HRM work around the clock. The second chart shows data recorded during the day. As you can see the error rate (red color indicates potential errors) is much higher. This might be explained by the fact that my movements were not constant or repetitive contrary to running or sleeping.</p>
+
+<p><img src="https://dl.dropboxusercontent.com/u/6360678/blog/day.png" alt="Heart rate" /></p>
+
+<p>The third chart shows the data gathered during the night. The data bears some noise as well, but the spikes indicate shift in data blocks and presumably body movements. It would be interesting to know if sleep stages can be extracted from heart rate data.</p>
+
+<p><img src="https://dl.dropboxusercontent.com/u/6360678/blog/night.png" alt="Night rate" /></p>
+
+<p>If you plan to use it on daily basis, keep in mind, that the battery last 8-10 hours. It might sound bad, but during the day you have plenty of time windows when you can charge the battery without loosing a lot sensitive data. For example, while you sit in front of computer your heart rate most likely will be low and stable and it is perfect time for charging.</p>
+
+<p>If the idea of wristband HRM sounds appealing, beside Mio link, you can check for <a href="http://www.scosche.com/health-fitness/rhythm-plus">Scosche RHYTHM+</a> as well, which is equivalent of the former.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Credit Card Fraud Detection]]></title>
+    <link href="http://datalab.lu/blog/2013/04/09/credit-card-fraud/"/>
+    <updated>2013-04-09T15:44:00+02:00</updated>
+    <id>http://datalab.lu/blog/2013/04/09/credit-card-fraud</id>
+    <content type="html"><![CDATA[<p>During the last Data Science community meeting in Luxembourg Phd Candidate Alejandro Correa Bahnsen gave a presentation about Credit Card Fraud Detection(CCFD). In short - CCFD is just another machine learning problem which is similar to <a href="http://datalab.lu/blog/2012/07/16/data-mining-for-network-security-and-intrusion-detection/">Network Security and Intrusion Detection(NSID)</a> problem, but it has its own obstacles.</p>
+
+<p>From business perspectives - card fraud detection system directly impacts profitability of all credit card operators, therefore are very desirable. The cost of card fraud in <a href="http://en.wikipedia.org/wiki/Credit_card_fraud">UK</a> alone in 2006 was estimated ~ 500 millions pounds. Assuming, that CCFD system can identify 30% (Churn models at TelComs are able to save that much) of all fraud would lead to 150 millions pound savings a year. Hence, we have a desirable product with price range from 1.5 to 15 millions pounds in the UK. Here is the catch - in any given country there are a few credit card operators, for ex. only <a href="http://www.cetrel.lu/">CETREL</a> operates in Luxembourg. So, if you want to sell a solution you play all or nothing game.<br/>
+Additionally, if you wish to build a CCFD system or at least a prototype you most likely missing the data and you won&#8217;t get it. Chicken and egg problem.</p>
+
+<p>How does the data set might look? Think of millions rows where less than 0.002% of data are the fraud operations. If you train your model with unadjusted data set, it will predict all future events as normal operations. In order to avoid such behavior you need to throw away most of the data with normal operations and balance data where distribution would be 1% of fraud vs 99% normal or 5% vs 95%. You can play with freely available [network intrusion data] to get idea how imbalanced data would look like.</p>
+
+<p>Another thing to keep in mind is the size of data set. Conventional wisdom - the more data you have, the better model you can build, but it is not true if you run a real time system, where latency is big deal. In such case you have to think about something similar to map-reduce framework, where you keep only the averages of the variables per client.</p>
+
+<p>CCFD systems work as binary classificators, where the response either fraud or normal operation, meaning that it doesn&#8217;t take into account how much fraud cost. Alejandro tries to incorporate loss-profit function, where each operation has its own cost. If you think about his approach - sounds as regression problem to me.</p>
+
+<p>And the last thing - I suppose, it&#8217;s worth to try to run unsupervised learning system in parallel. Unsupervised CCFD would issue a lot false alerts at the beginning, however it would considerably improve over time with good feedback from supervised CCFD.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Kaggle Challenge - Event Recommendation Engine]]></title>
+    <link href="http://datalab.lu/blog/2013/02/21/kaggle-event-recommentation-engine/"/>
+    <updated>2013-02-21T15:24:00+01:00</updated>
+    <id>http://datalab.lu/blog/2013/02/21/kaggle-event-recommentation-engine</id>
+    <content type="html"><![CDATA[<p><a href="https://www.kaggle.com/c/event-recommendation-engine-challenge/leaderboard">Event Recommendation Engine Challenge</a> was my second challenge at Kaggle and I finished 15th out of 225 on final (private) leaderboard. I was able to finish 1st on public leaderboard. Believe or not but the difference doesn&#8217;t come from over fitting but rather from an external data source (Google Maps) which was forbidden. I did read the rules, but such important restriction was buried under additional layer of rules which I didn&#8217;t bother to read. So moral of the story - if you are doing well then read the rules for second time. Nevertheless it is strange, why the host of the challenge didn&#8217;t preprocess the data and didn&#8217;t convert location of the users into latitude/longitude format? It would definitely lead to better models, as in my case such conversion gave + 4% in precision.</p>
+
+<p>For this competition I used random forest almost exclusively and devoted all my time for the feature derivation. For the final prediction I built three models and then combined them together:</p>
+
+<pre><code>set.seed(333)
+final_model3=randomForest(factor((interested-not_interested)/2+.5) ~ .,data=final_model,importance=TRUE,nodesize=4)
+
+set.seed(33)
+final_model1=randomForest(factor((interested-not_interested)/2+.5) ~ .,data=final_model,importance=TRUE,nodesize=4)
+
+set.seed(3)
+final_model2=randomForest(factor((interested-not_interested)/2+.5) ~ .,data=final_model,importance=TRUE,nodesize=4)
+
+final_model=combine(final_model3,final_model1,final_model2)
+</code></pre>
+
+<p>Below you can find a chart with most important features of my final model:</p>
+
+<p><img src="http://dl.dropbox.com/u/6360678/blog/features.png" alt="" /></p>
+
+<ul>
+<li><p><strong><em>time_diff</em></strong> - From early beginning I found that the difference between when the event is scheduled to begin and when the user saw the event ad is important feature which is easy to derive.</p></li>
+<li><p><strong><em>popularity</em></strong> - How many users said they are interested in the event.</p></li>
+<li><p><strong><em>start_hour</em></strong> - Turns out, that it is important to know at what hour an event is going to begin.</p></li>
+<li><p><strong><em>friends</em></strong> - The name of this feature might be misleading, nevertheless it keeps how many user friends are invited to the event.</p></li>
+<li><p><strong><em>joinedAt</em></strong> The difference between year when the user joined the service and 2000-01-01. I was surprised to find, that such feature has weight at all.</p></li>
+<li><p><strong><em>timezone</em></strong> Had few NA values which I replaced by 0. Then I converted timezone numerical value into factor of two hours: 14-12, 12-10 and etc.</p></li>
+<li><p><strong><em>birthyear</em></strong> Numeric value.</p></li>
+<li><p><strong><em>weekdays</em></strong> On which weekday did the event happen? (Monday, Tuesday and etc).</p></li>
+<li><p><strong><em>friend_yes, friend_no, friend_maybe</em></strong> Number of friends which are interested, not interested or maybe in the event.</p></li>
+<li><p><strong><em>c_XXX All c_xxxx</em></strong> features were used without preprocessing.</p></li>
+<li><p><strong><em>locale</em></strong> I used the first two letter of locale variable.</p></li>
+<li><p><strong><em>location_mat</em></strong> Once I found, that external sources such as Google maps are forbidden then I tried to determine if user location shares the same words with event country, state and city descriptions. If it does I would add +1 (max 3) for location_mat variable.</p></li>
+<li><p><strong><em>distance</em></strong> (forbidden) the feature scored high, but I had to remove it. The first step was to obtain latitude and longitude for users with known location. If you are interested here is the <a href="https://github.com/kafka399/kaggle-event/blob/master/address.r">source code</a> which shows how easily it can be done in R. Need to say, that I did manual and automated data cleaning - converted states names and some frequent errors like &#8220;City name 19&#8221;. Once I had the coordinates of the users I was able to calculate the distance to event. Then I used k-means to predict user location for those who did not specified it, based on friends location. For example if 5 out of 8 friends of the user are based in Indonesia then user is given Indonesia location and distance to the event is calculated. Here&#8217;s the <a href="https://github.com/kafka399/kaggle-event/blob/master/user_friends_coord.r">source code</a> for prediction of user location.</p></li>
+</ul>
+
+
+<p><a href="https://github.com/kafka399/kaggle-event/blob/master/review.r">Click here</a> if you are interested in the source code of my solution.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Machine Learning for Hackers]]></title>
+    <link href="http://datalab.lu/blog/2012/10/23/machine-learning-for-hackers/"/>
+    <updated>2012-10-23T15:06:00+02:00</updated>
+    <id>http://datalab.lu/blog/2012/10/23/machine-learning-for-hackers</id>
+    <content type="html"><![CDATA[<p>Which way do you prefer to learn a new material - deep theoretical background first and practice later or do you like to break things in order to fix them? If latter is your way of learning things, then most likely you will enjoy <a href="http://www.amazon.com/gp/product/1449303714/ref=as_li_tf_tl?ie=UTF8&amp;camp=1789&amp;creative=9325&amp;creativeASIN=1449303714&amp;linkCode=as2&amp;tag=quantitativ0e-20">Machine Learning for Hackers</a>.</p>
+
+<p>The book has chapters on machine learning techniques such as PCA, kNN, analysis of social graphs hence even advanced R users might find something interesting. So I want you to show you my example of visualisation of similarity between parliamentarians in <a href="http://en.wikipedia.org/wiki/Lithuania">Lithuania</a> which idea is taken for chapter 9.</p>
+
+<p>In most of the cases you should be able to get access to voting results of legislative body in your country. Nevertheless the data can be buried in &#8220;wrong&#8221; format such as html or pdf. I use <a href="http://scrapy.org/">Scrapy</a> framework to parse html pages, however I have faced a problem, when my IP address was blocked due to many requests (10 000) within 2 hours. But in cloud age the problem was quickly solved and I made a delay in my crawler. <a href="https://github.com/kafka399/votingDistance/tree/master/getdata">Here is</a> the examples of the data in CSV format.</p>
+
+<p>With data in hand it was easy to proceed further. To find similarities between parliamentarians I took voting results of approximately 4000 legislations and built a matrix, where rows represent parliamentarians and columns - legislations. &#8220;Yes&#8221; votes were encoded as 1, &#8220;No&#8221; as -1 and the rest as 0. R has a handy function <code>dist</code> to compute the distances between the rows (parliamentarians) of a data matrix. The result of the function is one dimension data of the distance between parliamentarians, however to reveal the structure of a data set we need two dimensions. Once again, R has a function <code>cmdscale</code> which does <a href="http://en.wikipedia.org/wiki/Multidimensional_scaling">Classical Multidimensional Scaling (CMS)</a>. I found <a href="http://www.bristol.ac.uk/cmm/publications/aimdss-2nd-ed/chapter3.pdf">this document</a> very useful in explaining Multidimensional Scaling. Here is the final result:</p>
+
+<p><a href="http://dl.dropbox.com/u/6360678/blog/big_mds.png"><img src="http://dl.dropbox.com/u/6360678/blog/small_mds.png" alt="" /></a></p>
+
+<p>Click on the image to enlarge.</p>
+
+<p>The plot above reveals, that right wing party TSLKD has a majority in parliament and LSDP (socialists) are in opposition and liberals (LSF, JF, MG) are in the center. You might argue, that that is already known, however the plot is based on actual data, therefore differences in voting support outlooks of the parliamentarians(right, central, left).
+The map shows which members of the party are outliers and which one from the other party can be invited while forming a new parliament (second tour of the election is on the way).
+Members of the left wing are mixed up and it would make sense to them to merge or form a coalition.</p>
+
+<p>Are you looking for source code? <a href="https://github.com/kafka399/votingDistance">Click here</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Garmin Data Visualization]]></title>
+    <link href="http://datalab.lu/blog/2012/10/04/garmin-data-visualization/"/>
+    <updated>2012-10-04T14:38:00+02:00</updated>
+    <id>http://datalab.lu/blog/2012/10/04/garmin-data-visualization</id>
+    <content type="html"><![CDATA[<p>People go on rage, when governments initiate surveillance projects like <a href="http://www.edri.org/cleanIT">CleanIT</a>, nevertheless share very private data without a doubt.</p>
+
+<p>I have to admit, that some data leaks are well buried in the process. Take for example Garmin which produces GPS training devices for runners. In order to see your workouts you are forced to upload sensitive data on internet. In response you are given a visualization tool and a storage facility. What are alternatives? It seems, that in the past there was a desktop version, however I was not able to find it. So, we are left with the last option - hack it.</p>
+
+<p>First of all you need to transfer data from Garmin device to computer. I own Forerunner 610 with relays on <a href="http://en.wikipedia.org/wiki/ANT_(network)">ANT</a> network and I found Python <a href="https://github.com/kafka399/Garmin-Forerunner-610-Extractor">script</a> with takes care of data transfer. Once data is transfered there is another obstacle - Garmin uses a proprietary format <a href="http://www.thisisant.com/pages/developer-zone/fit-sdk">FIT</a>. In order to tackle this problem I use another <a href="https://github.com/dtcooper/python-fitparse">Python script</a> which I have adapted to have <a href="https://github.com/kafka399/fitparse/blob/master/run.py">csv format</a>.</p>
+
+<p>Once data is in CSV format R can be used to plot data.</p>
+
+<p><img src="http://dl.dropbox.com/u/6360678/blog/garmin_1.png" alt="" /></p>
+
+<p><img src="http://dl.dropbox.com/u/6360678/blog/garmin_2.png" alt="" /></p>
+
+<p>I had a lot of fun by trying to understand Garmin longitude and latitude coordinates. Here is a short explantion by Hal Mueller:</p>
+
+<blockquote><p>The mapping Garmin uses (180 degrees to 2<sup>31</sup> semicircles) allows them to use a standard 32 bit unsigned integer to represent the full 360 degrees of longitude. Thus you get the maximum precision that 32 bits allows you (about double what you get from a floating point value), and they still get to use integer arithmetic instead of floating point.</p></blockquote>
+
+<p><img src="http://dl.dropbox.com/u/6360678/blog/garmin_map.png" alt="" /></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Building a Presentation, Report or Paper in R]]></title>
+    <link href="http://datalab.lu/blog/2012/08/01/building-a-presentation-report-or-paper-in-r/"/>
+    <updated>2012-08-01T14:00:00+02:00</updated>
+    <id>http://datalab.lu/blog/2012/08/01/building-a-presentation-report-or-paper-in-r</id>
+    <content type="html"><![CDATA[<p>If you need to build a presentation, obviously you have following options:</p>
+
+<ul>
+<li><p>Powerpoint alike presentation</p></li>
+<li><p>Online engines</p></li>
+<li><p><a href="http://www.latex-project.org/">LaTex</a></p></li>
+</ul>
+
+
+<p>The first two are beloved by business people and the third one is widely used in academia. The objective of the first group is shiny presentation, contrary to the second where asceticism and demand for automation are top priorities. However, if you are data scientist or any other data specialist with a need to build an automated report, then you know, that LaTex is just wrong.
+LaTex allows you to build a shiny presentation or outstanding paper, however it can take light years to build something useful for beginners . If you never tried LaTex here is an example of the monster - you literally have to <strong><em>code</em></strong> a document or presentation:</p>
+
+<pre><code>&lt;code&gt;\documentclass{article}
+\title {Investment strategy}
+\author {Dzidorius Martinaitis}
+\begin{document}
+\maketitle&lt;/code&gt;
+</code></pre>
+
+<p>So, what do you do, if you need only 1% of all LaTex features and a report/document needs to be build automatically? Turns out, that HTML little brother <a href="http://en.wikipedia.org/wiki/Markdown">Markdown</a> is saving the world. Markdown(.md) source files are easy to read and easy to write and you can convert it into .html, .pdf, .docx, .tex or any other format. There are many ways to do conversion, however I use <a href="http://johnmacfarlane.net/pandoc/">Pandoc</a> utility. By the way this post was written in markdown in <a href="http://www.vim.org/about.php">Vim</a> and you can check the <a href="https://github.com/kafka399/haxogreen.lu">source file</a>.</p>
+
+<p>However, the nicest thing about Markdown is integration with R. You can build your report in one file, where R code would be embed in Markdown. <a href="http://yihui.name/knitr/">Knitr</a> package will help you to convert R code into Markdown simply by calling this piece of code:</p>
+
+<pre><code>&lt;code&gt;require(knitr);
+knit('workshop.Rmd', 'workshop.md');&lt;/code&gt;
+</code></pre>
+
+<p>Below you will find an excerpt of .Rmd file which is mix of R and Markdown:</p>
+
+<pre><code>&lt;code&gt;Get the data
+===
+
+Who is tweeting about #Haxogreen
+
+
+```{r results=asis,comment=NA, message=FALSE}
+require(twitteR)
+load('tweets.Rdata')
+names=sapply(tweets,function(x)x$screenName)
+rez=(aggregate(names,list(factor(names)),length))
+rez=rez[order(rez$x),]
+colnames(rez)=c('name','count')
+options(xtable.type = 'html')
+require(xtable)
+xtable(t(tail(rez,6)))
+```
+
+Plot top10 tweeters
+===
+```{r topspam, figure=TRUE,fig.cap=''}
+barplot(tail(rez$count,10),names.arg=as.character(tail(rez$name,10)),cex.names=.7,las=2)
+```&lt;/code&gt;
+</code></pre>
+
+<p><a href="http://dl.dropbox.com/u/6360678/workshop.html">Here is a workshop presentation</a> which contains the example above - I built it for <a href="http://datalab.lu/blog/2012/08/01/building-a-presentation-report-or-paper-in-r">Haxogreen</a> hackers camp and source code can be found on <a href="https://github.com/kafka399/haxogreen.lu/blob/master/workshop.Rmd">gitHub</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Data Mining for Network Security and Intrusion Detection]]></title>
+    <link href="http://datalab.lu/blog/2012/07/17/data-mining-for-network-security-and-intrusion-detection/"/>
+    <updated>2012-07-17T13:34:00+02:00</updated>
+    <id>http://datalab.lu/blog/2012/07/17/data-mining-for-network-security-and-intrusion-detection</id>
+    <content type="html"><![CDATA[<p>In preparation for <a href="http://www.haxogreen.lu/">&#8220;Haxogreen&#8221; hackers summer camp</a> which takes place in Luxembourg, I was exploring network security world. My motivation was to find out how data mining is applicable to network security and intrusion detection.</p>
+
+<p><a href="http://en.wikipedia.org/wiki/Flame_(malware)">Flame virus</a>, <a href="http://en.wikipedia.org/wiki/Stuxnet">Stuxnet</a>, <a href="http://en.wikipedia.org/wiki/Duqu">Duqu</a> proved that static, signature based security systems are not able to detect very advanced, government sponsored threats. Nevertheless, signature based defense systems are mainstream today - think of antivirus, intrusion detection systems. What do you do when unknown is unknown? Data mining comes to mind as the answer.</p>
+
+<p>There are following areas where data mining is or can be employed: misuse/signature detection, anomaly detection, scan detection, etc.</p>
+
+<p>Misuse/signature detection systems are based on supervised learning. During learning phase, labeled examples of network packets or systems calls are provided, from which algorithm can learn about the threats. This is very efficient and fast way to find know threats. Nevertheless there are some important drawbacks, namely false positives, novel attacks and complication of obtaining initial data for training of the system. The false positives happens, when normal network flow or system calls are marked as a threat. For example, an user can fail to provide the correct password for three times in a row or start using the service which is deviation from the standard profile. Novel attack can be define as an attack not seen by the system, meaning that signature or the pattern of such attack is not learned and the system will be penetrated without the knowledge of the administrator. The latter obstacle (training dataset) can be overcome by collecting the data over time or relaying on public data, such as DARPA Intrusion Detection Data Set. Although misuse detection can be built on your own data mining techniques, I would suggest well known product like Snort which relays on crowd-sourcing.</p>
+
+<p>Anomaly/outlier detection systems looks for deviation from normal or established patterns within given data. In case of network security any threat will be marked as an anomaly. Below you can find two features graph, where number of logins are plotted on x axis and number of queries are plotter on y axis. The color indicates the group to which points are assigned - blue ones are normal, red ones - anomalies.</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=start_dec_anomalies.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/start_dec_anomalies.png" alt="" /></a></p>
+
+<p>Anomaly detection systems constantly evolves - what was a norm year ago can be an anomaly today. The algorithm compares network flow with historical flow over given period and looks for outliers with are far away. Such dynamic approach allows to detect novel attacks, nevertheless it generates false positive alerts (marks normal flow as suspicious). Moreover, hackers can mimic normal profile, if they know that such system is deployed.</p>
+
+<p>The first task when implementing anomaly detection (AD) is collection of the data. If AD is going to be network based, there are two possibilities to collect aggregated data from network. Some Cisco products provide aggregated data as <a href="http://www.cisco.com/en/US/products/ps6601/products_ios_protocol_group_home.html">Netflow</a> protocol. However, you can use <a href="http://www.wireshark.org/">Wireshark or tshark</a> to collect network flow data from the computer. For example:</p>
+
+<pre><code>tshark -T fields -E separator , -E quote d -e ip.src -e ip.dst -e tcp.srcport -e tcp.dstport -e udp.srcport -e upd.dstport -e tcp.len -e ip.len -e eth.type -e frame.time_epoch -e frame.len
+</code></pre>
+
+<p>Once you have enough data for mining process, you need to preprocess acquired data. In the context of intrusion, anomalous actions happen in bursts rather than single event. <a href="http://minds.cs.umn.edu/publications/chapter.pdf">Varun Chandola et al.</a> proposed to derive following features:</p>
+
+<ul>
+<li><p>Time window based: Number of flows to unique destination IP addresses inside the network in the last T seconds from the same source Number of flows from unique source IP addresses inside the network in the last T seconds to the same destination Number of flows from the source IP to the same destination port in the last T seconds host based - system calls network based - packet information Number of flows to the destination IP address using same source port in the last T seconds</p></li>
+<li><p>Connection based: Number of flows to unique destination IP addresses inside the network in the last N flows from the same source Number of flows from unique source IP addresses inside the network in the last N flows to the same destination Number of flows from the source IP to the same destination port in the last N flows Number of flows to the destination IP address using same source port in the last N flows</p></li>
+</ul>
+
+
+<p>Below you can find an example of feature creation in R. The dataset was created by calling tshark script, which is specified above.</p>
+
+<pre><code>#load data
+tmp=read.csv("stats2.cs",colClasses=c(re"characer",11)),header=F)
+#get rid of everything below min. in timestamp
+tmp[,10]=as.integer(as.POSIXct(format(as.POSIXct(as.integer(tmp[,10]),origin="1970-01-01"),"%Y-%m-%d %H:%M:00")))
+#fix some rows
+tmp=tmp[-which(sapply(tmp[,1],function(x) nchar(x)&gt;15)),] tmp=tmp[which(!is.na(tmp[,4])),]
+
+#aggregate date by 5 mins. it assumes, that flow is continuous
+factor=as.factor(tmp[1:5000,10])
+
+feature=do.call(rbind, sapply(seq(from=1,to=length(factor),by=4),function(x){ return(list(ddply( subset(tmp,factor==levels(factor)[x:(x+4)]),.(V1,V4),summarize,times=length(V11),.parallel=FALSE ))) }))
+</code></pre>
+
+<p>After preprocessing the data we can apply local outlier detection, KNN, random forest and others algorithms. I will provide R code and practical implementation of some algorithms in the following post.</p>
+
+<p>While preparing this post, I was looking for the books, I found only few books covering data mining and network security. To my surprise <a href="http://www.amazon.com/gp/product/1439839425/ref=as_li_qf_sp_asin_tl?ie=UTF8&amp;tag=quantitativ0e-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=1439839425">Data Mining and Machine Learning in Cybersecurity</a> book includes both topics and it is well written. However, if you are security specialist looking for data mining books, you can read my <a href="http://www.investuotojas.eu/2012/07/02/my-first-competition-at-kaggle/">summary</a> of <a href="http://www.amazon.com/gp/product/0123748569/ref=as_li_tf_tl?ie=UTF8&amp;tag=quantitativ0e-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=0123748569%20%22Data%20Mining:%20Practical%20Machine%20Learning%20Tools%20and%20Techniques%22.">&#8220;Data Mining: Practical Machine Learning Tools and Techniques&#8221;</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[My First Competition at Kaggle]]></title>
+    <link href="http://datalab.lu/blog/2012/07/02/my-first-competition-at-kaggle/"/>
+    <updated>2012-07-02T12:30:00+02:00</updated>
+    <id>http://datalab.lu/blog/2012/07/02/my-first-competition-at-kaggle</id>
+    <content type="html"><![CDATA[<p>For me <a href="http://www.kaggle.com/">Kaggle</a> becomes a social network for data scientist, as <a href="http://stackoverflow.com/questions/tagged/r">stackoverflow.com</a> or <a href="https://github.com/">github.com</a> for programmers. If you are data scientist, machine learner or statistician you better off to have a profile there, otherwise you do not exist.</p>
+
+<p>Nevertheless, I won&#8217;t bet on rosy future for data scientist as journalists suggest (<a href="http://www.guardian.co.uk/news/datablog/2012/mar/02/data-scientist">sexy job for next decade</a>). For sure, the demand for such specialists is on rise. However, I see one big threat for data scientist - Kaggle and similar service providers. You see, such services allows to tap high end data scientists (think of PhD in hard science) at minuscule fraction of real price. Think of Hollywood business model - top players get majority of the pool and the rest is starving. If you try the same service model on IT projects you will most likely get burned. My reasoning can be wrong, but I suspect, that project timespan is the issue - IT projects can take for while to finish (1-10 years), but main stream ML project won&#8217;t take that long.</p>
+
+<p>Notwithstanding these obstacles, machine learning, information retrieval, data mining and etc. is a must with ability to write code for production, deal with streaming big data and cope with performance of intelligent system. Then, in programmers parlance, you will became &#8220;data scientist ninja&#8221; and every company will die for you. There is a good post on the subject on <a href="http://blog.mikiobraun.de/2012/06/is-machine-learning-losing-impact.html">mikiobraun</a> blog, but I mind you, that it is a bit controversial.</p>
+
+<p>Although for last 4 years I often has been working on financial models and time-series, this competition added a new experience to me and hunger for the knowledge. During competition I found this book very practical and plentiful of ideas what to do next: <a href="http://www.amazon.com/gp/product/0123748569/ref=as_li_tf_tl?ie=UTF8&amp;tag=quantitativ0e-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=0123748569">Data Mining: Practical Machine Learning Tools and Techniques</a>. As complimentary book I used <a href="http://www.amazon.com/gp/product/0123814790/ref=as_li_tf_tl?ie=UTF8&amp;tag=quantitativ0e-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=0123814790">Data Mining: Concepts and Techniques</a>, though most of information can be found in one of them. I will try to summarize some chapters in my own story.</p>
+
+<p><strong><em>Understanding the data</em></strong>. &#8221;<a href="http://www.kaggle.com/c/online-sales">Online Product Sales</a>&#8221; competition metadata (data about data) is miserly - there are three types of the data - the date fields, categorical fields, quantitative fields and response data for next 12 months. However metadata is most important element in all ML projects, which can save you a lot of time once you understand it better and it leads to much better forecast if you have &#8220;domain knowledge&#8221;.</p>
+
+<p><strong><em>Cleaning data</em></strong>. There is famous phrase: &#8220;garbage in garbage out&#8221;, meaning, that before any further action you have to detect and fix incorrect, incomplete or missing data. You have many possibilities to deal with missing data - remove all rows, where the data is missing; replace it with mean or regressed value or nearest value and etc.  If your data is plentiful and missing values are random (meaning, that NA values do not bear any information) - just get rid of them. Otherwise you need impute new values based on mean or other technique. Mean based replacement worked best for me in this competition. Outliers are another type of the troubles. Suppose, that variable is normally distributed, but few variables are far away from the center. The easiest solution would be to remove such values - as many do in finance by removing &#8220;crisis period&#8221;.  When next crisis hits, the journalists are rushing to learn a new buzzword- <a href="http://en.wikipedia.org/wiki/Black_swan_theory">black swan</a>. Turns out, that outliers can&#8217;t be ignored, because the impact of them is huge.  So be precautious while dealing with outliers.</p>
+
+<p><strong><em>Feature selection</em></strong>. It was surprising to me that too many features or variables can pollute forecast, therefore you need to do feature selection. Such task can be done manually be checking correlation matrix, co-variance and etc. However, random forest or generalized boosted methods can lead to better selection. In R you just call randomForest() or gbm() and job is done.</p>
+
+<p><strong><em>Variable transformation</em></strong> - a way to get superior performance. &#8220;Online Product Sales&#8221; competition has two date fields, however these fields encoded as integers. By transforming these variables into date and retrieving year and month led to better performance of the model. In most of cases taking logarithm for numeric fields gives performance boost. Scaling (from 0 to 1 or from -1 to 1) and centering (normal distribution) might be considered when linear models are in use.  It is worth to transform categorical variables as well, where 1 would mean, that a feature belongs to the group and 0 otherwise. Check model.matrix function in R for latter transformation and preProcess function in caret package for numerical variables.</p>
+
+<p><strong><em>Validation stage</em></strong> - helps you to measure performance of the model. If you have huge database to build a model you can divide you set into two/three parts - for training, testing and cross validation and you are ready to start. However, if you are not so lucky, then other methods come to play. Most popular method is division of the set into two groups, namely &#8220;training&#8221; and &#8220;test&#8221; and rotating it for 10 times. For example, you have 100 rows, so you take first 75 for training and 25 for test and you check the performance ratio. In the next step you take the rows from 25 to 100 for training and you use first 25 for test. Once you repeat such procedure 10 times, you have 10 performance ratios and you take average of it. <a href="http://en.wikipedia.org/wiki/Stratified_sampling">Stratified sampling</a> is a buzzword, which you should know when you do a sampling. Keeping all this information in mind I wasn&#8217;t able to to implement accurate cross validation and my results differ within 0.05 range.</p>
+
+<p><strong><em>Model selection and ensemble</em></strong>. Intuitively you want to choose the best performing algorithm, however the mix of them can lead to superior performance. For regression problem I trained four models (two random forest versions, gbm, svm), made the predictions, averaged the results and that led to better prediction.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[GitHub Data Analysis]]></title>
+    <link href="http://datalab.lu/blog/2012/05/15/github-data-analysis/"/>
+    <updated>2012-05-15T12:04:00+02:00</updated>
+    <id>http://datalab.lu/blog/2012/05/15/github-data-analysis</id>
+    <content type="html"><![CDATA[<p>Few weeks ago GitHub <a href="https://github.com/blog/1112-data-at-github">announced</a>, that its timeline data is available on <a href="https://bigquery.cloud.google.com/">bigquery</a> for analysis. Moreover, it <a href="https://github.com/blog/1118-the-github-data-challenge">offers prizes</a> for the best visualization of the data. Despite my art skills and minimal chances to win beauty contest, I decided to crunch GitHub data and run data analysis.</p>
+
+<p>After initial trial of bigquery service, I found hard to know, what price, if any, I&#8217;m going to pay for the service. Hence, I pulled the data (6.5 GB) from bigquery on my machine and further I used my machine for analysis. Bash scripts have been used to clean up and extract necessary data, R for data analysis and visualization and C++ for text extraction.</p>
+
+<p>GitHub dataset is one table, where each row consist of information about repository (i.e. path, date of creation, name, description, programming language, number of forks/watchers and etc.) and action, which was done by user (i.e. username, location, timestamp and etc.).</p>
+
+<p>As a result, we can check how GitHub users actions are spread over time during the day. The X axis on the graph below is labeled with the hours of the day (GMT) and the Y axis represent median values of the actions for each hour. From it, we can make a deduction, that highest load for GitHub can be expected between 15:00 and 17:00 GMT and lowest to be expected between 05:00 and 07:00 GMT. The color of the line indicates how busy was the day based on quantiles: green are calm days (20% of days), blue - normal days (50% quantile) and red are busy days (80% quantile). I should to mention, that auto-correlation or serial correlation is high (70% for following hour), which means, that busy hours tend to be followed by busy hours and calm hours tend to be followed by calm hours. Moreover, busy days tend happen after busy days.</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=actions.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/actions.png" alt="" /></a></p>
+
+<p>Second graph below shows median of actions divided by weekdays. There is not big surprise - weekends are more slow than weekdays, nevertheless the programmers are slightly less productive on Mondays and Fridays.</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=actions_weekdays.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/actions_weekdays.png" alt="" /></a></p>
+
+<p>The analysis of creation of new repository shows, that the pattern of busy or calm hours remains over the years. This can be attributed to the fact, that majority of the users comes from North America and Europe. Another hypothesis can be drawn from this information, that number of creation of the new repositories grow exponentially. However, I mind you, that the graph below is biased - most likely, GitHub users update recent projects, consequently more recent projects appeared on timeline. Even though, 2009-2011 years show exponential grow. The X axis of the graph below is labeled with the hour of the day, the Y axis - log of median values of new repositories.</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=new_repos.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/new_repos.png" alt="" /></a></p>
+
+<p>Following graph shows the number of forks per project (the X axis, log scale) versus number of watchers (the Y axis, log scale). As expected, there is linear correlation between forks and watchers. Even so there is something interesting about outliers, which are below bottom line - the projects, where number of watchers is low, but number of forks is high. These are anomalies and worth to check.</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=fork_watch.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/fork_watch.png" alt="" /></a></p>
+
+<p>The next thing to do is to look at the repository description. Let&#8217;s group the repositories by programming language and count most dominant words in the description. The graph below has C++ word cloud on the left and Java - right . C++ projects are about library, game, simple(?), engine, Arduino. Java is dominated by android, plugin, server, minecraft, spring, maven.</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=cpp_java.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/cpp_java.png" alt="" /></a></p>
+
+<p>Ruby (left) vs Python(right ):</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=ruby_python.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/ruby_python.png" alt="" /></a></p>
+
+<p>&#8220;Surprise&#8221;, &#8220;surprise&#8221; - R projects (left) are largely about data analysis, however &#8220;machine&#8221; word, which corresponds to Machine learning is very tiny. Shell (right) is dominated by configuration, managing, git(?).</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=r_bash.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/r_bash.png" alt="" /></a></p>
+
+<p>GitHub dataset includes location field. Unfortunately, the users can enter whatever they want - country, city or leave it empty. Nevertheless, I was able to extract good chunk of actions, where location field has meaningful value.  The video below shows country based users activity, where dark red corresponds to high activity and light red - minor. Only 30 most active countries are included, the rest are grey. The same pattern persist over the days - activity in Asia increases around midnight, Europe wakes up around 8:00 or 9:00, where America starts around 15:00. Who said, that hackers and programmers work at night?</p>
+
+<p>What else can be done with GitHub dataset? Most repositories have description field, which can be used to find similar projects by implementing <a href="http://en.wikipedia.org/wiki/Tf*idf">tf-idf</a> method. I tried that method and the results are satisfying.</p>
+
+<p>Most of the graphs shown above are reproducible (except word clouds) and the code can be found on <a href="https://github.com/kafka399/githubdata">GitHub</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Machine learning for identification of cars]]></title>
+    <link href="http://datalab.lu/blog/2012/04/22/machine-learning-for-identification-of-cars/"/>
+    <updated>2012-04-22T17:20:00+02:00</updated>
+    <id>http://datalab.lu/blog/2012/04/22/machine-learning-for-identification-of-cars</id>
+    <content type="html"><![CDATA[<p>There are plenty of data on internet, however it is raw data. Think for a second about public surveillance cameras - useful to check the traffic on the route or busy place, but anything else? What if you want to know how many cars are on the route? How many car were yesterday at the same time? Given so many cars on the route, how much polluted air in the area? While working on the road map for data dive event, I started to wonder, how feasible is to use data of public surveillance cameras. So I quickly built a pilot project and now I would like to share my experience.</p>
+
+<p>First step - <strong><em>data acquisition</em></strong>. At beginning I was thinking to plug my smartphone somewhere and collect data of the busy route.  Nevertheless, I quickly found surveillance cameras in Vilnius and started to collect images. Run a search and I&#8217;m sure, that you will find them in your city:</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=example.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/example.png" alt="" /></a></p>
+
+<p>Here is bash script, which I use to collect images:</p>
+
+<pre><code>#you need full path for crontab
+cd /home/git/carCount/img
+a=`date +%s`
+b=${a}_4.jpg
+wget -O $b -q "http://www.sviesoforai.lt/map/camera.aspx?size=full&amp;image=K7742-1.jpg&amp;rnd=0.15417794161476195"
+</code></pre>
+
+<p><strong><em>Data preparation</em></strong>. After while you will have enough data to train your machine (for beginning more than 30 images should be O.K.). How do we train the algorithm? The goal is to identify the cars in a given image. That means, that we have to provide the examples of positive images (clear image of the cars) and negative images (no car, parts of the car and etc.). Important note - we don&#8217;t feed whole image, but we cut a chosen image with sliding window (100x100 in my case). 4 examples of positive images:</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=4.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/4.png" alt="" /></a></p>
+
+<p>Meanwhile, it is worth converting each image to <a href="http://datalab.lu/blog/2012/04/22/machine-learning-for-identification-of-cars/en.wikipedia.org/wiki/Netpbm_format">portable grey format PGM</a>. For this specific task, we can sacrifice information about the color of the car - it won&#8217;t improve prediction. Besides, PGM images can be loaded into R and easily transformed into matrix. Here is bash script, which converts jpg to pgm and slices each image:</p>
+
+<pre><code>#remove image duplicates
+find . -maxdepth 1 -type f -exec md5sum {} \;  &gt;test.txt
+awk 'a[$1]++ {gsub(/^\*/,"",$2); print "rm ", $2}' test.txt |sh
+rm test.txt
+
+#convert jpg
+
+if [ -d "out" ]; then
+    rm -r out
+fi
+mkdir out
+for k in $(ls *.jpg); do convert $k out/$k.pgm; done
+
+cd out
+mkdir slide
+for filename in $(ls *.pgm);
+ do 
+
+w=`convert $filename -print "%w" /dev/null`
+h=`convert $filename -print "%h" /dev/null`
+let "ww= $w/100"
+let "hh= $h/100"
+for((y=150;y&lt;=250;y+=50))
+do
+for((i=100;i&lt;=400;i+=50))
+do
+echo "slide/$i.$filename"
+let "h_slide=$i"
+convert $filename -crop 100x100+$i+$y slide/$y.$i.$filename
+done
+done
+done
+</code></pre>
+
+<p><strong><em>Training, predicting, cross validation</em></strong>. Now is time to open R, load 100x100 images from &#8220;train/out/slide&#8221; directory and train the algorithm. Important note - each image is a matrix, however you have to feed a matrix of all images to learning algorithm (support vector machine in my case). What you have to do is to &#8220;unroll&#8221; each image matrix into a vector, get 1X10000 vector and build a new matrix, where each row is an image. Once training is done, load unseen data from &#8220;crossval/out/slide&#8221; directory and check &#8220;result/&#8221; directory, where you will find  images of the cars. R script, which does all above:</p>
+
+<pre><code>setwd('/home/git/carCount/')
+
+######read positives############
+files=list.files('test/pos/')
+pos=matrix(nrow=NROW(files),ncol=100*100)
+
+for(i in 1:NROW(files))
+{
+  gray_file=read.pnm(paste('test/pos/',files[i],sep=''))
+  pos[i,]=c(gray_file@grey)
+}
+outcome=vector(length=NROW(files))
+outcome[which(outcome!=1)]=1
+
+########read negatives#############
+files=list.files('test/neg/')
+neg=matrix(nrow=NROW(files),ncol=100*100)
+
+for(i in 1:NROW(files))
+{
+  gray_file=read.pnm(paste('test/neg/',files[i],sep=''))
+  neg[i,]=c(gray_file@grey)
+}
+tmp=vector(length=NROW(files))
+tmp[which(tmp!=0)]=0
+outcome=c(outcome,tmp)
+forecast=svm(rbind(pos,neg),outcome)
+cross_val=pos[84:90,]
+pred=predict(forecast,cross_val,decision.values=TRUE)
+
+##########################unseen data######################
+files=list.files('crossval/out/slide/')
+cross=matrix(nrow=NROW(files),ncol=100*100)
+
+for(i in 1:NROW(files))
+{
+  gray_file=read.pnm(paste('crossval/out/slide/',files[i],sep=''))
+  cross[i,]=c(gray_file@grey)
+}
+pred=predict(forest,cross,decision.values=TRUE)
+
+###############copy positives into result directory###############
+dir.create('result')
+file.copy(paste('crossval/out/slide/',files[which(as.double(pred)&gt;0.6)],sep=''),'result/')
+</code></pre>
+
+<p>Classified as positive by algorithm:</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=pos.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/pos.png" alt="" /></a></p>
+
+<p>Classified as negative by algorithm:</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=neg.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/neg.png" alt="" /></a></p>
+
+<p><strong><em>Conclusion</em></strong>. It is truly amazing how well algorithm is able to separate wheat from the chaff without additional tuning. Mind you, my impression is biased after so many fails with financial data, which is noisy and good predictions are scarce. Nevertheless, this project is far away for ideal - it doesn&#8217;t take into account weather condition, traffic jams, perspective view, movements of the camera and etc. But I leave this fun for data-dive event.</p>
+
+<p>Fork the code: <a href="https://github.com/kafka399/carCount/">https://github.com/kafka399/carCount/</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Levenshtein Distance in C++ and Code Profiling in R]]></title>
+    <link href="http://datalab.lu/blog/2012/03/25/levenshtein-distance-in-c-and-code-profiling-in-r/"/>
+    <updated>2012-03-25T16:50:00+02:00</updated>
+    <id>http://datalab.lu/blog/2012/03/25/levenshtein-distance-in-c-and-code-profiling-in-r</id>
+    <content type="html"><![CDATA[<p>At work, the client requested, if existing search engine could accept singular and plural forms equally, e. g. &#8220;partner&#8221; and &#8220;partners&#8221; would lead to the same result.</p>
+
+<p>The first option - <a href="http://en.wikipedia.org/wiki/Stemming">stemming</a>. In that case, search engine would use root of a word, e. g. &#8220;partn&#8221;. However, stemming has many weaknesses: two different words might have same root, a user can misspell the root of the word, except English and few others languages it is not that trivial to implement stemming.</p>
+
+<p><a href="http://en.wikipedia.org/wiki/Levenshtein_distance">Levenshtein distance</a> comes as the second option. The algorithm is simple - you have two words and you calculate the difference between them. You can insert, delete or replace any character, but it will cost you. Let&#8217;s imagine, an user enters &#8220;Levenstin distances&#8221; into search engine and expects to find revalent information. However, he just made 2 errors by misspeling the author&#8217;s name and he used plural form of &#8220;distance&#8221;. If search engine accepts 3 errors - the user will get relevant information.</p>
+
+<p>The challenge comes, when you have a dictionary of terms (e. g. more that 1 mil.) and you want to get similar terms based on Levenshtein distance. You can visit every entry in the dictionary (very costly) or you can push dictionary into the <a href="http://en.wikipedia.org/wiki/Trie">trie</a>. Do you need a proof for the cost? There we go:</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=test.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/test.png" alt="" /></a></p>
+
+<p>Red color indicates the performance of the search, when all terms are in the trie, green - simple dictionary.</p>
+
+<p>Now we come to the second part of the post - why to bother and plot such graphs, if we could check few entries to determine average time and the winner? The reason is simple - we trust in God, all others must bring data. To say it differently - while profiling the code, you should be interested in average time AND variation. As you can see in the graph above, variation of the blue color is very small - it takes approximately the same time to scan whole dictionary. However, red has higher variation - the result can take for while or it can finish just at the beginning, but overall it works faster. Now, imagine, that a programmer wants to define, which implementation A or B for volatile cache is much faster. Let&#8217;s assume, that big O notion is not going to help and she conducts 2 test for A and 2 for B. While running test A, cache size expands, while B - shrinks. As the result, B wins over A and she makes wrong choice. However, her colleague claims, that despite A has greater volatility, it is much faster and she tried with 500 queries! Whom should I trust?</p>
+
+<p>I use this piece for code profiling:</p>
+
+<pre><code>simple=read.table('simple.txt')
+node=read.table('node.txt')
+
+simple=cbind(simple,as.character(c('simple')))
+colnames(simple)=c('time','type')
+node=cbind(node,c('node'))
+colnames(node)=c('time','type')
+
+rez=data.frame(rbind(simple, node))
+
+require(ggplot2)
+
+ggplot(rez,aes(time,fill=type))+geom_density(alpha=0.6,size=1.3)+scale_x_log10()
+</code></pre>
+
+<p>The data, C++ code for Levenshtein distance and trie can be find on <a href="https://github.com/kafka399/Levenshtein-distance">GitHub</a>.</p>
+
+<p>I found this source very useful: <a href="http://stevehanov.ca/blog/index.php?id=114">http://stevehanov.ca/blog/index.php?id=114</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Vectorized R vs Rcpp]]></title>
+    <link href="http://datalab.lu/blog/2012/02/01/vectorized-r-vs-rcpp/"/>
+    <updated>2012-02-01T11:35:00+01:00</updated>
+    <id>http://datalab.lu/blog/2012/02/01/vectorized-r-vs-rcpp</id>
+    <content type="html"><![CDATA[<p><a href="http://www.investuotojas.eu/2012/01/30/the-power-of-rcpp/">In my previous post</a>, I tried to show, that Rcpp is 1000 faster than pure R and that generated the fuss in the comments. Being lazy, I didn&#8217;t vectorize R code and at the end I was comparing apples vs oranges.</p>
+
+<p>To fix that problem, I built a new script, where I&#8217;m trying to compare apples against apples. First piece of code named &#8220;ifelse R&#8221; uses R &#8220;ifelse&#8221; function to vectorize code. Second piece of code is fully vectorized code written in R, third - pure C++ code and the last one is C++, where  Rcpp &#8220;ifelse&#8221; function is used.</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=performance.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/performance.png" alt="" /></a></p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th> Name  </th>
+<th> Seconds </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td> ifelse R </td>
+<td> 27.50</td>
+</tr>
+<tr>
+<td></td>
+<td> vectorized R </td>
+<td> 10.40</td>
+</tr>
+<tr>
+<td></td>
+<td> pure C++ </td>
+<td> 0.44</td>
+</tr>
+<tr>
+<td></td>
+<td> vectorized C++ </td>
+<td> 2.24</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>Here we go - vectorization truly helps, but pure C++ code still 23 times faster. Of course you pay the price when writing it in C++. I found a bit strange, that vectorized C++ code doesn&#8217;t perform that well&#8230;</p>
+
+<p>You can get the code from <a href="https://github.com/kafka399/Rproject/blob/master/performance/performance.R">github</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How Big Block Trades Affect Stock Market Prices?]]></title>
+    <link href="http://datalab.lu/blog/2011/07/27/how_big_block_trades_affect_stock_market_prices/"/>
+    <updated>2011-07-27T16:01:00+02:00</updated>
+    <id>http://datalab.lu/blog/2011/07/27/how_big_block_trades_affect_stock_market_prices</id>
+    <content type="html"><![CDATA[<p>I will be giving a presentation on &#8220;Optimal transaction cost&#8221; in <a href="http://maps.google.com/maps?q=vilnius,Maironio+g.+11&amp;hl=en&amp;sll=54.689386,25.280024&amp;sspn=0.599292,1.226349&amp;z=16">Vilnius</a> on 16th of August. While preparing the presentation and looking for an optimal execution solution, a natural question arises: does the size of the trade affect stock market price? I&#8217;m sure, you would say 100 % yes. Well, you would be right, but what is the scale of such effect? Is it possible to profit from execution of the big block trades?</p>
+
+<p>Such test is not trivial and to conduct it, you need high frequency data, which is messy in most of the cases. For testing purpose I chose <a href="http://finance.yahoo.com/q?s=BNP.PA&amp;ql=0">BNP Paribas</a> stock from February 2011 to May 2011. Initially, I had more than 460 k. trades and more than 320k. quotes. However, the data was filtered by buyers initiated trades. To find buyers initiated trades, I used Lee-Ready Rule - short description can be found <a href="http://goo.gl/RWSqa">here</a> on page 2. I found about Lee - Ready rule while reading <a href="http://www.maxdama.com/?p=477">Maxdama</a> last post and a damn good <a href="http://dl.dropbox.com/u/39904/maxdama.pdf">summary</a> (check page 42).</p>
+
+<p>The first chart below shows the average return  one trade later (within seconds in most of the cases), when big or small trade was done. X axis represents difference between the trade and following trade, Y axis represents the trade size and the dot size represents number of trades within that cluster of volume. As you can see, small trades add 0.0004% to the price, while big ones (more than 980 of shares) increase the price on average 0.0007%</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=bnpNextTrade.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/bnpNextTrade.png" alt="" /></a></p>
+
+<p>The next figure shows average return one minute later. This time the different between small trades and big one are almost3 times!</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=bnpMinuteLater.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/bnpMinuteLater.png" alt="" /></a></p>
+
+<p>While we can see, that stock market prices are affected by big blocks, there&#8217;s no easy way to profit from it. You have to take into account bid/ask spread, plus you are becoming liquidity demander when liquidity is dry. On other end, this test shows the cost for each volume cluster and this cost can be used when choosing an optimal strategy for portfolio/stock liquidation.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Transaction Cost Analysis and Pre-trade Analysis]]></title>
+    <link href="http://datalab.lu/blog/2011/04/20/transaction-cost-analysis-and-pre-trade-analysis/"/>
+    <updated>2011-04-20T14:33:00+02:00</updated>
+    <id>http://datalab.lu/blog/2011/04/20/transaction-cost-analysis-and-pre-trade-analysis</id>
+    <content type="html"><![CDATA[<p>Transaction cost analysis (TCA) is the framework to achieve best execution in trading context. TCA can be split into three groups: pre-trade analysis, intraday analysis, and post-trade measurement.</p>
+
+<p>Pre-trade analysis allows us to get insight about the future volatility of the price, forecast intra-day and daily volumes, market impact. It evaluates all strategies and advises the strategy that is most consistent with manager preferences for the risk.</p>
+
+<p>Intraday analysis is real time analysis, where the system ensure that the strategy performs in line with the forecast.</p>
+
+<p>Post-trade analysis measures the implementation of the investment decision to ensure, that pre-trade models are accurate and best execution is delivered.</p>
+
+<p>If you want to learn more about the transaction cost analysis, I highly recommend <a href="http://www.amazon.com/gp/product/0814407242/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;tag=quantitativ0e-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=0814407242">Optimal Trading Strategies: Quantitative Approaches for Managing Market Impact and Trading Risk</a> by Robert Kissell. The book not only covers all type of mentioned analysis, but also considers the practical aspects of the implementation of trading strategy and algorithms. The book includes very interesting part about Principal Bid Transactions or blind bids.</p>
+
+<p>To build a forecast model we need some input parameters. Pre-trade analysis can be split into two parts - fundamental part and statistically based part. It is much ease to derive fundamental facts such as market capitalization, company profile, the sectors in which company operates, than statistically based parameters. For the latter I&#8217;m going to use R and the raw stock price data to derive it. The former can easily be found on Internet, Bloomber or Reuter.</p>
+
+<p>The first input parameter that I&#8217;m are going to derive is average daily trading volume of the traded security. It is very easy to obtain it - only daily data is necessary. I used 20 days rolling window to get average volume. Here&#8217;s an example of IBM security:</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=avgDailyVolume.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/avgDailyVolume.png" alt="" /></a></p>
+
+<p>The graph shows, how the 20 days average volume evolved since last September - the minimum was 3.5 millions and the maximum was 6 millions traded a day. But the average can be misleading - it takes into account last 20 days and then it derives one number. In most of the case, we are going to deal with short time prediction such as 1 day or 1 hour, so approximation of 20 days does not make a lot sense. One of possible solutions would be using confidence intervals estimate daily volume. 95% confidence interval is wide used in finance - I will use the same interval answering the following question: based on this interval, what volume will be traded next day.</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=volumeDensity.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/volumeDensity.png" alt="" /></a></p>
+
+<p>The density diagram shows distribution of daily volume of IBM security. As you can see most of the days the volume was above 3 millions. However, 5% of the days the volume was below 3 millions. Based on this diagram, we can predict, that tomorrow&#8217;s volume will be higher than 3 millions.</p>
+
+<p>Before we finish with the daily volume, we have to test for weekly seasonality. If there is weekday seasonality, then the volume forecast has to be adjusted.</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=weekday.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/weekday.png" alt="" /></a></p>
+
+<p>The chart above clearly indicates, that the traded volume on Monday is below (~5%) the day average. There is increase in the volume on Friday, but the significance is under question. Let&#8217;s check density diagram to get rid of any doubt about the volatility on Monday and Friday.</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=weekdayDensity.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/weekdayDensity.png" alt="" /></a></p>
+
+<p>The density diagram above shows, that Monday&#8217;s peak and the body are shifted to the left. On the other end we can see, that Friday&#8217;s body is aligned with others days, only it has a fat tail. Based on this diagram we can eliminate Friday&#8217;s volume adjustment and apply Monda&#8217;s adjustment only.</p>
+
+<p>Once we finished with daily data we can move to intra-day. Then liquidating (or acquiring) a position in a security, the position has to be sliced into smaller parts to avoid influence of the market and to hide the intentions. For this reason, intra-day volume patterns have to be known. With that in mind, let&#8217;s look at how the volume is distributed in relation to the trading hour.</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=hourlyVolume.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/hourlyVolume.png" alt="" /></a></p>
+
+<p>The graph above shows hourly volume pattern, where the volume is grouped by hour. The black dots indicate the median of the hour. Please keep in mind, that the trading starts at 9:30 and the first trading hour has only 30 minutes (if you want align the first hour to the others, then you need to multiply the volume of the first hour by two). As we can see, the first and the last are most traded and the volume drops in the middle of the day.</p>
+
+<p>The next useful thing then liquidating a big position is average trade size. We need to know, how behaves average Joe and what he trades.</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=tradeSize.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/tradeSize.png" alt="" /></a></p>
+
+<p>The chart above shows all trades grouped by hour - the black dots indicate median of the trades. The following table is supplementary to the chart - here you find median of the hour.</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th> Hour  </th>
+<th> Volume </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td> 10 </td>
+<td> 842.5 |</td>
+</tr>
+<tr>
+<td></td>
+<td> 11 </td>
+<td> 565.5 |</td>
+</tr>
+<tr>
+<td></td>
+<td> 12 </td>
+<td> 394.0 |</td>
+</tr>
+<tr>
+<td></td>
+<td> 13 </td>
+<td> 300.0 |</td>
+</tr>
+<tr>
+<td></td>
+<td> 14 </td>
+<td> 297.0 |</td>
+</tr>
+<tr>
+<td></td>
+<td> 15 </td>
+<td> 369.5 |</td>
+</tr>
+<tr>
+<td></td>
+<td> 16 </td>
+<td> 708.5 |</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>Once again, average trade size is much higher in the first and last hours and it drops ~2.5 times during the trading session.</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=hourlyVolatility.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/hourlyVolatility.png" alt="" /></a></p>
+
+<p>The final chart shows the volatility grouped by hour. There is a lot jittery, then the market opens, it becomes calmer during the lunch time and slightly increases then the market closes. These are the numbers for each hour:</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th> Hour  </th>
+<th> Volume </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td> 10 </td>
+<td> 0.16% |</td>
+</tr>
+<tr>
+<td></td>
+<td> 11 </td>
+<td> 0.09% |</td>
+</tr>
+<tr>
+<td></td>
+<td> 12 </td>
+<td> 0.08% |</td>
+</tr>
+<tr>
+<td></td>
+<td> 13 </td>
+<td> 0.05% |</td>
+</tr>
+<tr>
+<td></td>
+<td> 14 </td>
+<td> 0.05% |</td>
+</tr>
+<tr>
+<td></td>
+<td> 15 </td>
+<td> 0.06% |</td>
+</tr>
+<tr>
+<td></td>
+<td> 16 </td>
+<td> 0.07% |</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>In this article we analyzed a list of potential input parameters for pre-trade analysis and further forecast. The list is not static and can be extended with supplementary parameters, such as bid-ask spread distribution and etc. The next step is to aggregate these parameters and build the models to forecast volatility and volume.</p>
+]]></content>
+  </entry>
+  
+</feed>

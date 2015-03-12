@@ -1,0 +1,281 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>How Big Block Trades Affect Stock Market Prices? - DataLab.lu</title>
+  <meta name="author" content="Dzidorius Martinaitis">
+
+  
+  <meta name="description" content="I will be giving a presentation on &#8220;Optimal transaction cost&#8221; in Vilnius on 16th of August. While preparing the presentation and looking &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://datalab.lu/blog/2011/07/27/how_big_block_trades_affect_stock_market_prices/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="DataLab.lu" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-37484105-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:datalab.lu" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+    <li><a href="/">
+        <span class="blue_light">
+            DataLab.lu
+        </span>
+       
+           <span class="blue_dark">
+             Data based inventions.
+           </span>
+       
+    </a></li>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">How Big Block Trades Affect Stock Market Prices?</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-07-27T16:01:00+02:00" pubdate data-updated="true">Jul 27<span>th</span>, 2011</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>I will be giving a presentation on &#8220;Optimal transaction cost&#8221; in <a href="http://maps.google.com/maps?q=vilnius,Maironio+g.+11&amp;hl=en&amp;sll=54.689386,25.280024&amp;sspn=0.599292,1.226349&amp;z=16">Vilnius</a> on 16th of August. While preparing the presentation and looking for an optimal execution solution, a natural question arises: does the size of the trade affect stock market price? I&#8217;m sure, you would say 100 % yes. Well, you would be right, but what is the scale of such effect? Is it possible to profit from execution of the big block trades?</p>
+
+<p>Such test is not trivial and to conduct it, you need high frequency data, which is messy in most of the cases. For testing purpose I chose <a href="http://finance.yahoo.com/q?s=BNP.PA&amp;ql=0">BNP Paribas</a> stock from February 2011 to May 2011. Initially, I had more than 460 k. trades and more than 320k. quotes. However, the data was filtered by buyers initiated trades. To find buyers initiated trades, I used Lee-Ready Rule - short description can be found <a href="http://goo.gl/RWSqa">here</a> on page 2. I found about Lee - Ready rule while reading <a href="http://www.maxdama.com/?p=477">Maxdama</a> last post and a damn good <a href="http://dl.dropbox.com/u/39904/maxdama.pdf">summary</a> (check page 42).</p>
+
+<p>The first chart below shows the average return  one trade later (within seconds in most of the cases), when big or small trade was done. X axis represents difference between the trade and following trade, Y axis represents the trade size and the dot size represents number of trades within that cluster of volume. As you can see, small trades add 0.0004% to the price, while big ones (more than 980 of shares) increase the price on average 0.0007%</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=bnpNextTrade.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/bnpNextTrade.png" alt="" /></a></p>
+
+<p>The next figure shows average return one minute later. This time the different between small trades and big one are almost3 times!</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=bnpMinuteLater.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/bnpMinuteLater.png" alt="" /></a></p>
+
+<p>While we can see, that stock market prices are affected by big blocks, there&#8217;s no easy way to profit from it. You have to take into account bid/ask spread, plus you are becoming liquidity demander when liquidity is dry. On other end, this test shows the cost for each volume cluster and this cost can be used when choosing an optimal strategy for portfolio/stock liquidation.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Dzidorius Martinaitis</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-07-27T16:01:00+02:00" pubdate data-updated="true">Jul 27<span>th</span>, 2011</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/en/'>EN</a>, <a class='category' href='/blog/categories/r-language/'>R-language</a>, <a class='category' href='/blog/categories/tca/'>TCA</a>, <a class='category' href='/blog/categories/data-analysis/'>data analysis</a>, <a class='category' href='/blog/categories/quant/'>quant</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://datalab.lu/blog/2011/07/27/how_big_block_trades_affect_stock_market_prices/" data-via="dzidorius" data-counturl="http://datalab.lu/blog/2011/07/27/how_big_block_trades_affect_stock_market_prices/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2011/04/20/transaction-cost-analysis-and-pre-trade-analysis/" title="Previous Post: Transaction Cost Analysis and Pre-trade Analysis">&laquo; Transaction Cost Analysis and Pre-trade Analysis</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/02/01/vectorized-r-vs-rcpp/" title="Next Post: Vectorized R vs Rcpp">Vectorized R vs Rcpp &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/03/11/applying-machine-learning-to-peer-to-peer-lending/">Applying Machine Learning to Peer to Peer lending</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/04/30/data-based-review-of-strapless-mio-link-hrm/">Data Based Review of Strapless Mio Link HRM</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/04/09/credit-card-fraud/">Credit Card Fraud Detection</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/02/21/kaggle-event-recommentation-engine/">Kaggle Challenge - Event Recommendation Engine</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/10/23/machine-learning-for-hackers/">Machine Learning for Hackers</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/dzidorius"  data-widget-id=""  data-link-color="#1863a1" data-tweet-limit="4" data-chrome="noheader nofooter transparent noscrollbar">Tweets by @dzidorius</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+  </ul>
+  
+    <a href="http://twitter.com/dzidorius" class="twitter-follow-button" data-show-count="false">Follow @dzidorius</a>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Dzidorius Martinaitis -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'kafka399';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://datalab.lu/blog/2011/07/27/how_big_block_trades_affect_stock_market_prices/';
+        var disqus_url = 'http://datalab.lu/blog/2011/07/27/how_big_block_trades_affect_stock_market_prices/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,447 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Transaction Cost Analysis and Pre-trade Analysis - DataLab.lu</title>
+  <meta name="author" content="Dzidorius Martinaitis">
+
+  
+  <meta name="description" content="Transaction cost analysis (TCA) is the framework to achieve best execution in trading context. TCA can be split into three groups: pre-trade analysis &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://datalab.lu/blog/2011/04/20/transaction-cost-analysis-and-pre-trade-analysis/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="DataLab.lu" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-37484105-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">DataLab.lu</a></h1>
+  
+    <h2>Data based inventions.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:datalab.lu" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+    <li><a href="/">
+        <span class="blue_light">
+            DataLab.lu
+        </span>
+       
+           <span class="blue_dark">
+             Data based inventions.
+           </span>
+       
+    </a></li>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Transaction Cost Analysis and Pre-trade Analysis</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-04-20T14:33:00+02:00" pubdate data-updated="true">Apr 20<span>th</span>, 2011</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Transaction cost analysis (TCA) is the framework to achieve best execution in trading context. TCA can be split into three groups: pre-trade analysis, intraday analysis, and post-trade measurement.</p>
+
+<p>Pre-trade analysis allows us to get insight about the future volatility of the price, forecast intra-day and daily volumes, market impact. It evaluates all strategies and advises the strategy that is most consistent with manager preferences for the risk.</p>
+
+<p>Intraday analysis is real time analysis, where the system ensure that the strategy performs in line with the forecast.</p>
+
+<p>Post-trade analysis measures the implementation of the investment decision to ensure, that pre-trade models are accurate and best execution is delivered.</p>
+
+<p>If you want to learn more about the transaction cost analysis, I highly recommend <a href="http://www.amazon.com/gp/product/0814407242/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;tag=quantitativ0e-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=0814407242">Optimal Trading Strategies: Quantitative Approaches for Managing Market Impact and Trading Risk</a> by Robert Kissell. The book not only covers all type of mentioned analysis, but also considers the practical aspects of the implementation of trading strategy and algorithms. The book includes very interesting part about Principal Bid Transactions or blind bids.</p>
+
+<p>To build a forecast model we need some input parameters. Pre-trade analysis can be split into two parts - fundamental part and statistically based part. It is much ease to derive fundamental facts such as market capitalization, company profile, the sectors in which company operates, than statistically based parameters. For the latter I&#8217;m going to use R and the raw stock price data to derive it. The former can easily be found on Internet, Bloomber or Reuter.</p>
+
+<p>The first input parameter that I&#8217;m are going to derive is average daily trading volume of the traded security. It is very easy to obtain it - only daily data is necessary. I used 20 days rolling window to get average volume. Here&#8217;s an example of IBM security:</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=avgDailyVolume.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/avgDailyVolume.png" alt="" /></a></p>
+
+<p>The graph shows, how the 20 days average volume evolved since last September - the minimum was 3.5 millions and the maximum was 6 millions traded a day. But the average can be misleading - it takes into account last 20 days and then it derives one number. In most of the case, we are going to deal with short time prediction such as 1 day or 1 hour, so approximation of 20 days does not make a lot sense. One of possible solutions would be using confidence intervals estimate daily volume. 95% confidence interval is wide used in finance - I will use the same interval answering the following question: based on this interval, what volume will be traded next day.</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=volumeDensity.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/volumeDensity.png" alt="" /></a></p>
+
+<p>The density diagram shows distribution of daily volume of IBM security. As you can see most of the days the volume was above 3 millions. However, 5% of the days the volume was below 3 millions. Based on this diagram, we can predict, that tomorrow&#8217;s volume will be higher than 3 millions.</p>
+
+<p>Before we finish with the daily volume, we have to test for weekly seasonality. If there is weekday seasonality, then the volume forecast has to be adjusted.</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=weekday.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/weekday.png" alt="" /></a></p>
+
+<p>The chart above clearly indicates, that the traded volume on Monday is below (~5%) the day average. There is increase in the volume on Friday, but the significance is under question. Let&#8217;s check density diagram to get rid of any doubt about the volatility on Monday and Friday.</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=weekdayDensity.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/weekdayDensity.png" alt="" /></a></p>
+
+<p>The density diagram above shows, that Monday&#8217;s peak and the body are shifted to the left. On the other end we can see, that Friday&#8217;s body is aligned with others days, only it has a fat tail. Based on this diagram we can eliminate Friday&#8217;s volume adjustment and apply Monda&#8217;s adjustment only.</p>
+
+<p>Once we finished with daily data we can move to intra-day. Then liquidating (or acquiring) a position in a security, the position has to be sliced into smaller parts to avoid influence of the market and to hide the intentions. For this reason, intra-day volume patterns have to be known. With that in mind, let&#8217;s look at how the volume is distributed in relation to the trading hour.</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=hourlyVolume.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/hourlyVolume.png" alt="" /></a></p>
+
+<p>The graph above shows hourly volume pattern, where the volume is grouped by hour. The black dots indicate the median of the hour. Please keep in mind, that the trading starts at 9:30 and the first trading hour has only 30 minutes (if you want align the first hour to the others, then you need to multiply the volume of the first hour by two). As we can see, the first and the last are most traded and the volume drops in the middle of the day.</p>
+
+<p>The next useful thing then liquidating a big position is average trade size. We need to know, how behaves average Joe and what he trades.</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=tradeSize.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/tradeSize.png" alt="" /></a></p>
+
+<p>The chart above shows all trades grouped by hour - the black dots indicate median of the trades. The following table is supplementary to the chart - here you find median of the hour.</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th> Hour  </th>
+<th> Volume </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td> 10 </td>
+<td> 842.5 |</td>
+</tr>
+<tr>
+<td></td>
+<td> 11 </td>
+<td> 565.5 |</td>
+</tr>
+<tr>
+<td></td>
+<td> 12 </td>
+<td> 394.0 |</td>
+</tr>
+<tr>
+<td></td>
+<td> 13 </td>
+<td> 300.0 |</td>
+</tr>
+<tr>
+<td></td>
+<td> 14 </td>
+<td> 297.0 |</td>
+</tr>
+<tr>
+<td></td>
+<td> 15 </td>
+<td> 369.5 |</td>
+</tr>
+<tr>
+<td></td>
+<td> 16 </td>
+<td> 708.5 |</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>Once again, average trade size is much higher in the first and last hours and it drops ~2.5 times during the trading session.</p>
+
+<p><a href="http://s176.photobucket.com/albums/w180/investuotojas/?action=view&amp;current=hourlyVolatility.png"><img src="http://i176.photobucket.com/albums/w180/investuotojas/hourlyVolatility.png" alt="" /></a></p>
+
+<p>The final chart shows the volatility grouped by hour. There is a lot jittery, then the market opens, it becomes calmer during the lunch time and slightly increases then the market closes. These are the numbers for each hour:</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th> Hour  </th>
+<th> Volume </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td> 10 </td>
+<td> 0.16% |</td>
+</tr>
+<tr>
+<td></td>
+<td> 11 </td>
+<td> 0.09% |</td>
+</tr>
+<tr>
+<td></td>
+<td> 12 </td>
+<td> 0.08% |</td>
+</tr>
+<tr>
+<td></td>
+<td> 13 </td>
+<td> 0.05% |</td>
+</tr>
+<tr>
+<td></td>
+<td> 14 </td>
+<td> 0.05% |</td>
+</tr>
+<tr>
+<td></td>
+<td> 15 </td>
+<td> 0.06% |</td>
+</tr>
+<tr>
+<td></td>
+<td> 16 </td>
+<td> 0.07% |</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>In this article we analyzed a list of potential input parameters for pre-trade analysis and further forecast. The list is not static and can be extended with supplementary parameters, such as bid-ask spread distribution and etc. The next step is to aggregate these parameters and build the models to forecast volatility and volume.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Dzidorius Martinaitis</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-04-20T14:33:00+02:00" pubdate data-updated="true">Apr 20<span>th</span>, 2011</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/en/'>EN</a>, <a class='category' href='/blog/categories/r-language/'>R-language</a>, <a class='category' href='/blog/categories/tca/'>TCA</a>, <a class='category' href='/blog/categories/data-analysis/'>data analysis</a>, <a class='category' href='/blog/categories/quant/'>quant</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://datalab.lu/blog/2011/04/20/transaction-cost-analysis-and-pre-trade-analysis/" data-via="dzidorius" data-counturl="http://datalab.lu/blog/2011/04/20/transaction-cost-analysis-and-pre-trade-analysis/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+      
+        <a class="basic-alignment right" href="/blog/2011/07/27/how_big_block_trades_affect_stock_market_prices/" title="Next Post: How Big Block Trades Affect Stock Market Prices?">How Big Block Trades Affect Stock Market Prices? &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/03/11/applying-machine-learning-to-peer-to-peer-lending/">Applying Machine Learning to Peer to Peer lending</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/04/30/data-based-review-of-strapless-mio-link-hrm/">Data Based Review of Strapless Mio Link HRM</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/04/09/credit-card-fraud/">Credit Card Fraud Detection</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/02/21/kaggle-event-recommentation-engine/">Kaggle Challenge - Event Recommendation Engine</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/10/23/machine-learning-for-hackers/">Machine Learning for Hackers</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("dzidorius", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/dzidorius" class="twitter-follow-button" data-show-count="true">Follow @dzidorius</a>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Dzidorius Martinaitis -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'kafka399';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://datalab.lu/blog/2011/04/20/transaction-cost-analysis-and-pre-trade-analysis/';
+        var disqus_url = 'http://datalab.lu/blog/2011/04/20/transaction-cost-analysis-and-pre-trade-analysis/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

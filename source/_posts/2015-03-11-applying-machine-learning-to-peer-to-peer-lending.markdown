@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Applying Machine Learning to Peer to Peer lending"
-date: 2015-03-11 16:25
+date: 2015-03-11 20:25
 comments: true
 categories: [ML, data analysis, visualization, investment] 
 ---

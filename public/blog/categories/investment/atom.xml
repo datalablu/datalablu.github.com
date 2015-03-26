@@ -4,7 +4,7 @@
   <title><![CDATA[Category: investment | DataLab.lu]]></title>
   <link href="http://datalab.lu/blog/categories/investment/atom.xml" rel="self"/>
   <link href="http://datalab.lu/"/>
-  <updated>2015-03-12T14:09:16+01:00</updated>
+  <updated>2015-03-12T14:42:51+01:00</updated>
   <id>http://datalab.lu/</id>
   <author>
     <name><![CDATA[Dzidorius Martinaitis]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Applying Machine Learning to Peer to Peer lending]]></title>
     <link href="http://datalab.lu/blog/2015/03/11/applying-machine-learning-to-peer-to-peer-lending/"/>
-    <updated>2015-03-11T16:25:00+01:00</updated>
+    <updated>2015-03-11T20:25:00+01:00</updated>
     <id>http://datalab.lu/blog/2015/03/11/applying-machine-learning-to-peer-to-peer-lending</id>
     <content type="html"><![CDATA[<p>Peer to peer lending allows to lend money to unrelated individuals without going through traditional financial service such as bank, credit union, etc. Nevertheless, there is an intermediary - service and platform provider. The provider verifies the identity of the borrower and income status, processes the payments, promotes its platform, deals with bad loans or demands bankruptcy for the borrower.<br/>
 The advantage of peer to peer lending for the borrowers is lower interest rate and higher rate for lenders. However, higher rate comes with higher risk - the return is more volatile than a bank deposit.</p>
